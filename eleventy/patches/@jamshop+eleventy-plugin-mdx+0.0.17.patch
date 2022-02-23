@@ -1,0 +1,62 @@
+diff --git a/node_modules/@jamshop/eleventy-plugin-mdx/eleventy-mdx.js b/node_modules/@jamshop/eleventy-plugin-mdx/eleventy-mdx.js
+index 650ff37..978ecf8 100644
+--- a/node_modules/@jamshop/eleventy-plugin-mdx/eleventy-mdx.js
++++ b/node_modules/@jamshop/eleventy-plugin-mdx/eleventy-mdx.js
+@@ -29,15 +29,16 @@ const esBuildMDXPlugin = ({ inputPath }) => ({
+       
+       if(filePath !== inputPath) {
+         return {
+-          contents: (await mdx.compile(content, { jsxRuntime: 'classic' })).value,
++          contents: (await mdx.compile(content, { jsxRuntime: 'classic', ...globalStore.mdxOptions })).value,
+           loader: "jsx",
+         }
+       }
+ 
+       return {
+         contents: `import React from "react";
++        import ReactDOM from "react-dom";
+         import { mdx } from "@mdx-js/react";
+-        ${await mdx.compile(content)}`,
++        ${await mdx.compile(content, globalStore.mdxOptions)}`,
+         loader: "jsx",
+       }
+     })
+@@ -86,9 +87,10 @@ let globalStore = {};
+ 
+ class EleventyMDX {
+ 
+-  constructor ({includeCDNLinks, components}) {
++  constructor ({includeCDNLinks, components, mdxOptions}) {
+     globalStore.includeCDNLinks = includeCDNLinks;
+     globalStore.components = components;
++    globalStore.mdxOptions = mdxOptions;
+   }
+ 
+   async getInstanceFromInputPath(inputPath) {
+@@ -121,7 +123,10 @@ class EleventyMDX {
+       if (serializeEleventyProps) {
+         
+         hydrateScript = transformSync(`
+-      const require = (e) => { if (e === "react") return window.React; };
++      const require = (e) => { 
++        if (e === "react") return window.React; 
++        if (e === "react-dom") return window.ReactDOM; 
++      };
+       ${___mdx_clientBundle}
+       const props = JSON.parse(${JSON.stringify(JSON.stringify(serializeEleventyProps(props)))});
+       ReactDOM.hydrate(React.createElement(Component.default, props, null), document.querySelector('#${ROOT_ID}'));
+diff --git a/node_modules/@jamshop/eleventy-plugin-mdx/index.js b/node_modules/@jamshop/eleventy-plugin-mdx/index.js
+index 5af2643..166da8a 100644
+--- a/node_modules/@jamshop/eleventy-plugin-mdx/index.js
++++ b/node_modules/@jamshop/eleventy-plugin-mdx/index.js
+@@ -1,8 +1,8 @@
+ const EleventyMDX = require("./eleventy-mdx");
+ 
+-const mdxBuildPlugin = (eleventyConfig, { includeCDNLinks = false } = {}) => {
++const mdxBuildPlugin = (eleventyConfig, { includeCDNLinks = false, mdxOptions = {} } = {}) => {
+ 
+-  const eleventyMDX = new EleventyMDX({includeCDNLinks, components: eleventyConfig.javascriptFunctions });
++  const eleventyMDX = new EleventyMDX({includeCDNLinks, components: eleventyConfig.javascriptFunctions, mdxOptions });
+ 
+   process.env.ELEVENTY_EXPERIMENTAL = "true";
+   eleventyConfig.addTemplateFormats("mdx");
