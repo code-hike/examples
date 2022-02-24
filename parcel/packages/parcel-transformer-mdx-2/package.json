@@ -1,0 +1,8 @@
+{
+  "name": "parcel-transformer-mdx-2",
+  "version": "0.0.1",
+  "engines": {"parcel": "^2.0.0"},
+  "dependencies": {
+    "@mdx-js/mdx": "^2.0.0"
+  }
+}
