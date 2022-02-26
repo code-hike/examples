@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "@11ty/eleventy": "^1.0.0"
+  },
+  "dependencies": {
+    "@code-hike/mdx": "^0.3.0-next.26",
+    "@jamshop/eleventy-plugin-mdx": "^0.0.17",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
