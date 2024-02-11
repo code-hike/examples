@@ -5,14 +5,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import Link from "next/link"
 
 export function Nav() {
   return (
     <nav className="w-full bg-white border-b border-zinc-200 sticky top-0">
       <div className="flex gap-2 max-w-4xl mx-auto items-center h-12">
-        <h1 className="text-xl font-bold">
+        <Link className="text-xl font-bold" href="/">
           CloneUI <span className="text-teal-600">Tutorials</span>
-        </h1>
+        </Link>
         <div className="mx-5 h-5 border-l border-zinc-200" />
         <TutorialSelect />
         <SectionSelect />
