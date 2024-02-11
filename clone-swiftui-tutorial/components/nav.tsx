@@ -5,6 +5,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { ChevronRight } from "lucide-react"
 import Link from "next/link"
 
 export function Nav() {
@@ -16,6 +17,11 @@ export function Nav() {
         </Link>
         <div className="mx-5 h-5 border-l border-zinc-200" />
         <TutorialSelect />
+        <ChevronRight
+          className="text-zinc-200 -mx-2"
+          strokeWidth={1}
+          size={28}
+        />
         <SectionSelect />
       </div>
     </nav>
