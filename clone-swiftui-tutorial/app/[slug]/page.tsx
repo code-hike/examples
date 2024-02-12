@@ -12,7 +12,7 @@ export default async function TutorialPage({
   )
   return (
     <>
-      <Nav />
+      <Nav tutorial={params.slug} />
       <Content components={{ Tutorial }} />
     </>
   )

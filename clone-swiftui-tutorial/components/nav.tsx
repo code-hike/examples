@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Select,
   SelectContent,
@@ -7,8 +9,9 @@ import {
 } from "@/components/ui/select"
 import { ChevronRight } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
-export function Nav() {
+export function Nav({ tutorial }: { tutorial: string }) {
   return (
     <nav className="w-full bg-white border-b border-zinc-200 sticky top-0 z-10">
       <div className="flex gap-2 max-w-4xl mx-auto items-center h-12">
@@ -16,7 +19,7 @@ export function Nav() {
           CloneUI <span className="text-teal-600">Tutorials</span>
         </Link>
         <div className="mx-5 h-5 border-l border-zinc-200" />
-        <TutorialSelect />
+        <TutorialSelect tutorial={tutorial} />
         <ChevronRight
           className="text-zinc-200 -mx-2"
           strokeWidth={1}
@@ -28,15 +31,20 @@ export function Nav() {
   )
 }
 
-function TutorialSelect() {
+function TutorialSelect({ tutorial }: { tutorial: string }) {
+  const router = useRouter()
   return (
-    <Select>
+    <Select value={tutorial} onValueChange={(value) => router.push(value)}>
       <SelectTrigger className="min-w-56 max-w-72">
-        <SelectValue placeholder="Theme" />
+        <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="dark">Creating and combining views</SelectItem>
-        <SelectItem value="light">Building lists and navigation</SelectItem>
+        <SelectItem value="creating-and-combining-views">
+          Creating and combining views
+        </SelectItem>
+        <SelectItem value="building-lists-and-navigation">
+          Building lists and navigation
+        </SelectItem>
       </SelectContent>
     </Select>
   )
