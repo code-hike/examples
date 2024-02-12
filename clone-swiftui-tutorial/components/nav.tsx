@@ -10,7 +10,7 @@ import Link from "next/link"
 
 export function Nav() {
   return (
-    <nav className="w-full bg-white border-b border-zinc-200 sticky top-0">
+    <nav className="w-full bg-white border-b border-zinc-200 sticky top-0 z-10">
       <div className="flex gap-2 max-w-4xl mx-auto items-center h-12">
         <Link className="text-xl font-bold" href="/">
           CloneUI <span className="text-teal-600">Tutorials</span>

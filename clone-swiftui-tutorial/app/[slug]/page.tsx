@@ -23,9 +23,9 @@ export function Tutorial({ hike }: { hike: any }) {
   const sections = hike.sections
 
   return (
-    <main>
+    <main className="overflow-x-clip">
       <header className="py-20 bg-black">
-        <div className="max-w-3xl mx-auto prose prose-invert">
+        <div className="max-w-3xl xl:max-w-4xl mx-auto prose prose-invert">
           <h3>SwiftUI essentials</h3>
           <h1>{hero.query}</h1>
           {hero.children}
@@ -48,15 +48,15 @@ function Section({ header, steps }: any) {
   }))
 
   return (
-    <section className="max-w-3xl mx-auto pt-20">
+    <section className="max-w-3xl xl:max-w-4xl mx-auto pt-20">
       <header className="prose mb-20">
         <h3>Section 1</h3>
         <h2>Foo</h2>
         {header}
       </header>
-      <Steps className="flex gap-4" steps={content}>
+      <Steps className="flex relative" steps={content}>
         <ScrollableContent steps={steps} />
-        <div className="w-[40vw] max-w-xl bg-zinc-100">
+        <div className="w-[calc(50vw+8.333%)] bg-zinc-100 flex-none ">
           <div className="top-16 sticky">
             <Step element="sticker" />
           </div>
@@ -68,7 +68,7 @@ function Section({ header, steps }: any) {
 
 function ScrollableContent({ steps }: { steps: any[] }) {
   return (
-    <div className="flex-1 mt-32 mb-[90vh] ml-2 ">
+    <div className="flex-none mt-32 mb-[94vh] mr-[4.167%] w-[37.5%]">
       {steps.map((step: any, i: number) => (
         <ScrollyStep
           key={i}
