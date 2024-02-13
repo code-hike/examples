@@ -11,7 +11,13 @@ import { ChevronRight } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
-export function Nav({ tutorial }: { tutorial: string }) {
+export function Nav({
+  tutorial,
+  sections,
+}: {
+  tutorial: string
+  sections: string[]
+}) {
   return (
     <nav className="w-full bg-white border-b border-zinc-200 sticky top-0 z-10">
       <div className="flex gap-2 max-w-4xl mx-auto items-center h-12">
@@ -25,7 +31,7 @@ export function Nav({ tutorial }: { tutorial: string }) {
           strokeWidth={1}
           size={28}
         />
-        <SectionSelect />
+        <SectionSelect sections={sections} />
       </div>
     </nav>
   )
@@ -50,18 +56,18 @@ function TutorialSelect({ tutorial }: { tutorial: string }) {
   )
 }
 
-function SectionSelect() {
+function SectionSelect({ sections }: { sections: string[] }) {
   return (
-    <Select>
+    <Select value={"Introduction"}>
       <SelectTrigger className="min-w-56 max-w-72">
-        <SelectValue placeholder="Section" />
+        <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="swiftui">Introduction</SelectItem>
-        <SelectItem value="react">
-          Create a new project and explore the canvas
-        </SelectItem>
-        <SelectItem value="tailwind">Customize the text view</SelectItem>
+        {sections.map((s) => (
+          <SelectItem value={s} key={s}>
+            {s}
+          </SelectItem>
+        ))}
       </SelectContent>
     </Select>
   )
