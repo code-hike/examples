@@ -7,39 +7,38 @@ export default async function TutorialPage({
 }: {
   params: { slug: string }
 }) {
-  const { default: Content } = await import(
-    `@/content/${params.slug}/tutorial.mdx`
-  )
-  return (
-    <>
-      <Nav tutorial={params.slug} sections={["Introduction"]} />
-      <Content components={{ Tutorial }} />
-    </>
-  )
-}
+  const { getHike } = await import(`@/content/${params.slug}/tutorial.mdx`)
 
-export function Tutorial({ hike }: { hike: any }) {
+  const hike = getHike({ components: { Hike: "TODO fix" } })
+
   const hero = hike.hero[0]
   const sections = hike.sections
+  const sectionNames = sections.map((section: any) => section.query)
 
   return (
-    <main className="overflow-x-clip">
-      <header className="py-20 bg-black">
-        <div className="max-w-3xl xl:max-w-4xl mx-auto prose prose-invert">
-          <h3>SwiftUI essentials</h3>
-          <h1>{hero.query}</h1>
-          {hero.children}
-        </div>
-      </header>
-      {sections.map((section: any, i: number) => (
-        <Section
-          key={i}
-          header={section}
-          steps={section.steps}
-          number={i + 1}
-        />
-      ))}
-    </main>
+    <>
+      <Nav
+        tutorial={params.slug}
+        sections={["Introduction", ...sectionNames]}
+      />
+      <main className="overflow-x-clip">
+        <header className="py-20 bg-black">
+          <div className="max-w-3xl xl:max-w-4xl mx-auto prose prose-invert">
+            <h3>SwiftUI essentials</h3>
+            <h1>{hero.query}</h1>
+            {hero.children}
+          </div>
+        </header>
+        {sections.map((section: any, i: number) => (
+          <Section
+            key={i}
+            header={section}
+            steps={section.steps}
+            number={i + 1}
+          />
+        ))}
+      </main>
+    </>
   )
 }
 
