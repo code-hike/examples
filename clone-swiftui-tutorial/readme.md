@@ -3,6 +3,7 @@ https://developer.apple.com/tutorials/swiftui/building-lists-and-navigation
 
 # To do
 
+- move to markdown
 - 00.foo-something/tutorial.mdx
   - not sure, it makes getting mdx from slug harder
 - dark mode images

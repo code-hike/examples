@@ -24,7 +24,7 @@ export function Code({ codeblock }: { codeblock: CodeBlock }) {
         key={codeblock.meta}
         codeblock={codeblock}
         config={{ theme: "github-light", annotationPrefix: "!" }}
-        className="min-h-[40rem] py-3 pl-1"
+        className="min-h-[40rem] py-3 pl-1 text-sm"
         components={{ Line, Mark }}
       />
     </>

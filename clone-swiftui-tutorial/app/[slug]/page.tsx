@@ -13,6 +13,7 @@ export default async function TutorialPage({
   const hike = getHike({ components: { Hike: "TODO fix" } })
 
   const hero = hike.hero[0]
+  const quiz = hike.quiz[0]
   const sections = hike.sections
   const sectionNames = sections.map((section: any) => section.query)
 
@@ -38,6 +39,9 @@ export default async function TutorialPage({
             number={i + 1}
           />
         ))}
+
+        <Quiz quiz={quiz} />
+        <footer className="py-20 bg-zinc-100"></footer>
       </main>
     </>
   )
@@ -158,6 +162,21 @@ async function Sticker({
         height="auto"
         className="ml-10 px-5 block max-w-[364px] xl:max-w-[531px] max-h-[calc(100vh-3rem-80px)]"
       />
+    </div>
+  )
+}
+
+function Quiz({ quiz }: { quiz: any }) {
+  return (
+    <div className="max-w-3xl xl:max-w-4xl my-16 mx-auto bg-zinc-50 px-16 py-12">
+      <h2 className="text-3xl text-center font-semibold">{quiz.query}</h2>
+      <hr className="my-12" />
+      <div className="text-sm text-zinc-600">Question 1 of 4</div>
+      <p className="mt-8 text-lg font-semibold">
+        When creating a custom SwiftUI view, where do you declare the view’s
+        layout?
+      </p>
+      <p>TO DO</p>
     </div>
   )
 }

@@ -255,178 +255,252 @@ When creating a SwiftUI view, you describe its content, layout, and behavior in 
 
 In this section, you’ll use a vertical stack to place the title above a horizontal stack that contains details about the park.
 
-## !steps A Game of Thrones
+![!cover A screenshot of the editor and canvas, with the iPhone preview showing to the right.](01030H.png)
 
-A Game of Thrones is the first book in the A Song of Ice and Fire series by George R.R. Martin. Set in a world where seasons last for years, it introduces a complex plot and a wide cast of characters, ranging from noble families vying for the Iron Throne to the supernatural threats in the North.
+## /
 
-```js george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-]
+You can use Xcode to embed a view in a container view, open an inspector, or help with other useful changes.
 
-const winner =
-  houses[
-    Math.floor(
-      Math.random() * houses.length,
-    )
-  ]
+## !steps Step 1
 
-console.log(`Iron Throne: ${winner}`)
-```
+Control-click the text view’s initializer to show a context menu, and then choose “Embed in VStack”.
 
-## !steps A Clash of Kings
+![!screenshot A screenshot.](010301.png)
 
-A Clash of Kings, the second book in the series, continues the epic saga. The Seven Kingdoms are plunged into war, with kings rising and falling. Meanwhile, Daenerys Targaryen seeks to return to Westeros with her growing dragons.
+## /
 
-```js george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-]
+Next, you’ll add a text view to the stack by dragging a `Text` view from the library.
 
-const clash = () => {
-  const winner =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  return `${winner} wins the battle!`
+## !steps Step 2
+
+Open the library by clicking the plus button (+) at the top-right of the Xcode window, and then drag a `Text` view to the place in your code immediately below the “Turtle Rock” text view.
+
+![!screenshot A screenshot.](010302.png)
+
+## !steps Step 3
+
+Replace the `Text` view’s placeholder text with “Joshua Tree National Park”.
+
+![!preview A screenshot.](010303.png)
+
+```swift ContentView.swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        VStack {
+            Text("Turtle Rock")
+                .font(.title)
+            // !Mark
+            Text("Joshua Tree National Park")
+        }
+    }
 }
 
-console.log(clash())
+#Preview {
+    ContentView()
+}
 ```
 
-## !steps A Storm of Swords
+## /
 
-The third book, A Storm of Swords, is known for its intense and shocking developments. Battles rage on, alliances shift, and characters face unexpected challenges and betrayals, making it one of the most thrilling books in the series.
+Customize the location to match the desired layout.
 
-```js george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-]
+## !steps Step 4
 
-const reveal = () => {
-  const traitor =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  return `${traitor} betrays the alliance!`
+Set the location’s font to `subheadline`.
+
+![!preview A screenshot.](010304.png)
+
+```swift ContentView.swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        VStack {
+            Text("Turtle Rock")
+                .font(.title)
+            Text("Joshua Tree National Park")
+                // !Mark
+                .font(.subheadline)
+        }
+    }
 }
 
-console.log(reveal())
+#Preview {
+    ContentView()
+}
 ```
 
-## !steps A Feast for Crows
+## !steps Step 5
 
-A Feast for Crows, the fourth book, explores the aftermath of the wars, with a focus on the characters in the southern regions of Westeros. It delves into the politics and power struggles in a kingdom weary of battle.
+Edit the `VStack` initializer to align the views by their leading edges.
 
-```js george.js
-const houses = [
-  "Martell",
-  "Lannister",
-  "Baratheon",
-  "Tyrell",
-]
+---
 
-const intrigue = () => {
-  const ally1 =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  const ally2 =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  return `${ally1} and ${ally2} form an alliance!`
+By default, stacks center their contents along their axis and provide context-appropriate spacing.
+
+![!preview A screenshot.](010305.png)
+
+```swift ContentView.swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        // !Mark
+        VStack(alignment: .leading) {
+            Text("Turtle Rock")
+                .font(.title)
+            Text("Joshua Tree National Park")
+                .font(.subheadline)
+        }
+    }
 }
 
-console.log(intrigue())
+#Preview {
+    ContentView()
+}
 ```
 
-## !steps A Dance with Dragons
+## /
 
-A Dance with Dragons, the fifth book, runs concurrently with A Feast for Crows and focuses on the characters in the North and across the Narrow Sea. The story advances with dragons, the Night’s Watch, and the lingering threat of winter.
+Next, you’ll add another text view to the right of the location, this for the park’s state.
 
-```js george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-]
+## !steps Step 6
 
-const dragons = () => {
-  const dragon =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  return `${dragon} has a dragon!`
+Embed the “Joshua Tree National Park” text view in an HStack.
+
+![!preview A screenshot.](010305.png)
+
+```swift ContentView.swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Turtle Rock")
+                .font(.title)
+            // !Mark(1:4)
+            HStack {
+                Text("Joshua Tree National Park")
+                    .font(.subheadline)
+            }
+        }
+    }
 }
 
-console.log(dragons())
+#Preview {
+    ContentView()
+}
 ```
 
-## !steps The Winds of Winter
+## !steps Step 7
 
-The Winds of Winter, the anticipated sixth book, is expected to continue the intricate storylines and bring new twists and turns to the world of Westeros. Fans eagerly await its release.
+Add a new text view after the location, change the placeholder text to the park’s state, and then set its font to `subheadline`.
 
-```js george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-  "Martell",
-  "Tyrell",
-  "Greyjoy",
-]
+![!preview A screenshot.](010307.png)
 
-const winterIsComing = () => {
-  const isComing = Math.random() > 0.99
-  if (isComing) {
-    return "Winter is coming!"
-  } else {
-    return "Winter is not coming."
-  }
+```swift ContentView.swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Turtle Rock")
+                .font(.title)
+            HStack {
+                Text("Joshua Tree National Park")
+                    .font(.subheadline)
+                // !Mark(1:2)
+                Text("California")
+                    .font(.subheadline)
+            }
+        }
+    }
 }
 
-console.log(winterIsComing())
+#Preview {
+    ContentView()
+}
 ```
 
-## !steps A Dream of Spring
+## !steps Step 8
 
-A Dream of Spring is the proposed final book in the series, anticipated to conclude the epic saga. It remains one of the most awaited books in modern fantasy literature.
+To direct the layout to use the full width of the device, separate the park and the state by adding a `Spacer` to the horizontal stack holding the two text views.
 
-```js george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-  "Martell",
-  "Tyrell",
-  "Greyjoy",
-]
+---
 
-const keepDreaming = () => {
-  return "Not gonna happen..."
+A _spacer_ expands to make its containing view use all of the space of its parent view, instead of having its size defined only by its contents.
+
+![!preview A screenshot.](010308.png)
+
+```swift ContentView.swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Turtle Rock")
+                .font(.title)
+            HStack {
+                Text("Joshua Tree National Park")
+                    .font(.subheadline)
+                // !Mark
+                Spacer()
+                Text("California")
+                    .font(.subheadline)
+            }
+        }
+    }
 }
 
-console.log(keepDreaming())
+#Preview {
+    ContentView()
+}
 ```
+
+## !steps Step 9
+
+Finally, use the `padding()` modifier to give the landmark’s name and details a little more space around their outer edges.
+
+![!preview A screenshot.](010309.png)
+
+```swift ContentView.swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Turtle Rock")
+                .font(.title)
+            HStack {
+                Text("Joshua Tree National Park")
+                    .font(.subheadline)
+                Spacer()
+                Text("California")
+                    .font(.subheadline)
+            }
+        }
+        // !Mark
+        .padding()
+    }
+}
+
+#Preview {
+    ContentView()
+}
+```
+
+# !quiz Check Your Understanding
+
+## !question When creating a custom SwiftUI view, where do you declare the view’s layout?
+
+1. In the `body` property of the view’s structure.
+2. In the `@main` attribute of the app’s entry point.
+3. In the `WindowGroup` initializer of the app’s entry point.
+
+## !question What does the `foregroundColor(.green)` modifier do?
+
+1. It changes the text’s color to green.
+2. It changes the text’s color to black.
+3. It removes the text’s color.
