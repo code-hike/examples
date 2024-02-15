@@ -1,15 +1,16 @@
 import { Steps, ScrollyStep, Step } from "codehike/scrolly"
+import { CodeBlock } from "codehike"
 import { Nav } from "@/components/nav"
 import { Code } from "@/components/code"
-import { CodeBlock } from "codehike"
-import { Preview } from "../../components/preview"
+import { Preview } from "@/components/preview"
+import { slugify } from "@/lib/utils"
 
 export default async function TutorialPage({
   params,
 }: {
   params: { slug: string }
 }) {
-  const { getHike } = await import(`@/content/${params.slug}/tutorial.mdx`)
+  const { getHike } = await import(`@/content/${params.slug}/tutorial.md`)
   const hike = getHike({ components: { Hike: "TODO fix" } })
 
   const hero = hike.hero[0]
@@ -24,7 +25,7 @@ export default async function TutorialPage({
         sections={["Introduction", ...sectionNames, "Check your understanding"]}
       />
       <main className="overflow-x-clip">
-        <header className="py-20 bg-black">
+        <header className="py-20 bg-black" id={slugify("Introduction")}>
           <div className="max-w-3xl xl:max-w-4xl mx-auto prose prose-invert">
             <h3>SwiftUI essentials</h3>
             <h1>{hero.query}</h1>
@@ -64,7 +65,10 @@ async function Section({ slug, section, number }: any) {
   const coverImg = await loadImage(slug, intro.cover)
 
   return (
-    <section className="max-w-3xl xl:max-w-4xl mx-auto pt-20">
+    <section
+      className="max-w-3xl xl:max-w-4xl mx-auto pt-20"
+      id={slugify(section.query)}
+    >
       <header className=" mb-20 flex flex-row">
         <div className="w-1/2 prose pr-7">
           <h3>Section {number}</h3>
@@ -168,7 +172,10 @@ async function Sticker({
 
 function Quiz({ quiz }: { quiz: any }) {
   return (
-    <div className="max-w-3xl xl:max-w-4xl my-16 mx-auto bg-zinc-50 px-16 py-12">
+    <section
+      className="max-w-3xl xl:max-w-4xl my-16 mx-auto bg-zinc-50 px-16 py-12"
+      id={slugify("Check your understanding")}
+    >
       <h2 className="text-3xl text-center font-semibold">{quiz.query}</h2>
       <hr className="my-12" />
       <div className="text-sm text-zinc-600">Question 1 of 4</div>
@@ -177,7 +184,7 @@ function Quiz({ quiz }: { quiz: any }) {
         layout?
       </p>
       <p>TO DO</p>
-    </div>
+    </section>
   )
 }
 
@@ -185,7 +192,7 @@ async function loadImage(slug: string, img?: { url: string; alt: string }) {
   if (!img) return null
   const {
     default: { src, height, width },
-  } = await import(`@/content/${slug}/${img.url}`)
+  } = await import(`@/content/${slug}/assets/${img.url}`)
   return {
     src,
     height,

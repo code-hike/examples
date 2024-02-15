@@ -3,7 +3,6 @@ https://developer.apple.com/tutorials/swiftui/building-lists-and-navigation
 
 # To do
 
-- move to markdown
 - 00.foo-something/tutorial.mdx
   - not sure, it makes getting mdx from slug harder
 - dark mode images
@@ -14,11 +13,11 @@ https://developer.apple.com/tutorials/swiftui/building-lists-and-navigation
 - small screen layout
 - previews
 - quiz
-- navigate to section
 - word-wrap section names in select
 - remove select ring https://stackoverflow.com/questions/74494317/using-tailwind-how-can-i-apply-a-ring-to-an-element-only-when-the-user-tabs-to
 - remove inline code before and after
 - static export nextjs
+- add link to github and codehike v1
 
 - <CodeContent key={codeblock.meta} />
   - maybe prop drill key to client component

@@ -10,6 +10,8 @@ import {
 import { ChevronRight } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import { slugify } from "@/lib/utils"
 
 export function Nav({
   tutorial,
@@ -57,14 +59,37 @@ function TutorialSelect({ tutorial }: { tutorial: string }) {
 }
 
 function SectionSelect({ sections }: { sections: string[] }) {
+  const [selected, setSelected] = useState("Introduction")
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setSelected(entry.target.id)
+          }
+        })
+      },
+      { rootMargin: "-15% 0% -80% 0%" },
+    )
+    sections.forEach((s) => {
+      observer.observe(document.getElementById(slugify(s)) as Element)
+    })
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <Select value={"Introduction"}>
+    <Select
+      value={selected}
+      onValueChange={(value) =>
+        document.getElementById(value)?.scrollIntoView({ behavior: "smooth" })
+      }
+    >
       <SelectTrigger className="min-w-56 max-w-72">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
         {sections.map((s) => (
-          <SelectItem value={s} key={s}>
+          <SelectItem value={slugify(s)} key={s}>
             {s}
           </SelectItem>
         ))}
