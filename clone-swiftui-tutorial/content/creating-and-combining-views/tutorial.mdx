@@ -1,10 +1,14 @@
 # !hero Creating and combining views
 
-> !time 35mins
-
 This tutorial guides you through building _Landmarks_ — an app for discovering and sharing the places you love. You’ll start by building the view that shows a landmark’s details.
 
 To lay out the views, Landmarks uses _stacks_ to combine and layer the image and text view components. To add a map to the view, you’ll include a standard MapKit component. As you refine the view’s design, Xcode provides real-time feedback so you can see how those changes translate into code.
+
+Download the project files to begin building this project, and follow the steps below.
+
+> !time 40mins
+> !files https://v1.codehike.org
+> !xcode https://v1.codehike.org
 
 # !sections Create a new project and explore the canvas
 
@@ -61,6 +65,8 @@ In the Project navigator, select `ContentView`.
 
 By default, SwiftUI view files declare a structure and a preview. The structure conforms to the `View` protocol and describes the view’s content and layout. The preview declaration creates a preview for that view.
 
+![!preview A screenshot from the Xcode preview as it would appear on iPhone, with the image of a globe and the text, Hello, world, centered in the middle of the display.](010105.png)
+
 ```swift ContentView.swift
 import SwiftUI
 
@@ -84,51 +90,35 @@ struct ContentView: View {
 
 ## !steps
 
-The Winds of Winter, the anticipated sixth book, is expected to continue the intricate storylines and bring new twists and turns to the world of Westeros. Fans eagerly await its release.
+The canvas displays a preview automatically.
 
-```js george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-  "Martell",
-  "Tyrell",
-  "Greyjoy",
-]
+---
 
-const winterIsComing = () => {
-  const isComing = Math.random() > 0.99
-  if (isComing) {
-    return "Winter is coming!"
-  } else {
-    return "Winter is not coming."
-  }
-}
+If the canvas isn’t visible, select Editor > Canvas to show it.
 
-console.log(winterIsComing())
-```
+![!screenshot A screenshot of the Xcode canvas showing an iPhone preview screen that has the text Hello world below a globe icon.](010106.png)
 
 ## !steps
 
-A Dream of Spring is the proposed final book in the series, anticipated to conclude the epic saga. It remains one of the most awaited books in modern fantasy literature.
+Inside the body property, remove everything but the Text declaration and change “Hello, world!” to a greeting for yourself.
 
-```js george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-  "Martell",
-  "Tyrell",
-  "Greyjoy",
-]
+---
 
-const keepDreaming = () => {
-  return "Not gonna happen..."
+As you change the code in a view’s body property, the preview updates to reflect your changes.
+
+```swift ContentView.swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        // !Mark
+        Text("Hello SwiftUI!")
+    }
 }
 
-console.log(keepDreaming())
+#Preview {
+    ContentView()
+}
 ```
 
 # !sections Customize the text view
@@ -345,7 +335,7 @@ const winner =
 console.log(`Iron Throne: ${winner}`)
 ```
 
-## !steps A Clash of Kingsb
+## !steps A Clash of Kings
 
 A Clash of Kings, the second book in the series, continues the epic saga. The Seven Kingdoms are plunged into war, with kings rising and falling. Meanwhile, Daenerys Targaryen seeks to return to Westeros with her growing dragons.
 

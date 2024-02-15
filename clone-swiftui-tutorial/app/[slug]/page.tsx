@@ -2,6 +2,7 @@ import { Steps, ScrollyStep, Step } from "codehike/scrolly"
 import { Nav } from "@/components/nav"
 import { Code } from "@/components/code"
 import { CodeBlock } from "codehike"
+import { Preview } from "../../components/preview"
 
 export default async function TutorialPage({
   params,
@@ -9,7 +10,6 @@ export default async function TutorialPage({
   params: { slug: string }
 }) {
   const { getHike } = await import(`@/content/${params.slug}/tutorial.mdx`)
-
   const hike = getHike({ components: { Hike: "TODO fix" } })
 
   const hero = hike.hero[0]
@@ -51,18 +51,12 @@ async function Section({ slug, header, steps, number }: any) {
         slug={slug}
         codeblock={step.code?.[0]}
         screenshot={step.screenshot}
+        preview={step.preview}
       />
     ),
   }))
 
-  const { cover } = header
-  let src = ""
-
-  if (cover) {
-    const img = await import(`@/content/${slug}/${cover.url}`)
-    console.log(img.default)
-    src = img.default.src
-  }
+  const coverImg = await loadImage(slug, header.cover)
 
   return (
     <section className="max-w-3xl xl:max-w-4xl mx-auto pt-20">
@@ -74,7 +68,8 @@ async function Section({ slug, header, steps, number }: any) {
         </div>
         <div className="w-1/2 pl-7 flex items-center">
           <img
-            src={src}
+            src={coverImg?.src}
+            alt={coverImg?.alt}
             width={450}
             height="auto"
             className="mx-auto px-5 block"
@@ -83,7 +78,7 @@ async function Section({ slug, header, steps, number }: any) {
       </header>
       <Steps className="flex relative" steps={content}>
         <ScrollableContent steps={steps} />
-        <div className="w-[calc(50vw+8.333%)] bg-zinc-100 flex-none ">
+        <div className="w-[calc(50vw+8.333%)] bg-zinc-50 flex-none ">
           <div className="top-12 sticky h-[calc(100vh-3rem)]">
             <Step element="sticker" />
           </div>
@@ -121,28 +116,43 @@ async function Sticker({
   slug,
   codeblock,
   screenshot,
+  preview,
 }: {
   codeblock?: CodeBlock
   screenshot?: Image
   slug: string
+  preview?: Image
 }) {
-  let src = ""
+  const screenshotImg = await loadImage(slug, screenshot)
+  const previewImg = await loadImage(slug, preview)
 
-  if (screenshot) {
-    const img = await import(`@/content/${slug}/${screenshot.url}`)
-    console.log(img.default)
-    src = img.default.src
-  }
   return codeblock ? (
-    <Code codeblock={codeblock} />
+    <div>
+      <Code codeblock={codeblock} />
+      <Preview preview={previewImg} />
+    </div>
   ) : (
     <div className="h-full flex items-center w-2/3">
       <img
-        src={src}
+        src={screenshotImg?.src}
+        alt={screenshotImg?.alt}
         width={450}
         height="auto"
         className="ml-10 px-5 block max-w-[364px] xl:max-w-[531px] max-h-[calc(100vh-3rem-80px)]"
       />
     </div>
   )
+}
+
+async function loadImage(slug: string, img?: { url: string; alt: string }) {
+  if (!img) return null
+  const {
+    default: { src, height, width },
+  } = await import(`@/content/${slug}/${img.url}`)
+  return {
+    src,
+    height,
+    width,
+    alt: img.alt,
+  }
 }

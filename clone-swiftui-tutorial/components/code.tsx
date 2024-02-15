@@ -6,7 +6,7 @@ export function Code({ codeblock }: { codeblock: CodeBlock }) {
   const __html = svg.replace(/svg/, `svg fill='${color}'`)
 
   return (
-    <div className="">
+    <>
       <div className="pl-4 pt-3 text-zinc-600">
         <span
           dangerouslySetInnerHTML={{ __html }}
@@ -27,7 +27,7 @@ export function Code({ codeblock }: { codeblock: CodeBlock }) {
         className="min-h-[40rem] py-3 pl-1"
         components={{ Line, Mark }}
       />
-    </div>
+    </>
   )
 }
 
