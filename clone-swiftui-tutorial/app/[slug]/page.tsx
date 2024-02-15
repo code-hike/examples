@@ -5,6 +5,13 @@ import { Code } from "@/components/code"
 import { Preview } from "@/components/preview"
 import { slugify } from "@/lib/utils"
 
+export function generateStaticParams() {
+  return [
+    { slug: "creating-and-combining-views" },
+    { slug: "building-lists-and-navigation" },
+  ]
+}
+
 export default async function TutorialPage({
   params,
 }: {
