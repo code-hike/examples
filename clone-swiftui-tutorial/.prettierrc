@@ -1,0 +1,13 @@
+{
+  "trailingComma": "all",
+  "semi": false,
+  "overrides": [
+    {
+      "files": ["*.mdx"],
+      "options": {
+        "printWidth": 42,
+        "semi": false
+      }
+    }
+  ]
+}
