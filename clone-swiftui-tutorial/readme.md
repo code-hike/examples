@@ -28,3 +28,4 @@ https://developer.apple.com/tutorials/swiftui/building-lists-and-navigation
 - parse quotes `> !time 40mins`
 - different syntax for multiple (!) and single (!!)
 - getHike({ components: { Hike: "TODO fix" } })
+- add index in <slot name="steps" index={2}>

@@ -78,7 +78,7 @@ async function Section({ slug, section, number }: any) {
         </div>
       </header>
       <Steps className="flex relative" steps={content}>
-        <ScrollableContent steps={steps} />
+        <ScrollableContent section={section} />
         <div className="w-[calc(50vw+8.333%)] bg-zinc-50 flex-none ">
           <div className="top-12 sticky h-[calc(100vh-3rem)]">
             <Step element="sticker" />
@@ -89,22 +89,39 @@ async function Section({ slug, section, number }: any) {
   )
 }
 
-function ScrollableContent({ steps }: { steps: any[] }) {
+function ScrollableContent({ section }: { section: any }) {
+  const { steps } = section
+  let i = 0
+
   return (
     <div className="flex-none mt-32 mb-[94vh] mr-[4.167%] w-[37.5%]">
-      {steps.map((step: any, i: number) => (
-        <ScrollyStep
-          key={i}
-          stepIndex={i}
-          className={
-            "border-l-8 border-transparent data-[ch-selected]:border-blue-400" +
-            " px-5 py-4 mb-24 rounded-lg bg-zinc-50"
+      {section.children.map((child: any) => {
+        if (child.type === "slot") {
+          if (child.props.name === "steps") {
+            const e = (
+              <ScrollyStep
+                key={i}
+                stepIndex={i}
+                className={
+                  "border-l-8 border-transparent data-[ch-selected]:border-blue-400" +
+                  " px-5 py-4 mb-24 rounded-lg bg-zinc-50"
+                }
+              >
+                <h4 className="mb-2 text-sm font-semibold">{steps[i].query}</h4>
+                <div className="prose prose-hr:my-4 text-sm">
+                  {steps[i].children}
+                </div>
+              </ScrollyStep>
+            )
+            i++
+            return e
+          } else {
+            return null
           }
-        >
-          <h4 className="mb-2 text-sm font-semibold">{step.query}</h4>
-          <div className="prose prose-hr:my-4">{step.children}</div>
-        </ScrollyStep>
-      ))}
+        } else {
+          return <div className="px-7 mb-8 prose text-sm">{child}</div>
+        }
+      })}
     </div>
   )
 }
