@@ -12,31 +12,33 @@ Download the project files to begin building this project, and follow the steps 
 
 # !sections Create a new project and explore the canvas
 
+## !intro
+
 ![!cover A screenshot of the editor and canvas, with the iPhone preview showing to the right.](01010H.png)
 
 Create a new Xcode project that uses SwiftUI. Explore the canvas, previews, and the SwiftUI template code.
 
 To preview and interact with views from the canvas in Xcode, and to use all the latest features described throughout the tutorials, ensure your Mac is running macOS Sonoma or later.
 
-## !steps
+## !steps Step 1
 
 Open Xcode and either click “Create New Project” in Xcode’s startup window, or choose File > New > Project.
 
 ![!screenshot A screenshot of the Xcode welcome screen. There are three options to choose from when you open Xcode: Create New Project, Clone Git Repository, and Open Existing Project. The first option is highlighted.](010101.png)
 
-## !steps
+## !steps Step 2
 
 In the template selector, select iOS as the platform, select the App template, and then click Next.
 
 ![!screenshot A screenshot of the template selector sheet in Xcode. In the top row, iOS is selected as the platform. In the Application section, App is selected as the template. The Next button in the lower-right corner is highlighted.](010102.png)
 
-## !steps
+## !steps Step 3
 
 Enter “Landmarks” as the product name, select “SwiftUI” for the interface and “Swift” for the language, and click Next. Choose a location to save the Landmarks project on your Mac.
 
 ![!screenshot A screenshot of the project sheet which shows the name Landmarks filled in for the Product Name. The interface is set to SwiftUI, and the language is set to Swift.](010103.png)
 
-## !steps
+## !steps Step 4
 
 In the Project navigator, select `LandmarksApp`.
 
@@ -57,7 +59,7 @@ struct LandmarksApp: App {
 }
 ```
 
-## !steps
+## !steps Step 5
 
 In the Project navigator, select `ContentView`.
 
@@ -88,7 +90,7 @@ struct ContentView: View {
 }
 ```
 
-## !steps
+## !steps Step 6
 
 The canvas displays a preview automatically.
 
@@ -98,13 +100,15 @@ If the canvas isn’t visible, select Editor > Canvas to show it.
 
 ![!screenshot A screenshot of the Xcode canvas showing an iPhone preview screen that has the text Hello world below a globe icon.](010106.png)
 
-## !steps
+## !steps Step 7
 
 Inside the body property, remove everything but the Text declaration and change “Hello, world!” to a greeting for yourself.
 
 ---
 
 As you change the code in a view’s body property, the preview updates to reflect your changes.
+
+![!preview A screenshot from the Xcode preview as it would appear on iPhone, with the text, Hello SwiftUI!, centered in the middle of the display.](010107.png)
 
 ```swift ContentView.swift
 import SwiftUI
@@ -123,189 +127,127 @@ struct ContentView: View {
 
 # !sections Customize the text view
 
-## !header
+## !intro
 
-The first view you’ll build in this tutorial is a row for displaying details about each landmark. This row view stores information in a property for the landmark it displays, so that one view can display any landmark. Later, you’ll combine multiple rows into a list of landmarks.
+You can customize a view’s display by changing your code, or by using the inspector to discover what’s available and to help you write code.
 
-## !steps A Game of Thrones
+As you build the Landmarks app, you can use any combination of editors: the source editor, the canvas, or the inspectors. Your code stays updated, regardless of which tool you use.
 
-A Game of Thrones is the first book in the A Song of Ice and Fire series by George R.R. Martin. Set in a world where seasons last for years, it introduces a complex plot and a wide cast of characters, ranging from noble families vying for the Iron Throne to the supernatural threats in the North.
+![!cover A screenshot of the editor and canvas, with the iPhone preview showing to the right.](01020H.png)
 
-```js george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-]
+## /
 
-const winner =
-  houses[
-    Math.floor(
-      Math.random() * houses.length,
-    )
-  ]
+Next, you’ll customize the text view using the inspector.
 
-console.log(`Iron Throne: ${winner}`)
-```
+## !steps Step 1
 
-## !steps A Clash of Kings
+Change the canvas mode to Selectable.
 
-A Clash of Kings, the second book in the series, continues the epic saga. The Seven Kingdoms are plunged into war, with kings rising and falling. Meanwhile, Daenerys Targaryen seeks to return to Westeros with her growing dragons.
+---
 
-```js george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-]
+The canvas displays previews in Live mode by default so that you can interact with them, but you can use the Selectable mode to enable editing instead.
 
-const clash = () => {
-  const winner =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  return `${winner} wins the battle!`
+![!screenshot A screenshot of the editor and canvas, with the iPhone preview showing to the right.](010201.png)
+
+## !steps Step 2
+
+In the preview, Command-Control-click the greeting to bring up the structured editing popover, and choose “Show SwiftUI Inspector”.
+
+---
+
+The popover shows different attributes that you can customize, depending on the type of view you inspect.
+
+![!screenshot A screenshot of the editor and canvas, with the iPhone preview showing to the right.](010202.png)
+
+## !steps Step 3
+
+Use the inspector to change the text to “Turtle Rock”, the name of the first landmark you’ll show in your app.
+
+![!screenshot A screenshot.](010203.png)
+
+## !steps Step 4
+
+Change the Font modifier to “Title”.
+
+---
+
+This applies the system font to the text so that it responds correctly to the user’s preferred font sizes and settings.
+
+![!screenshot A screenshot.](010204.png)
+
+## /
+
+To customize a SwiftUI view, you call methods called _modifiers_. Modifiers wrap a view to change its display or other properties. Each modifier returns a new view, so it’s common to chain multiple modifiers, stacked vertically.
+
+## !steps Step 5
+
+Edit the code by hand to add the `foregroundColor(.green)` modifier; this changes the text’s color to green.
+
+![!preview A screenshot.](010205.png)
+
+```swift ContentView.swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        Text("Turtle Rock")
+            .font(.title)
+            // !Mark
+            .foregroundColor(.green)
+    }
 }
 
-console.log(clash())
+#Preview {
+    ContentView()
+}
 ```
 
-## !steps A Storm of Swords
+## /
 
-The third book, A Storm of Swords, is known for its intense and shocking developments. Battles rage on, alliances shift, and characters face unexpected challenges and betrayals, making it one of the most thrilling books in the series.
+Your code is always the source of truth for the view. When you use the inspector to change or remove a modifier, Xcode updates your code immediately to match.
 
-```js george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-]
+## !steps Step 6
 
-const reveal = () => {
-  const traitor =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  return `${traitor} betrays the alliance!`
+This time, open the inspector by Control-clicking on the `Text` declaration in the code editor, and then choose “Show SwiftUI Inspector” from the popover. Click the Color pop-up menu and choose Inherited to change the text color to black again.
+
+![!screenshot A screenshot.](010206.png)
+
+## !steps Step 7
+
+Notice that Xcode updates your code automatically to reflect the change, removing the `foregroundColor(.green)` modifier.
+
+![!preview A screenshot.](010207.png)
+
+```swift ContentView.swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        Text("Turtle Rock")
+            .font(.title)
+            // !Mark
+
+    }
 }
 
-console.log(reveal())
-```
-
-## !steps A Feast for Crows
-
-A Feast for Crows, the fourth book, explores the aftermath of the wars, with a focus on the characters in the southern regions of Westeros. It delves into the politics and power struggles in a kingdom weary of battle.
-
-```js george.js
-const houses = [
-  "Martell",
-  "Lannister",
-  "Baratheon",
-  "Tyrell",
-]
-
-const intrigue = () => {
-  const ally1 =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  const ally2 =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  return `${ally1} and ${ally2} form an alliance!`
+#Preview {
+    ContentView()
 }
-
-console.log(intrigue())
 ```
 
-## !steps A Dance with Dragons
+## !steps Step 8
 
-A Dance with Dragons, the fifth book, runs concurrently with A Feast for Crows and focuses on the characters in the North and across the Narrow Sea. The story advances with dragons, the Night’s Watch, and the lingering threat of winter.
+Set the preview back to Live mode.
 
-```js george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-]
+---
 
-const dragons = () => {
-  const dragon =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  return `${dragon} has a dragon!`
-}
+Working in Live mode makes it easy to keep track of view behavior as you make edits in source.
 
-console.log(dragons())
-```
-
-## !steps The Winds of Winter
-
-The Winds of Winter, the anticipated sixth book, is expected to continue the intricate storylines and bring new twists and turns to the world of Westeros. Fans eagerly await its release.
-
-```js george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-  "Martell",
-  "Tyrell",
-  "Greyjoy",
-]
-
-const winterIsComing = () => {
-  const isComing = Math.random() > 0.99
-  if (isComing) {
-    return "Winter is coming!"
-  } else {
-    return "Winter is not coming."
-  }
-}
-
-console.log(winterIsComing())
-```
-
-## !steps A Dream of Spring
-
-A Dream of Spring is the proposed final book in the series, anticipated to conclude the epic saga. It remains one of the most awaited books in modern fantasy literature.
-
-```js george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-  "Martell",
-  "Tyrell",
-  "Greyjoy",
-]
-
-const keepDreaming = () => {
-  return "Not gonna happen..."
-}
-
-console.log(keepDreaming())
-```
+![!screenshot A screenshot.](010208.png)
 
 # !sections Combine views using stacks
 
-## !header
+## !intro
 
 Beyond the title view you created in the previous section, you’ll add text views to contain details about the landmark, such as the name of the park and state it’s in.
 

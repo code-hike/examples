@@ -20,7 +20,7 @@ export default async function TutorialPage({
     <>
       <Nav
         tutorial={params.slug}
-        sections={["Introduction", ...sectionNames]}
+        sections={["Introduction", ...sectionNames, "Check your understanding"]}
       />
       <main className="overflow-x-clip">
         <header className="py-20 bg-black">
@@ -33,10 +33,9 @@ export default async function TutorialPage({
         {sections.map((section: any, i: number) => (
           <Section
             key={i}
-            header={section}
-            steps={section.steps}
-            number={i + 1}
+            section={section}
             slug={params.slug}
+            number={i + 1}
           />
         ))}
       </main>
@@ -44,7 +43,9 @@ export default async function TutorialPage({
   )
 }
 
-async function Section({ slug, header, steps, number }: any) {
+async function Section({ slug, section, number }: any) {
+  const { steps } = section
+  const intro = section.intro?.[0] || section
   const content = steps.map((step: any) => ({
     sticker: (
       <Sticker
@@ -56,15 +57,15 @@ async function Section({ slug, header, steps, number }: any) {
     ),
   }))
 
-  const coverImg = await loadImage(slug, header.cover)
+  const coverImg = await loadImage(slug, intro.cover)
 
   return (
     <section className="max-w-3xl xl:max-w-4xl mx-auto pt-20">
       <header className=" mb-20 flex flex-row">
         <div className="w-1/2 prose pr-7">
           <h3>Section {number}</h3>
-          <h2>{header.query}</h2>
-          {header.children}
+          <h2>{section.query}</h2>
+          {intro.children}
         </div>
         <div className="w-1/2 pl-7 flex items-center">
           <img
@@ -100,7 +101,7 @@ function ScrollableContent({ steps }: { steps: any[] }) {
             " px-5 py-4 mb-24 rounded-lg bg-zinc-50"
           }
         >
-          <h4 className="mb-2 text-sm font-semibold">Step {i + 1}</h4>
+          <h4 className="mb-2 text-sm font-semibold">{step.query}</h4>
           <div className="prose prose-hr:my-4">{step.children}</div>
         </ScrollyStep>
       ))}
