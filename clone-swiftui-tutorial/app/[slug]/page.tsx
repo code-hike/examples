@@ -18,11 +18,8 @@ export default async function TutorialPage({
   params: { slug: string }
 }) {
   const { getHike } = await import(`@/content/${params.slug}/tutorial.md`)
-  const hike = getHike({ components: { Hike: "TODO fix" } })
+  const { hero, sections, quiz } = getHike()
 
-  const hero = hike.hero[0]
-  const quiz = hike.quiz[0]
-  const sections = hike.sections
   const sectionNames = sections.map((section: any) => section.query)
 
   return (
@@ -56,13 +53,12 @@ export default async function TutorialPage({
 }
 
 async function Section({ slug, section, number }: any) {
-  const { steps } = section
-  const intro = section.intro?.[0] || section
+  const { intro, steps } = section
   const content = steps.map((step: any) => ({
     sticker: (
       <Sticker
         slug={slug}
-        codeblock={step.code?.[0]}
+        codeblock={step.code}
         screenshot={step.screenshot}
         preview={step.preview}
       />
@@ -111,31 +107,23 @@ function ScrollableContent({ section }: { section: any }) {
   return (
     <div className="flex-none mt-32 mb-[94vh] mr-[4.167%] w-[37.5%]">
       {section.children.map((child: any) => {
-        if (child.type === "slot") {
-          if (child.props.name === "steps") {
-            const e = (
-              <ScrollyStep
-                key={i}
-                stepIndex={i}
-                className={
-                  "border-l-8 border-transparent data-[ch-selected]:border-blue-400" +
-                  " px-5 py-4 mb-24 rounded-lg bg-zinc-50"
-                }
-              >
-                <h4 className="mb-2 text-sm font-semibold">{steps[i].query}</h4>
-                <div className="prose prose-hr:my-4 text-sm">
-                  {steps[i].children}
-                </div>
-              </ScrollyStep>
-            )
-            i++
-            return e
-          } else {
-            return null
-          }
-        } else {
+        if (child.type !== "slot") {
           return <div className="px-7 mb-8 prose text-sm">{child}</div>
         }
+        const { index, name } = child.props
+        if (name !== "steps") return null
+
+        const { query, children } = steps[index]
+        return (
+          <ScrollyStep
+            key={index}
+            stepIndex={index}
+            className="border-l-8 border-transparent data-[ch-selected]:border-blue-400 px-5 py-4 mb-24 rounded-lg bg-zinc-50"
+          >
+            <h4 className="mb-2 text-sm font-semibold">{query}</h4>
+            <div className="prose prose-hr:my-4 text-sm">{children}</div>
+          </ScrollyStep>
+        )
       })}
     </div>
   )
