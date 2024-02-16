@@ -1,9 +1,10 @@
 import { Steps, ScrollyStep, Step } from "codehike/scrolly"
 import { CodeBlock } from "codehike"
+import { slugify } from "@/lib/utils"
 import { Nav } from "@/components/nav"
 import { Code } from "@/components/code"
 import { Preview } from "@/components/preview"
-import { slugify } from "@/lib/utils"
+import { Quiz } from "@/components/quiz"
 import { ArrowDownCircle, Hammer } from "lucide-react"
 
 export function generateStaticParams() {
@@ -127,7 +128,6 @@ async function Section({ slug, section, number }: any) {
 
 function ScrollableContent({ section }: { section: any }) {
   const { steps } = section
-  let i = 0
 
   return (
     <div className="flex-none mt-32 mb-[94vh] mr-[4.167%] w-[37.5%]">
@@ -187,24 +187,6 @@ async function Sticker({
         className="ml-10 px-5 block max-w-[364px] xl:max-w-[531px] max-h-[calc(100vh-3rem-80px)]"
       />
     </div>
-  )
-}
-
-function Quiz({ quiz }: { quiz: any }) {
-  return (
-    <section
-      className="max-w-3xl xl:max-w-4xl my-16 mx-auto bg-zinc-50 px-16 py-12"
-      id={slugify("Check your understanding")}
-    >
-      <h2 className="text-3xl text-center font-semibold">{quiz.query}</h2>
-      <hr className="my-12" />
-      <div className="text-sm text-zinc-600">Question 1 of 4</div>
-      <p className="mt-8 text-lg font-semibold">
-        When creating a custom SwiftUI view, where do you declare the view’s
-        layout?
-      </p>
-      <p>TO DO</p>
-    </section>
   )
 }
 

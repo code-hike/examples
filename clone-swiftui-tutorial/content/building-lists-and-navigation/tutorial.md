@@ -493,45 +493,45 @@ struct ContentView: View {
 
 # !quiz Check Your Understanding
 
-## !!question
+## !!questions
 
 When creating a custom SwiftUI view, where do you declare the view’s layout?
 
-### !!answer
+### !!answers
 
 In the view's initializer.
 
 > !hint Use the body property to declare the view’s layout.
 
-### !!answer correct
+### !!answers correct
 
 In the `body` property.
 
 > !hint Custom views implement the body property, which is a requirement of the View protocol.
 
-### !!answer
+### !!answers
 
 In the `layoutSubviews()` method.
 
 > !hint SwiftUI views are not UIView subclasses. Use the body property to declare the view’s layout.
 
-## !!question
+## !!questions
 
 What is the purpose of a spacer in SwiftUI?
 
-### !!answer
+### !!answers
 
 To add space between views.
 
 > !hint Spacers expand to make their containing view use all of the space of its parent view.
 
-### !!answer correct
+### !!answers correct
 
 To make a view use all of the space of its parent view.
 
 > !hint Spacers expand to make their containing view use all of the space of its parent view.
 
-### !!answer
+### !!answers
 
 To center a view within its parent view.
 
