@@ -4,6 +4,7 @@ import { Nav } from "@/components/nav"
 import { Code } from "@/components/code"
 import { Preview } from "@/components/preview"
 import { slugify } from "@/lib/utils"
+import { ArrowDownCircle, Hammer } from "lucide-react"
 
 export function generateStaticParams() {
   return [
@@ -20,22 +21,17 @@ export default async function TutorialPage({
   const { getHike } = await import(`@/content/${params.slug}/tutorial.md`)
   const { hero, sections, quiz } = getHike()
 
-  const sectionNames = sections.map((section: any) => section.query)
+  const sectionNames = [
+    "Introduction",
+    ...sections.map((section: any) => section.query),
+    "Check your understanding",
+  ]
 
   return (
     <>
-      <Nav
-        tutorial={params.slug}
-        sections={["Introduction", ...sectionNames, "Check your understanding"]}
-      />
+      <Nav tutorial={params.slug} sections={sectionNames} />
       <main className="overflow-x-clip">
-        <header className="py-20 bg-black" id={slugify("Introduction")}>
-          <div className="max-w-3xl xl:max-w-4xl mx-auto prose prose-invert">
-            <h3>SwiftUI essentials</h3>
-            <h1>{hero.query}</h1>
-            {hero.children}
-          </div>
-        </header>
+        <Hero hero={hero} />
         {sections.map((section: any, i: number) => (
           <Section
             key={i}
@@ -44,11 +40,40 @@ export default async function TutorialPage({
             number={i + 1}
           />
         ))}
-
         <Quiz quiz={quiz} />
-        <footer className="py-20 bg-zinc-100"></footer>
+        <footer className="py-20 bg-zinc-100" />
       </main>
     </>
+  )
+}
+
+function Hero({ hero }: { hero: any }) {
+  return (
+    <header className="py-20 bg-black" id={slugify("Introduction")}>
+      <div className="max-w-3xl xl:max-w-4xl mx-auto prose prose-invert">
+        <h3>SwiftUI essentials</h3>
+        <h1>{hero.query}</h1>
+        {hero.children}
+        <div className="flex mt-10">
+          <div className="w-40 pr-8 flex flex-col items-center">
+            <div className="text-4xl font-semibold mb-2">{hero.time}</div>
+            <div className="text-sm">Estimated Time</div>
+          </div>
+          <div className="border-x border-zinc-200 w-36 flex flex-col items-center">
+            <ArrowDownCircle size={44} strokeWidth={1.2} />
+            <a href={hero.files} className="text-sm mt-1 no-underline">
+              Project files
+            </a>
+          </div>
+          <div className="w-48 flex flex-col items-center">
+            <Hammer size={44} strokeWidth={1.2} />
+            <a href={hero.xcode} className="text-sm mt-1 no-underline">
+              Xcode 15 or later
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
   )
 }
 

@@ -3,10 +3,10 @@ https://developer.apple.com/tutorials/swiftui/building-lists-and-navigation
 
 # To do
 
+- schema
 - 00.foo-something/tutorial.mdx
   - not sure, it makes getting mdx from slug harder
 - dark mode images
-- scheme
 - dark mode
 - code theme
 - metadata
@@ -20,10 +20,3 @@ https://developer.apple.com/tutorials/swiftui/building-lists-and-navigation
 - <CodeContent key={codeblock.meta} />
   - maybe prop drill key to client component
   - https://twitter.com/pomber/status/1757336372719874560
-
-## Code Hike
-
-- parse quotes `> !time 40mins`
-- different syntax for multiple (!) and single (!!)
-- getHike({ components: { Hike: "TODO fix" } })
-- add index in <slot name="steps" index={2}>
