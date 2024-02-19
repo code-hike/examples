@@ -1,0 +1,2 @@
+- MDX pages with Blocks doesn't work because of Astro slots: https://docs.astro.build/en/guides/framework-components/#passing-children-to-framework-components
+- Importing MDX from React components also doesn't work
