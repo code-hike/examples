@@ -1,15 +1,15 @@
 // @ts-ignore
 import { getBlocks } from "./content.md"
-import { CodeContent, CodeBlock } from "codehike"
 import {
   ContentBlock,
-  ContentSchema,
   EndpointBlock,
   PropertyBlock,
   ResourceBlock,
+  parseContent,
 } from "./schema"
+import { ResourceCode, RequestCode, ResponseCode } from "@/components/code"
 
-const content = ContentSchema.parse(getBlocks())
+const content = parseContent(getBlocks())
 
 export const metadata = {
   title: content.intro.query,
@@ -86,7 +86,7 @@ function Resource({ query, code, properties, hidden }: ResourceBlock) {
       <div className="flex gap-8 ">
         <div className="min-w-0 flex-1 prose-hr:my-2">
           <h2 className="mt-0">{query}</h2>
-          <div>Properties</div>
+          <div className="font-bold">Properties</div>
           <hr />
           {properties.map((property) => (
             <Property key={property.query} {...property} />
@@ -105,7 +105,7 @@ function Resource({ query, code, properties, hidden }: ResourceBlock) {
         </div>
         <div className="min-w-0 flex-1">
           <div className="sticky top-4">
-            <Code codeblock={code} />
+            <ResourceCode codeblock={code} />
           </div>
         </div>
       </div>
@@ -132,11 +132,13 @@ function Property({
       {children}
 
       {subproperties && (
-        <details className="border border-zinc-800 bg-zinc-900 rounded-lg">
-          <summary className="p-2 border-b border-zinc-800 text-zinc-400 cursor-pointer">
+        <details className="border border-[#133a48] bg-[#0A1D26] rounded-lg overflow-hidden">
+          <summary className="p-2  text-[#81AEC4] cursor-pointer">
             <span className="font-mono">{query}</span> properties
           </summary>
-          <div className="px-4">{subproperties.children}</div>
+          <div className="px-4 border-t border-[#133a48]">
+            {subproperties.children}
+          </div>
         </details>
       )}
       <hr />
@@ -144,15 +146,22 @@ function Property({
   )
 }
 
-function Endpoint({ query, method, path, children }: EndpointBlock) {
+function Endpoint({
+  query,
+  method,
+  path,
+  response,
+  children,
+  parameters = [],
+}: EndpointBlock) {
   return (
     <section className="mt-12">
       <hr className="my-16" />
       <div className="flex gap-8">
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0 flex-1 prose-hr:my-2">
           <h2
             id={query.replace(/\s/g, "-")}
-            className="flex items-center gap-3 mt-0"
+            className="flex items-center gap-3 mt-0 scroll-mt-12"
           >
             <div
               className={`border rounded border-current mt-0.5 text-sm w-[5ch] text-center ${methodColor[method]}`}
@@ -164,27 +173,20 @@ function Endpoint({ query, method, path, children }: EndpointBlock) {
           <hr className="m-0" />
 
           <div>{children}</div>
+          <div className="font-bold mt-12">Parameters</div>
+          <hr />
+          {parameters.map((property) => (
+            <Property key={property.query} {...property} />
+          ))}
+          <div className="font-bold mt-12">Examples</div>
+          <hr />
         </div>
         <div className="min-w-0 flex-1">
           <div className="sticky top-4">
-            <Code codeblock={{ value: "", lang: "json", meta: path }} />
+            <ResponseCode codeblock={response} />
           </div>
         </div>
       </div>
     </section>
-  )
-}
-function Code({ codeblock }: { codeblock: CodeBlock }) {
-  return (
-    <div className="border border-[#1e647a] min-w-0 flex-1 rounded-lg max-w-lg ml-auto bg-[#184C5E]">
-      <div className="font-mono px-4 py-1 text-[#8fbfd7] bg-[#133A48] m-0.5 rounded-lg">
-        {"{}   " + codeblock.meta}
-      </div>
-      <CodeContent
-        codeblock={codeblock}
-        config={{ theme: "dark-plus" }}
-        className="min-h-[40rem] max-h-[600px] m-0 whitespace-pre-wrap"
-      />
-    </div>
   )
 }

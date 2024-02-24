@@ -16,7 +16,7 @@ An order is a customer's request to purchase one or more products from a shop. Y
 ### !!properties app_id
 
 !type integer
-!readonly 1
+!readonly
 
 The ID of the app that created the order.
 
@@ -106,12 +106,110 @@ There are additional optional parameters that can be specified in the body of th
   - **decrement_obeying_policy**: Follow the product's inventory policy and claim inventory, if possible.
 - **send_receipt**: Whether to send an order confirmation to the customer. (default: \`false\`)
 
+```bash !!request cURL
+curl -d '{"order":{"line_items":[{"title":"Big Brown Bear Boots","price":74.99,"grams":"1300","quantity":3,"tax_lines":[{"price":13.5,"rate":0.06,"title":"State tax"}]}],"transactions":[{"kind":"sale","status":"success","amount":238.47}],"total_tax":13.5,"currency":"EUR"}}' \
+-X POST "https://your-development-store.myshopify.com/admin/api/2024-01/orders.json" \
+-H "X-Shopify-Access-Token: {access_token}" \
+-H "Content-Type: application/json"
+```
+
+```js !!request Node.js
+// Session is built by the OAuth process
+
+const order = new shopify.rest.Order({
+  session: session,
+})
+order.line_items = [
+  {
+    title: "Big Brown Bear Boots",
+    price: 74.99,
+    grams: "1300",
+    quantity: 3,
+    tax_lines: [
+      {
+        price: 13.5,
+        rate: 0.06,
+        title: "State tax",
+      },
+    ],
+  },
+]
+order.transactions = [
+  {
+    kind: "sale",
+    status: "success",
+    amount: 238.47,
+  },
+]
+order.total_tax = 13.5
+order.currency = "EUR"
+await order.save({
+  update: true,
+})
+```
+
+```json !response Response
+HTTP/1.1 201 Created
+{
+  "order": {
+    "id": 450789469,
+    "email": ""
+  }
+}
+```
+
+### !!parameters api_version
+
+!type string
+!required
+
+```json !response Response
+{
+  "order": {
+    "id": 450789469,
+    "email": ""
+  }
+}
+```
+
 ## !!endpoints Cancel an order
 
 !method POST
 !path /admin/api/2024-01/orders/450789469/cancel.json
 
 Cancels an order. Orders that are paid and have fulfillments can't be canceled.
+
+```json !response Response
+{
+  "order": {
+    "id": 450789469,
+    "email": ""
+  }
+}
+```
+
+### !!parameters api_version
+
+!type string
+!required
+
+### !!parameters order_id
+
+!type string
+!required
+
+### !!parameters amount
+
+!type string
+
+The amount to refund. If set, Shopify attempts to refund the specified amount, depending on its status. Shopify refunds through a manual gateway in cases where the original transaction was not made in Shopify. Refunds through a manual gateway are recorded as a refund on Shopify, but the customer is not refunded.
+
+### !!parameters email
+
+!type boolean
+!default false
+
+Whether to send an email to the customer notifying them of the cancellation.
 
 ## !!endpoints Retrieve a list of orders
 
@@ -121,6 +219,15 @@ Cancels an order. Orders that are paid and have fulfillments can't be canceled.
 Retrieves a list of orders that meet the specified criteria. **Usage notes:**  
 This endpoint implements pagination by using links that are provided in the response header. To learn more, see [Make paginated requests to the REST Admin API](https://shopify.dev/api/usage/pagination-rest).
 
+```json !response Response
+{
+  "order": {
+    "id": 450789469,
+    "email": ""
+  }
+}
+```
+
 ## !!endpoints Update an order
 
 !method PUT
@@ -128,9 +235,27 @@ This endpoint implements pagination by using links that are provided in the resp
 
 This operation allows for updating properties of an order including \`buyer_accepts_marketing\`, \`email\`, \`phone\`, \`note\`, \`tags\`, \`metafields\` and \`shipping_address_attributes\`. It is not for editing the items of an order.
 
+```json !response Response
+{
+  "order": {
+    "id": 450789469,
+    "email": ""
+  }
+}
+```
+
 ## !!endpoints Delete an order
 
 !method DEL
 !path /admin/api/2024-01/orders/450789469.json
 
 Deletes an order. Orders that interact with an online gateway can't be deleted.
+
+```json !response Response
+{
+  "order": {
+    "id": 450789469,
+    "email": ""
+  }
+}
+```
