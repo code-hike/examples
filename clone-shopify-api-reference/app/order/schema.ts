@@ -31,7 +31,7 @@ const Endpoint = Block.extend({
   path: z.string(),
   parameters: z.optional(z.array(Property)),
   response: Code,
-  // response: z.optional(Block),
+  request: z.array(Code),
   // examples: z.array(Block),
 })
 

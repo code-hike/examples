@@ -107,44 +107,15 @@ There are additional optional parameters that can be specified in the body of th
 - **send_receipt**: Whether to send an order confirmation to the customer. (default: \`false\`)
 
 ```bash !!request cURL
-curl -d '{"order":{"line_items":[{"title":"Big Brown Bear Boots","price":74.99,"grams":"1300","quantity":3,"tax_lines":[{"price":13.5,"rate":0.06,"title":"State tax"}]}],"transactions":[{"kind":"sale","status":"success","amount":238.47}],"total_tax":13.5,"currency":"EUR"}}' \
--X POST "https://your-development-store.myshopify.com/admin/api/2024-01/orders.json" \
--H "X-Shopify-Access-Token: {access_token}" \
--H "Content-Type: application/json"
+curl -X GET "https://your-development-store.myshopify.com/admin/api/2024-01/orders/count.json?status=any" \
+-H "X-Shopify-Access-Token: {access_token}"
 ```
 
 ```js !!request Node.js
 // Session is built by the OAuth process
-
-const order = new shopify.rest.Order({
+await shopify.rest.Order.count({
   session: session,
-})
-order.line_items = [
-  {
-    title: "Big Brown Bear Boots",
-    price: 74.99,
-    grams: "1300",
-    quantity: 3,
-    tax_lines: [
-      {
-        price: 13.5,
-        rate: 0.06,
-        title: "State tax",
-      },
-    ],
-  },
-]
-order.transactions = [
-  {
-    kind: "sale",
-    status: "success",
-    amount: 238.47,
-  },
-]
-order.total_tax = 13.5
-order.currency = "EUR"
-await order.save({
-  update: true,
+  status: "any",
 })
 ```
 
@@ -163,6 +134,19 @@ HTTP/1.1 201 Created
 !type string
 !required
 
+```bash !!request cURL
+curl -X GET "https://your-development-store.myshopify.com/admin/api/2024-01/orders/count.json?status=any" \
+-H "X-Shopify-Access-Token: {access_token}"
+```
+
+```js !!request Node.js
+// Session is built by the OAuth process
+await shopify.rest.Order.count({
+  session: session,
+  status: "any",
+})
+```
+
 ```json !response Response
 {
   "order": {
@@ -178,6 +162,19 @@ HTTP/1.1 201 Created
 !path /admin/api/2024-01/orders/450789469/cancel.json
 
 Cancels an order. Orders that are paid and have fulfillments can't be canceled.
+
+```bash !!request cURL
+curl -X GET "https://your-development-store.myshopify.com/admin/api/2024-01/orders/count.json?status=any" \
+-H "X-Shopify-Access-Token: {access_token}"
+```
+
+```js !!request Node.js
+// Session is built by the OAuth process
+await shopify.rest.Order.count({
+  session: session,
+  status: "any",
+})
+```
 
 ```json !response Response
 {
@@ -219,6 +216,19 @@ Whether to send an email to the customer notifying them of the cancellation.
 Retrieves a list of orders that meet the specified criteria. **Usage notes:**  
 This endpoint implements pagination by using links that are provided in the response header. To learn more, see [Make paginated requests to the REST Admin API](https://shopify.dev/api/usage/pagination-rest).
 
+```bash !!request cURL
+curl -X GET "https://your-development-store.myshopify.com/admin/api/2024-01/orders/count.json?status=any" \
+-H "X-Shopify-Access-Token: {access_token}"
+```
+
+```js !!request Node.js
+// Session is built by the OAuth process
+await shopify.rest.Order.count({
+  session: session,
+  status: "any",
+})
+```
+
 ```json !response Response
 {
   "order": {
@@ -235,6 +245,19 @@ This endpoint implements pagination by using links that are provided in the resp
 
 This operation allows for updating properties of an order including \`buyer_accepts_marketing\`, \`email\`, \`phone\`, \`note\`, \`tags\`, \`metafields\` and \`shipping_address_attributes\`. It is not for editing the items of an order.
 
+```bash !!request cURL
+curl -X GET "https://your-development-store.myshopify.com/admin/api/2024-01/orders/count.json?status=any" \
+-H "X-Shopify-Access-Token: {access_token}"
+```
+
+```js !!request Node.js
+// Session is built by the OAuth process
+await shopify.rest.Order.count({
+  session: session,
+  status: "any",
+})
+```
+
 ```json !response Response
 {
   "order": {
@@ -250,6 +273,19 @@ This operation allows for updating properties of an order including \`buyer_acce
 !path /admin/api/2024-01/orders/450789469.json
 
 Deletes an order. Orders that interact with an online gateway can't be deleted.
+
+```bash !!request cURL
+curl -X GET "https://your-development-store.myshopify.com/admin/api/2024-01/orders/count.json?status=any" \
+-H "X-Shopify-Access-Token: {access_token}"
+```
+
+```js !!request Node.js
+// Session is built by the OAuth process
+await shopify.rest.Order.count({
+  session: session,
+  status: "any",
+})
+```
 
 ```json !response Response
 {

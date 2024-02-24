@@ -26,14 +26,22 @@ export function RequestCode({
 }) {
   const codeblock = codeblocks[0]
   return (
-    <div className="border border-[#1e647a] min-w-0 flex-1 rounded-lg max-w-lg ml-auto bg-[#184C5E]">
-      <div className="font-mono px-4 py-1 text-[#8fbfd7] bg-[#133A48] m-0.5 rounded-lg">
-        {"{}   " + codeblock.meta}
+    <div className="border border-[#1e647a] min-w-0 flex-1 rounded-lg max-w-lg ml-auto mb-4 bg-[#184C5E]">
+      <div className="font-mono px-4 text-[#8fbfd7] bg-[#133A48] m-0.5 rounded">
+        {path}
+      </div>
+      <div className="font-mono py-1 text-[#8fbfd7] mx-0.5 flex gap-1">
+        <div className="px-4 bg-[#133A48] rounded flex-1 flex gap-3">
+          {codeblocks.map(({ meta }) => (
+            <span key={meta}>{meta}</span>
+          ))}
+        </div>
+        <div className="px-4 bg-[#133A48] rounded">C</div>
       </div>
       <CodeContent
         codeblock={codeblock}
         config={{ theme: "dark-plus" }}
-        className="min-h-[40rem] max-h-[600px] m-0 whitespace-pre-wrap"
+        className="max-h-[600px] m-0 whitespace-pre-wrap"
       />
     </div>
   )
@@ -49,6 +57,7 @@ export function ResponseCode({ codeblock }: { codeblock: CodeBlock }) {
           JSON
         </span>
       </div>
+
       <CodeContent
         codeblock={codeblock}
         config={{ theme: "dark-plus" }}

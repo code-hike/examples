@@ -150,6 +150,7 @@ function Endpoint({
   query,
   method,
   path,
+  request,
   response,
   children,
   parameters = [],
@@ -183,6 +184,7 @@ function Endpoint({
         </div>
         <div className="min-w-0 flex-1">
           <div className="sticky top-4">
+            <RequestCode codeblocks={request} method={method} path={path} />
             <ResponseCode codeblock={response} />
           </div>
         </div>
