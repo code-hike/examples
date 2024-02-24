@@ -16,10 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark bg-neutral-950">
-      <body className={inter.className}>
-        {children}
-        <footer className="h-32 bg-zinc-900 mt-12" />
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   )
 }

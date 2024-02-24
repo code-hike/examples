@@ -13,8 +13,8 @@ const Code = z.object({
 
 const Property = Block.extend({
   type: z.string(),
-  readonly: z.coerce.boolean(),
-  deprecated: z.coerce.boolean(),
+  readonly: z.optional(z.string()).transform((val) => val != null),
+  deprecated: z.optional(z.string()).transform((val) => val != null),
   subproperties: z.optional(Block),
 })
 

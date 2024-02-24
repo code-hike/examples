@@ -18,13 +18,16 @@ export const metadata = {
 export default function Page() {
   const { intro, resource, endpoints } = content
   return (
-    <main className="prose prose-invert prose-hr:border-[#133a48] max-w-6xl mx-auto">
-      <Intro {...intro} endpoints={endpoints} />
-      <Resource {...resource} />
-      {endpoints.map((endpoint) => (
-        <Endpoint {...endpoint} key={endpoint.query} />
-      ))}
-    </main>
+    <>
+      <main className="prose prose-invert prose-hr:border-[#133a48] max-w-6xl mx-auto">
+        <Intro {...intro} endpoints={endpoints} />
+        <Resource {...resource} />
+        {endpoints.map((endpoint) => (
+          <Endpoint {...endpoint} key={endpoint.query} />
+        ))}
+      </main>
+      <footer className="h-32 bg-zinc-900 mt-12" />
+    </>
   )
 }
 
@@ -123,8 +126,8 @@ function Property({
       <div className="flex gap-2 font-mono">
         <span className="text-blue-300">{query}</span>
         <span className="text-cyan-300">{type}</span>
-        <span>{readonly ? "readonly" : "not readonly"}</span>
-        <span>{deprecated ? "deprecated" : "not deprecated"}</span>
+        {readonly && <span>readonly</span>}
+        {deprecated && <span>deprecated</span>}
       </div>
       {children}
 
