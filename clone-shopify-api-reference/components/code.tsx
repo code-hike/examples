@@ -1,4 +1,5 @@
 import { CodeBlock, CodeContent } from "codehike"
+import { CopyButton } from "./copy-button"
 
 export function ResourceCode({ codeblock }: { codeblock: CodeBlock }) {
   return (
@@ -36,7 +37,9 @@ export function RequestCode({
             <span key={meta}>{meta}</span>
           ))}
         </div>
-        <div className="px-4 bg-[#133A48] rounded">C</div>
+        <div className="px-1 bg-[#133A48] rounded flex items-center hover:bg-[#257a95] transition-colors hover:text-white">
+          <CopyButton text={codeblock.value} />
+        </div>
       </div>
       <CodeContent
         codeblock={codeblock}
