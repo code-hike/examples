@@ -7,6 +7,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "./ui/tabs"
+import { Method, Path } from "./ui/endpoint"
 
 export function ResourceCode({ codeblock }: { codeblock: CodeBlock }) {
   return (
@@ -17,7 +18,8 @@ export function ResourceCode({ codeblock }: { codeblock: CodeBlock }) {
       <CodeContent
         codeblock={codeblock}
         config={{ theme: "dark-plus" }}
-        className="min-h-[40rem] max-h-[600px] m-0 whitespace-pre-wrap"
+        className="min-h-[40rem] max-h-[600px] m-0 px-0 whitespace-pre-wrap"
+        components={{ Line }}
       />
     </div>
   )
@@ -38,8 +40,9 @@ export function RequestCode({
       defaultValue="Node.js"
       className="border border-[#1e647a] min-w-0 flex-1 rounded-lg max-w-lg ml-auto mb-4 bg-[#184C5E]"
     >
-      <div className="font-mono px-4 text-[#8fbfd7] bg-[#133A48] m-0.5 rounded">
-        {path}
+      <div className="font-mono px-3 text-[#8fbfd7] bg-[#133A48] m-0.5 rounded flex items-center gap-3">
+        <Method value={method} />
+        <Path method={method} path={path} />
       </div>
       <div className="font-mono py-1 text-[#8fbfd7] mx-0.5 flex gap-1">
         <TabsList className="px-4 bg-[#133A48] rounded flex-1 flex gap-4">
@@ -65,7 +68,8 @@ export function RequestCode({
           <CodeContent
             codeblock={codeblock}
             config={{ theme: "dark-plus" }}
-            className="max-h-[600px] m-0 whitespace-pre-wrap"
+            className="max-h-[600px] m-0 px-0 whitespace-pre-wrap"
+            components={{ Line }}
           />
         </TabsContent>
       ))}
@@ -87,8 +91,21 @@ export function ResponseCode({ codeblock }: { codeblock: CodeBlock }) {
       <CodeContent
         codeblock={codeblock}
         config={{ theme: "dark-plus" }}
-        className="max-h-[600px] m-0 whitespace-pre-wrap"
+        className="max-h-[600px] m-0 px-0 whitespace-pre-wrap"
+        components={{ Line }}
       />
+    </div>
+  )
+}
+
+// TODO better word-wrap
+function Line({ children, query }: any) {
+  return (
+    <div data-line="true" className="">
+      <span className="pl-2 pr-4 inline-block w-[3ch] box-content !opacity-50 text-right select-none">
+        {query}
+      </span>
+      {children}
     </div>
   )
 }

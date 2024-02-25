@@ -7,7 +7,9 @@ import {
   ResourceBlock,
   parseContent,
 } from "./schema"
+import { Pill } from "@/components/ui/pill"
 import { ResourceCode, RequestCode, ResponseCode } from "@/components/code"
+import { Method, Path } from "@/components/ui/endpoint"
 
 const content = parseContent(getBlocks())
 
@@ -50,32 +52,34 @@ function Intro({
         {children}
       </div>
       <div className="min-w-0 flex-1">
-        <div className="border border-cyan-950 min-w-0 flex-1 rounded-lg max-w-lg ml-auto bg-[#0A1D26]">
-          <div className="font-mono px-4 py-1 text-[#bedbeb] bg-[#061219] m-0.5 rounded-lg">
-            # Endpoints
-          </div>
-          <div className="p-4">
-            {endpoints.map((endpoint) => (
-              <a
-                key={endpoint.query}
-                href={`#${endpoint.query.replace(/\s/g, "-")}`}
-                className={`flex gap-3 no-underline items-start mb-1 ${
-                  methodColor[endpoint.method]
-                } p-2 rounded-lg`}
-              >
-                <div className="border rounded border-current mt-0.5 text-sm w-[5ch] text-center">
-                  {endpoint.method}
-                </div>
-                <div className="">
-                  <div>{endpoint.path}</div>
-                  <div className="text-[#81aec4]"># {endpoint.query}</div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
+        <EndpointsNav endpoints={endpoints} />
       </div>
     </section>
+  )
+}
+
+function EndpointsNav({ endpoints }: { endpoints: EndpointBlock[] }) {
+  return (
+    <div className="border border-cyan-950 min-w-0 flex-1 rounded-lg max-w-lg ml-auto bg-[#0A1D26]">
+      <div className="font-mono px-4 py-1 text-[#bedbeb] bg-[#061219] m-0.5 rounded-lg">
+        # Endpoints
+      </div>
+      <div className="p-4">
+        {endpoints.map((endpoint) => (
+          <a
+            key={endpoint.query}
+            href={`#${endpoint.query.replace(/\s/g, "-")}`}
+            className={`flex gap-3 no-underline items-start mb-1 p-2 rounded-lg`}
+          >
+            <Method value={endpoint.method} />
+            <div className="">
+              <Path method={endpoint.method} path={endpoint.path} />
+              <div className="text-[#81aec4]"># {endpoint.query}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
   )
 }
 
@@ -118,16 +122,38 @@ function Property({
   type,
   readonly,
   deprecated,
+  required,
+  default: defaultValue,
   children,
   subproperties,
 }: PropertyBlock) {
   return (
     <div>
-      <div className="flex gap-2 font-mono">
-        <span className="text-blue-300">{query}</span>
-        <span className="text-cyan-300">{type}</span>
-        {readonly && <span>readonly</span>}
-        {deprecated && <span>deprecated</span>}
+      <div className="flex gap-2 font-mono items-center">
+        <span className="text-[#25a2c6] bg-[#0a1d26] px-1 rounded">
+          {query}
+        </span>
+        <TypeTag value={type} />
+        <Pill
+          value={readonly ? "read-only" : undefined}
+          bg="#151d1e"
+          fg="#8a8f93"
+        />
+        <Pill
+          value={deprecated ? "deprecated" : undefined}
+          bg="#180f01"
+          fg="#d69e27"
+        />
+        <Pill
+          value={required ? "required" : undefined}
+          bg="#290400"
+          fg="#fd6257"
+        />
+        <Pill
+          value={defaultValue ? `default ${defaultValue}` : undefined}
+          bg="#151d1e"
+          fg="#8a8f93"
+        />
       </div>
       {children}
 
@@ -143,6 +169,16 @@ function Property({
       )}
       <hr />
     </div>
+  )
+}
+
+function TypeTag({ value }: { value: string }) {
+  const [type, ...rest] = value.split(" ")
+  return (
+    <>
+      <Pill value={type} fg="#00a6b3" bg="#091f21" />
+      <Pill value={rest.join(" ")} fg="#8A8F93" />
+    </>
   )
 }
 
@@ -164,11 +200,7 @@ function Endpoint({
             id={query.replace(/\s/g, "-")}
             className="flex items-center gap-3 mt-0 scroll-mt-12"
           >
-            <div
-              className={`border rounded border-current mt-0.5 text-sm w-[5ch] text-center ${methodColor[method]}`}
-            >
-              {method}
-            </div>
+            <Method value={method} />
             {query}
           </h2>
           <hr className="m-0" />
