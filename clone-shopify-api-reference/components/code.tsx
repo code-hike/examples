@@ -1,5 +1,6 @@
 import { CodeBlock, CodeContent } from "codehike"
 import { CopyButton } from "./copy-button"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs"
 
 export function ResourceCode({ codeblock }: { codeblock: CodeBlock }) {
   return (
@@ -25,28 +26,43 @@ export function RequestCode({
   method: "GET" | "POST" | "PUT" | "DEL"
   path: string
 }) {
-  const codeblock = codeblocks[0]
   return (
-    <div className="border border-[#1e647a] min-w-0 flex-1 rounded-lg max-w-lg ml-auto mb-4 bg-[#184C5E]">
+    <Tabs
+      defaultValue="Node.js"
+      className="border border-[#1e647a] min-w-0 flex-1 rounded-lg max-w-lg ml-auto mb-4 bg-[#184C5E]"
+    >
       <div className="font-mono px-4 text-[#8fbfd7] bg-[#133A48] m-0.5 rounded">
         {path}
       </div>
       <div className="font-mono py-1 text-[#8fbfd7] mx-0.5 flex gap-1">
-        <div className="px-4 bg-[#133A48] rounded flex-1 flex gap-3">
+        <TabsList className="px-4 bg-[#133A48] rounded flex-1 flex gap-4">
           {codeblocks.map(({ meta }) => (
-            <span key={meta}>{meta}</span>
+            <TabsTrigger
+              value={meta!}
+              className="data-[state=active]:text-white data-[state=active]:border-b border-white"
+            >
+              {meta}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        <div className="px-1 bg-[#133A48] rounded flex items-center hover:bg-[#257a95] transition-colors hover:text-white">
+          {codeblocks.map((codeblock) => (
+            <TabsContent value={codeblock.meta!} asChild>
+              <CopyButton text={codeblock.value} />
+            </TabsContent>
           ))}
         </div>
-        <div className="px-1 bg-[#133A48] rounded flex items-center hover:bg-[#257a95] transition-colors hover:text-white">
-          <CopyButton text={codeblock.value} />
-        </div>
       </div>
-      <CodeContent
-        codeblock={codeblock}
-        config={{ theme: "dark-plus" }}
-        className="max-h-[600px] m-0 whitespace-pre-wrap"
-      />
-    </div>
+      {codeblocks.map((codeblock) => (
+        <TabsContent value={codeblock.meta!}>
+          <CodeContent
+            codeblock={codeblock}
+            config={{ theme: "dark-plus" }}
+            className="max-h-[600px] m-0 whitespace-pre-wrap"
+          />
+        </TabsContent>
+      ))}
+    </Tabs>
   )
 }
 
