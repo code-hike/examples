@@ -31,4 +31,41 @@ const TabsContent = React.forwardRef<
 ))
 TabsContent.displayName = TabsPrimitive.Content.displayName
 
+export const LocalStoredTabs = ({
+  localStorageKey,
+  ...props
+}: { localStorageKey: string } & React.ComponentProps<typeof Tabs>) => {
+  const [value, setValue] = React.useState(
+    localStorage.getItem(localStorageKey) || props.defaultValue,
+  )
+
+  React.useEffect(() => {
+    const handler = (e: StorageEvent) => {
+      if (e.key === localStorageKey) {
+        setValue(e.newValue || props.defaultValue)
+      }
+    }
+    window.addEventListener("storage", handler)
+    return () => {
+      window.removeEventListener("storage", handler)
+    }
+  }, [localStorageKey])
+
+  return (
+    <Tabs
+      {...props}
+      onValueChange={(value) => {
+        localStorage.setItem(localStorageKey, value)
+        window.dispatchEvent(
+          new StorageEvent("storage", {
+            key: localStorageKey,
+            newValue: value,
+          }),
+        )
+      }}
+      value={value}
+    />
+  )
+}
+
 export { Tabs, TabsList, TabsTrigger, TabsContent }

@@ -1,6 +1,12 @@
 import { CodeBlock, CodeContent } from "codehike"
 import { CopyButton } from "./copy-button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs"
+import {
+  LocalStoredTabs,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "./ui/tabs"
 
 export function ResourceCode({ codeblock }: { codeblock: CodeBlock }) {
   return (
@@ -27,7 +33,8 @@ export function RequestCode({
   path: string
 }) {
   return (
-    <Tabs
+    <LocalStoredTabs
+      localStorageKey="preferredLanguage"
       defaultValue="Node.js"
       className="border border-[#1e647a] min-w-0 flex-1 rounded-lg max-w-lg ml-auto mb-4 bg-[#184C5E]"
     >
@@ -62,7 +69,7 @@ export function RequestCode({
           />
         </TabsContent>
       ))}
-    </Tabs>
+    </LocalStoredTabs>
   )
 }
 
