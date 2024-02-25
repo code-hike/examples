@@ -36,7 +36,9 @@ export const LocalStoredTabs = ({
   ...props
 }: { localStorageKey: string } & React.ComponentProps<typeof Tabs>) => {
   const [value, setValue] = React.useState(
-    localStorage.getItem(localStorageKey) || props.defaultValue,
+    typeof localStorage !== "undefined"
+      ? localStorage?.getItem(localStorageKey) || props.defaultValue
+      : props.defaultValue,
   )
 
   React.useEffect(() => {

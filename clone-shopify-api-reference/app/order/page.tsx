@@ -10,6 +10,12 @@ import {
 import { Pill } from "@/components/ui/pill"
 import { ResourceCode, RequestCode, ResponseCode } from "@/components/code"
 import { Method, Path } from "@/components/ui/endpoint"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 
 const content = parseContent(getBlocks())
 
@@ -183,6 +189,7 @@ function Endpoint({
   response,
   children,
   parameters = [],
+  examples = [],
 }: EndpointBlock) {
   return (
     <section className="mt-12">
@@ -206,6 +213,16 @@ function Endpoint({
           ))}
           <div className="font-bold mt-12">Examples</div>
           <hr />
+          <Accordion type="single" collapsible className="w-full">
+            {examples.map((example) => (
+              <AccordionItem key={example.query} value={example.query}>
+                <AccordionTrigger className="text-base text-[#81aec4] hover:text-white">
+                  {example.query}
+                </AccordionTrigger>
+                <AccordionContent>Hey</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
         <div className="min-w-0 flex-1">
           <div className="sticky top-4">

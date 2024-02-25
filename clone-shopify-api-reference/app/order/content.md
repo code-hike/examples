@@ -134,27 +134,13 @@ HTTP/1.1 201 Created
 !type string
 !required
 
-```bash !!request cURL
-curl -X GET "https://your-development-store.myshopify.com/admin/api/2024-01/orders/count.json?status=any" \
--H "X-Shopify-Access-Token: {access_token}"
-```
+### !!examples Create a comprehensive order
 
-```js !!request Node.js
-// Session is built by the OAuth process
-await shopify.rest.Order.count({
-  session: session,
-  status: "any",
-})
-```
+### !!examples Create a partially paid order
 
-```json !response Response
-{
-  "order": {
-    "id": 450789469,
-    "email": ""
-  }
-}
-```
+### !!examples Create a simple order and fulfill it
+
+### !!examples Create an order and apply a discount
 
 ## !!endpoints Cancel an order
 

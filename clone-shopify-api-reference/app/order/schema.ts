@@ -26,13 +26,20 @@ const Resource = Block.extend({
   hidden: z.optional(z.array(Property)),
 })
 
+const Example = Block.extend({
+  path: z.optional(z.string()),
+  // pathParams: z.optional(Code),
+  // queryParams: z.optional(Code),
+  // requestBody: z.optional(Code),
+})
+
 const Endpoint = Block.extend({
   method: z.enum(["GET", "POST", "PUT", "DEL"]),
   path: z.string(),
   parameters: z.optional(z.array(Property)),
   response: Code,
   request: z.array(Code),
-  // examples: z.array(Block),
+  examples: z.optional(z.array(Example)),
 })
 
 export const ContentSchema = Block.extend({
