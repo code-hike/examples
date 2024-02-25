@@ -89,7 +89,7 @@ function Resource({ query, code, properties, hidden }: ResourceBlock) {
       <div className="flex gap-8 ">
         <div className="min-w-0 flex-1 prose-hr:my-2">
           <h2 className="mt-0">{query}</h2>
-          <div className="font-bold">Properties</div>
+          <div className="font-bold text-lg">Properties</div>
           <hr />
           {properties.map((property) => (
             <Property key={property.query} {...property} />
@@ -206,17 +206,17 @@ function Endpoint({
           <hr className="m-0" />
 
           <div>{children}</div>
-          <div className="font-bold mt-12">Parameters</div>
+          <div className="font-bold mt-12 text-lg">Parameters</div>
           <hr />
           {parameters.map((property) => (
             <Property key={property.query} {...property} />
           ))}
-          <div className="font-bold mt-12">Examples</div>
+          <div className="font-bold mt-12 text-lg">Examples</div>
           <hr />
           <Accordion type="single" collapsible className="w-full">
             {examples.map((example) => (
               <AccordionItem key={example.query} value={example.query}>
-                <AccordionTrigger className="text-base text-[#81aec4] hover:text-white">
+                <AccordionTrigger className="text-base text-[#81aec4] hover:text-[#bedbeb] data-[state=open]:text-[#bedbeb]">
                   {example.query}
                 </AccordionTrigger>
                 <AccordionContent>Hey</AccordionContent>
