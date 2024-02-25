@@ -1,19 +1,42 @@
 import { cn } from "@/lib/utils"
 
-const methodColor = {
-  POST: "text-teal-300",
-  GET: "text-indigo-300",
-  PUT: "text-yellow-200",
-  DEL: "text-red-400",
+const methodStyle = {
+  POST: {
+    color: "#00f4b9",
+    background: "#1d2b25",
+    borderColor: "#00e4ad",
+  },
+  GET: {
+    color: "#b4b1ff",
+    background: "#211375",
+    borderColor: "#c6c4ff",
+  },
+  PUT: {
+    color: "#e4eb45",
+    background: "#35370a",
+    borderColor: "#e4eb45",
+  },
+  DEL: {
+    color: "#fd847e",
+    background: "#530c02",
+    borderColor: "#fa3510",
+  },
 }
 
-export function Method({ value }: { value: "GET" | "POST" | "PUT" | "DEL" }) {
+export function Method({
+  value,
+  className,
+}: {
+  className?: string
+  value: "GET" | "POST" | "PUT" | "DEL"
+}) {
   return (
     <div
       className={cn(
-        "border rounded border-current mt-0.5 text-sm w-[5ch] text-center",
-        methodColor[value],
+        "border rounded border-current text-sm w-[5ch] text-center",
+        className,
       )}
+      style={methodStyle[value]}
     >
       {value}
     </div>
@@ -27,5 +50,6 @@ export function Path({
   method: "GET" | "POST" | "PUT" | "DEL"
   path: string
 }) {
-  return <div className={cn(methodColor[method])}>{path}</div>
+  const { color } = methodStyle[method]
+  return <div style={{ color }}>{path}</div>
 }

@@ -33,13 +33,6 @@ export default function Page() {
   )
 }
 
-const methodColor = {
-  POST: "text-teal-300",
-  GET: "text-indigo-300",
-  PUT: "text-yellow-200",
-  DEL: "text-red-400",
-}
-
 function Intro({
   query,
   children,
@@ -71,7 +64,7 @@ function EndpointsNav({ endpoints }: { endpoints: EndpointBlock[] }) {
             href={`#${endpoint.query.replace(/\s/g, "-")}`}
             className={`flex gap-3 no-underline items-start mb-1 p-2 rounded-lg`}
           >
-            <Method value={endpoint.method} />
+            <Method value={endpoint.method} className="mt-0.5" />
             <div className="">
               <Path method={endpoint.method} path={endpoint.path} />
               <div className="text-[#81aec4]"># {endpoint.query}</div>
