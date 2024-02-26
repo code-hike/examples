@@ -28,9 +28,9 @@ const Resource = Block.extend({
 
 const Example = Block.extend({
   path: z.optional(z.string()),
-  // pathParams: z.optional(Code),
-  // queryParams: z.optional(Code),
-  // requestBody: z.optional(Code),
+  pathParams: z.optional(Code),
+  queryParams: z.optional(Code),
+  requestBody: z.optional(Code),
 })
 
 const Endpoint = Block.extend({
