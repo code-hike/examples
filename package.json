@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "start-shopify": "cd clone-shopify-api-reference && npm install && npm run dev",
+    "start-swiftui": "cd clone-swiftui-tutorial && npm install && npm run dev"
+  }
+}
