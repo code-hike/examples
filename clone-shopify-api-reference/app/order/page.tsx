@@ -16,6 +16,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import Link from "next/link"
 
 const content = parseContent(getBlocks())
 
@@ -27,7 +28,24 @@ export default function Page() {
   const { intro, resource, endpoints } = content
   return (
     <>
-      <main className="prose prose-invert prose-hr:border-[#133a48] max-w-6xl mx-auto">
+      <nav className="border-b border-[#133a48] py-2 text-[#bedbeb] flex gap-4 max-w-6xl mx-auto px-10 items-center">
+        <Link href="/" className="hover:text-white font-bold">
+          Shopiclone
+        </Link>
+        <a
+          href="https://shopify.dev/docs/api/admin-rest/2024-01/resources/order"
+          className="hover:text-white"
+        >
+          Original
+        </a>
+        <a
+          href="https://github.com/code-hike/examples/tree/main/clone-shopify-api-reference"
+          className="hover:text-white ml-auto"
+        >
+          GitHub
+        </a>
+      </nav>
+      <main className="prose prose-invert prose-hr:border-[#133a48] max-w-6xl mx-auto px-10">
         <Intro {...intro} endpoints={endpoints} />
         <Resource {...resource} />
         {endpoints.map((endpoint) => (
@@ -45,12 +63,12 @@ function Intro({
   endpoints,
 }: ContentBlock & { endpoints: EndpointBlock[] }) {
   return (
-    <section className="mt-24 flex gap-8">
-      <div className="min-w-0 flex-1">
+    <section className="mt-24 flex gap-8 flex-wrap">
+      <div className="min-w-96 flex-1">
         <h1>{query}</h1>
         {children}
       </div>
-      <div className="min-w-0 flex-1">
+      <div className="min-w-96 flex-1">
         <EndpointsNav endpoints={endpoints} />
       </div>
     </section>
@@ -59,7 +77,7 @@ function Intro({
 
 function EndpointsNav({ endpoints }: { endpoints: EndpointBlock[] }) {
   return (
-    <div className="border border-cyan-950 min-w-0 flex-1 rounded-lg max-w-lg ml-auto bg-[#0A1D26]">
+    <div className="border border-cyan-950 min-w-0 flex-1 rounded-lg lg:max-w-lg lg:ml-auto overflow-hidden bg-[#0A1D26]">
       <div className="font-mono px-4 py-1 text-[#bedbeb] bg-[#061219] m-0.5 rounded-lg">
         # Endpoints
       </div>
@@ -86,8 +104,8 @@ function Resource({ query, code, properties, hidden }: ResourceBlock) {
   return (
     <section className="">
       <hr className="my-16" />
-      <div className="flex gap-8 ">
-        <div className="min-w-0 flex-1 prose-hr:my-2">
+      <div className="flex gap-8 flex-wrap">
+        <div className="min-w-96 flex-1 prose-hr:my-2">
           <h2 className="mt-0">{query}</h2>
           <div className="font-bold text-lg">Properties</div>
           <hr />
@@ -106,7 +124,7 @@ function Resource({ query, code, properties, hidden }: ResourceBlock) {
             </details>
           )}
         </div>
-        <div className="min-w-0 flex-1">
+        <div className="min-w-96 flex-1">
           <div className="sticky top-4">
             <ResourceCode codeblock={code} />
           </div>
@@ -194,8 +212,8 @@ function Endpoint({
   return (
     <section className="mt-12">
       <hr className="my-16" />
-      <div className="flex gap-8">
-        <div className="min-w-0 flex-1 prose-hr:my-2">
+      <div className="flex gap-8 flex-wrap">
+        <div className="min-w-96 flex-1 prose-hr:my-2">
           <h2
             id={query.replace(/\s/g, "-")}
             className="flex items-center gap-3 mt-0 scroll-mt-12"
@@ -224,7 +242,7 @@ function Endpoint({
             ))}
           </Accordion>
         </div>
-        <div className="min-w-0 flex-1">
+        <div className="min-w-96 flex-1">
           <div className="sticky top-4">
             <RequestCode codeblocks={request} method={method} path={path} />
             <ResponseCode codeblock={response} />

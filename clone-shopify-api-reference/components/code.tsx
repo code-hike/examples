@@ -11,7 +11,7 @@ import { Method, Path } from "./ui/endpoint"
 
 export function ResourceCode({ codeblock }: { codeblock: CodeBlock }) {
   return (
-    <div className="border border-[#1e647a] min-w-0 flex-1 rounded-lg max-w-lg ml-auto bg-[#184C5E]">
+    <div className="border border-[#1e647a] min-w-0 flex-1 rounded-lg lg:max-w-lg lg:ml-auto overflow-hidden bg-[#184C5E]">
       <div className="font-mono px-4 py-1 text-[#8fbfd7] bg-[#133A48] m-0.5 rounded-lg">
         {"{}   " + codeblock.meta}
       </div>
@@ -38,7 +38,7 @@ export function RequestCode({
     <LocalStoredTabs
       localStorageKey="preferredLanguage"
       defaultValue="Node.js"
-      className="border border-[#1e647a] min-w-0 flex-1 rounded-lg max-w-lg ml-auto mb-4 bg-[#184C5E]"
+      className="border border-[#1e647a] min-w-0 flex-1 rounded-lg lg:max-w-lg lg:ml-auto overflow-hidden mb-4 bg-[#184C5E]"
     >
       <div className="font-mono px-3 text-[#8fbfd7] bg-[#133A48] m-0.5 rounded flex items-center gap-3">
         <Method value={method} />
@@ -79,7 +79,7 @@ export function RequestCode({
 
 export function ResponseCode({ codeblock }: { codeblock: CodeBlock }) {
   return (
-    <div className="border border-cyan-950 min-w-0 flex-1 rounded-lg max-w-lg ml-auto bg-[#0A1D26]">
+    <div className="border border-cyan-950 min-w-0 flex-1 rounded-lg lg:max-w-lg lg:ml-auto overflow-hidden bg-[#0A1D26]">
       <div className="font-mono px-4 py-1 text-[#8fbfd7] bg-[#061219] m-0.5 rounded-lg flex gap-3 items-center">
         <span>{"{}"}</span>
         <span>{codeblock.meta}</span>
