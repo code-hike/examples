@@ -17,7 +17,7 @@ export function Quiz({ quiz }: { quiz: any }) {
       <div className="text-sm text-zinc-600">
         Question {index + 1} of {quiz.questions.length}
       </div>
-      <p className="mt-6 text-lg font-semibold">{question.children}</p>
+      <div className="mt-6 text-lg font-semibold">{question.children}</div>
       {answers.map((answer: any, i: number) => (
         <div key={i} className="flex items-center mt-8">
           <input
