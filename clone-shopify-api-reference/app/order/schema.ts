@@ -1,15 +1,5 @@
 import { z } from "zod"
-
-const Block = z.object({
-  query: z.string(),
-  children: z.array(z.custom<React.ReactNode>()),
-})
-
-const Code = z.object({
-  meta: z.string().optional(),
-  value: z.string(),
-  lang: z.string(),
-})
+import { Block, Code } from "codehike/schema"
 
 const Property = Block.extend({
   type: z.string(),
@@ -36,9 +26,9 @@ const Example = Block.extend({
 const Endpoint = Block.extend({
   method: z.enum(["GET", "POST", "PUT", "DEL"]),
   path: z.string(),
-  parameters: z.optional(z.array(Property)),
-  response: Code,
   request: z.array(Code),
+  response: Code,
+  parameters: z.optional(z.array(Property)),
   examples: z.optional(z.array(Example)),
 })
 
@@ -59,38 +49,24 @@ export function parseContent(blocks: any) {
     return result.data
   }
 
-  throw result.error
+  const error = result.error.errors[0]
 
-  // TODO better error message
+  let p = error.path.slice()
+  let block = blocks
+  let location = ""
+  while (p.length) {
+    const key = p.shift()!
+    block = block[key]
+    if (block?._data?.header) {
+      location += `\n${block._data.header}`
+    }
+  }
 
-  //   const error = result.error.errors[0]
-  //   console.log("result", error)
+  const { path, code, message, ...rest } = error
+  const name = path[path.length - 1]
 
-  //   let p = error.path.slice()
-  //   let block = blocks
-  //   let location = ""
-  //   while (p.length) {
-  //     const key = p.shift()!
-  //     // is a number
-  //     if (typeof key === "number") {
-  //       block = block[key]
-  //       location += `[${key}]`
-  //     } else {
-  //       block = block[key]
-  //       location += `\n${key}`
-  //     }
-  //     if (block && block.query) {
-  //       location += ` ${block.query}`
-  //     }
-  //   }
-
-  //   const s = `at content.md
-  // ## !resource The Order resource
-  // ### !!properties billing_address
-  // !type is missing
-  //   `
-
-  //   throw new Error(s, {
-  //     cause: "foo",
-  //   })
+  throw new Error(`at ${location || "root"}
+Error for \`${name}\`: ${message}
+${JSON.stringify(rest, null, 2)}
+  `)
 }

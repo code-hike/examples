@@ -16,7 +16,7 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "codehike": "^1.0.0-alpha.7",
+    "codehike": "^1.0.0-alpha.8",
     "lucide-react": "^0.338.0",
     "next": "14.1.0",
     "react": "^18",
