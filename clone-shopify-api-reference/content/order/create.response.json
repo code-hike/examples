@@ -1,0 +1,266 @@
+HTTP/1.1 201 Created
+{
+  "order": {
+    "id": 1073459963,
+    "admin_graphql_api_id": "gid://shopify/Order/1073459963",
+    "app_id": 755357713,
+    "browser_ip": null,
+    "buyer_accepts_marketing": false,
+    "cancel_reason": null,
+    "cancelled_at": null,
+    "cart_token": null,
+    "checkout_id": null,
+    "checkout_token": null,
+    "client_details": null,
+    "closed_at": null,
+    "confirmation_number": "Z5NDCZ8N0",
+    "confirmed": true,
+    "contact_email": null,
+    "created_at": "2024-01-09T13:56:01-05:00",
+    "currency": "EUR",
+    "current_subtotal_price": "224.97",
+    "current_subtotal_price_set": {
+      "shop_money": {
+        "amount": "224.97",
+        "currency_code": "EUR"
+      },
+      "presentment_money": {
+        "amount": "224.97",
+        "currency_code": "EUR"
+      }
+    },
+    "current_total_additional_fees_set": null,
+    "current_total_discounts": "0.00",
+    "current_total_discounts_set": {
+      "shop_money": {
+        "amount": "0.00",
+        "currency_code": "EUR"
+      },
+      "presentment_money": {
+        "amount": "0.00",
+        "currency_code": "EUR"
+      }
+    },
+    "current_total_duties_set": null,
+    "current_total_price": "238.47",
+    "current_total_price_set": {
+      "shop_money": {
+        "amount": "238.47",
+        "currency_code": "EUR"
+      },
+      "presentment_money": {
+        "amount": "238.47",
+        "currency_code": "EUR"
+      }
+    },
+    "current_total_tax": "13.50",
+    "current_total_tax_set": {
+      "shop_money": {
+        "amount": "13.50",
+        "currency_code": "EUR"
+      },
+      "presentment_money": {
+        "amount": "13.50",
+        "currency_code": "EUR"
+      }
+    },
+    "customer_locale": null,
+    "device_id": null,
+    "discount_codes": [],
+    "email": "",
+    "estimated_taxes": false,
+    "financial_status": "paid",
+    "fulfillment_status": null,
+    "landing_site": null,
+    "landing_site_ref": null,
+    "location_id": null,
+    "merchant_of_record_app_id": null,
+    "name": "#1002",
+    "note": null,
+    "note_attributes": [],
+    "number": 2,
+    "order_number": 1002,
+    "original_total_additional_fees_set": null,
+    "original_total_duties_set": null,
+    "payment_gateway_names": [
+      ""
+    ],
+    "phone": null,
+    "po_number": null,
+    "presentment_currency": "EUR",
+    "processed_at": "2024-01-09T13:56:01-05:00",
+    "reference": null,
+    "referring_site": null,
+    "source_identifier": null,
+    "source_name": "755357713",
+    "source_url": null,
+    "subtotal_price": "224.97",
+    "subtotal_price_set": {
+      "shop_money": {
+        "amount": "224.97",
+        "currency_code": "EUR"
+      },
+      "presentment_money": {
+        "amount": "224.97",
+        "currency_code": "EUR"
+      }
+    },
+    "tags": "",
+    "tax_exempt": false,
+    "tax_lines": [
+      {
+        "price": "13.50",
+        "rate": 0.06,
+        "title": "State tax",
+        "price_set": {
+          "shop_money": {
+            "amount": "13.50",
+            "currency_code": "EUR"
+          },
+          "presentment_money": {
+            "amount": "13.50",
+            "currency_code": "EUR"
+          }
+        },
+        "channel_liable": false
+      }
+    ],
+    "taxes_included": false,
+    "test": false,
+    "token": "8800b154fc486b0c822b5002c3ed32cf",
+    "total_discounts": "0.00",
+    "total_discounts_set": {
+      "shop_money": {
+        "amount": "0.00",
+        "currency_code": "EUR"
+      },
+      "presentment_money": {
+        "amount": "0.00",
+        "currency_code": "EUR"
+      }
+    },
+    "total_line_items_price": "224.97",
+    "total_line_items_price_set": {
+      "shop_money": {
+        "amount": "224.97",
+        "currency_code": "EUR"
+      },
+      "presentment_money": {
+        "amount": "224.97",
+        "currency_code": "EUR"
+      }
+    },
+    "total_outstanding": "0.00",
+    "total_price": "238.47",
+    "total_price_set": {
+      "shop_money": {
+        "amount": "238.47",
+        "currency_code": "EUR"
+      },
+      "presentment_money": {
+        "amount": "238.47",
+        "currency_code": "EUR"
+      }
+    },
+    "total_shipping_price_set": {
+      "shop_money": {
+        "amount": "0.00",
+        "currency_code": "EUR"
+      },
+      "presentment_money": {
+        "amount": "0.00",
+        "currency_code": "EUR"
+      }
+    },
+    "total_tax": "13.50",
+    "total_tax_set": {
+      "shop_money": {
+        "amount": "13.50",
+        "currency_code": "EUR"
+      },
+      "presentment_money": {
+        "amount": "13.50",
+        "currency_code": "EUR"
+      }
+    },
+    "total_tip_received": "0.00",
+    "total_weight": 0,
+    "updated_at": "2024-01-09T13:56:01-05:00",
+    "user_id": null,
+    "billing_address": null,
+    "customer": null,
+    "discount_applications": [],
+    "fulfillments": [],
+    "line_items": [
+      {
+        "id": 1071823173,
+        "admin_graphql_api_id": "gid://shopify/LineItem/1071823173",
+        "current_quantity": 3,
+        "fulfillable_quantity": 3,
+        "fulfillment_service": "manual",
+        "fulfillment_status": null,
+        "gift_card": false,
+        "grams": 1300,
+        "name": "Big Brown Bear Boots",
+        "price": "74.99",
+        "price_set": {
+          "shop_money": {
+            "amount": "74.99",
+            "currency_code": "EUR"
+          },
+          "presentment_money": {
+            "amount": "74.99",
+            "currency_code": "EUR"
+          }
+        },
+        "product_exists": false,
+        "product_id": null,
+        "properties": [],
+        "quantity": 3,
+        "requires_shipping": true,
+        "sku": null,
+        "taxable": true,
+        "title": "Big Brown Bear Boots",
+        "total_discount": "0.00",
+        "total_discount_set": {
+          "shop_money": {
+            "amount": "0.00",
+            "currency_code": "EUR"
+          },
+          "presentment_money": {
+            "amount": "0.00",
+            "currency_code": "EUR"
+          }
+        },
+        "variant_id": null,
+        "variant_inventory_management": null,
+        "variant_title": null,
+        "vendor": null,
+        "tax_lines": [
+          {
+            "channel_liable": false,
+            "price": "13.50",
+            "price_set": {
+              "shop_money": {
+                "amount": "13.50",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "13.50",
+                "currency_code": "EUR"
+              }
+            },
+            "rate": 0.06,
+            "title": "State tax"
+          }
+        ],
+        "duties": [],
+        "discount_allocations": []
+      }
+    ],
+    "payment_terms": null,
+    "refunds": [],
+    "shipping_address": null,
+    "shipping_lines": []
+  }
+}

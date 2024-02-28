@@ -1,5 +1,5 @@
 // @ts-ignore
-import { getBlocks } from "./content.md"
+import { getBlocks } from "@/content/order.md"
 import {
   ContentBlock,
   EndpointBlock,

@@ -75,3 +75,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+[data-line] span:not(.select-none) {
+  word-break: break-all;
+  display: inline !important;
+}

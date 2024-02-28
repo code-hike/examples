@@ -10,7 +10,7 @@ An order is a customer's request to purchase one or more products from a shop. Y
 ## !resource The Order resource
 
 ```json ! The Order resource
-!from ./order.json
+!from ./order/resource.json
 ```
 
 ### !!properties app_id
@@ -107,26 +107,15 @@ There are additional optional parameters that can be specified in the body of th
 - **send_receipt**: Whether to send an order confirmation to the customer. (default: \`false\`)
 
 ```bash !!request cURL
-curl -X GET "https://your-development-store.myshopify.com/admin/api/2024-01/orders/count.json?status=any" \
--H "X-Shopify-Access-Token: {access_token}"
+!from order/create.curl.bash
 ```
 
 ```js !!request Node.js
-// Session is built by the OAuth process
-await shopify.rest.Order.count({
-  session: session,
-  status: "any",
-})
+!from order/create.node.js
 ```
 
 ```json !response Response
-HTTP/1.1 201 Created
-{
-  "order": {
-    "id": 450789469,
-    "email": ""
-  }
-}
+!from order/create.response.json
 ```
 
 ### !!parameters api_version

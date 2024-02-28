@@ -68,7 +68,7 @@ export function RequestCode({
           <CodeContent
             codeblock={codeblock}
             config={{ theme: "dark-plus" }}
-            className="max-h-[600px] m-0 px-0 whitespace-pre-wrap"
+            className="max-h-[600px] m-0 px-0 whitespace-pre-wrap break-all"
             components={{ Line }}
           />
         </TabsContent>
@@ -101,11 +101,11 @@ export function ResponseCode({ codeblock }: { codeblock: CodeBlock }) {
 // TODO better word-wrap
 function Line({ children, query }: any) {
   return (
-    <div data-line="true" className="">
-      <span className="pl-2 pr-4 inline-block w-[3ch] box-content !opacity-50 text-right select-none">
+    <div data-line="true" className="table-row px-1">
+      <div className="pl-1 pr-4 w-[3ch] box-content !opacity-50 text-right select-none table-cell">
         {query}
-      </span>
-      {children}
+      </div>
+      <div className="table-cell break-words">{children}</div>
     </div>
   )
 }
