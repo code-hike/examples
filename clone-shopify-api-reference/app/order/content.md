@@ -194,6 +194,12 @@ The amount to refund. If set, Shopify attempts to refund the specified amount, d
 
 Whether to send an email to the customer notifying them of the cancellation.
 
+### !!examples Cancel an order
+
+### !!examples Cancel an order using the amount property
+
+### !!examples Cancel an order using the refund property
+
 ## !!endpoints Retrieve a list of orders
 
 !method GET
@@ -224,6 +230,48 @@ await shopify.rest.Order.count({
 }
 ```
 
+### !!parameters api_version
+
+!type string
+!required
+
+### !!parameters attribution_app_id
+
+!type string
+
+Show orders attributed to a certain app, specified by the app's ID.
+
+### !!parameters financial_status
+
+!type string
+!default any
+
+Filter orders by their financial status.
+
+#### !subproperties
+
+- **authorized**: Show only authorized orders
+- **pending**: Show only pending orders
+- **paid**: Show only paid orders
+- **partially_paid**: Show only partially paid orders
+- **refunded**: Show only refunded orders
+- **voided**: Show only voided orders
+- **partially_refunded**: Show only partially refunded orders
+- **any**: Show orders of any financial status.
+- **unpaid**: Show authorized and partially paid orders.
+
+### !!parameters since_id
+
+!type integer ISO 8601
+
+Show orders after the specified ID.
+
+### !!examples Retrieve all orders
+
+### !!examples Retrieve all orders with certain properties
+
+### !!examples Retrieve specific orders
+
 ## !!endpoints Update an order
 
 !method PUT
@@ -253,6 +301,22 @@ await shopify.rest.Order.count({
 }
 ```
 
+### !!parameters api_version
+
+!type string
+!required
+
+### !!parameters order_id
+
+!type string
+!required
+
+### !!examples Add a metafield to an order
+
+### !!examples Add a note to an order
+
+### !!examples Change the email of an order
+
 ## !!endpoints Delete an order
 
 !method DEL
@@ -281,3 +345,15 @@ await shopify.rest.Order.count({
   }
 }
 ```
+
+### !!parameters api_version
+
+!type string
+!required
+
+### !!parameters order_id
+
+!type string
+!required
+
+### !!examples Delete an order
