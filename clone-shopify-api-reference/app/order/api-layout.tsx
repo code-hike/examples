@@ -22,7 +22,7 @@ export function Layout({
       <Intro {...intro} endpoints={endpoints} />
       <Resource {...resource} />
       {endpoints.map((endpoint) => (
-        <Endpoint {...endpoint} key={endpoint.query} />
+        <Endpoint {...endpoint} key={endpoint.title} />
       ))}
     </main>
   )
@@ -31,14 +31,14 @@ export function Layout({
 type EndpointBlock = Content["endpoints"][number]
 
 function Intro({
-  query,
+  title,
   children,
   endpoints,
 }: Content["intro"] & { endpoints: EndpointBlock[] }) {
   return (
     <section className="mt-24 flex gap-8 flex-wrap">
       <div className="min-w-96 flex-1">
-        <h1>{query}</h1>
+        <h1>{title}</h1>
         {children}
       </div>
       <div className="min-w-96 flex-1">
@@ -57,14 +57,14 @@ function EndpointsNav({ endpoints }: { endpoints: EndpointBlock[] }) {
       <div className="p-4">
         {endpoints.map((endpoint) => (
           <a
-            key={endpoint.query}
-            href={`#${endpoint.query.replace(/\s/g, "-")}`}
+            key={endpoint.title}
+            href={`#${endpoint.title.replace(/\s/g, "-")}`}
             className={`flex gap-3 no-underline items-start mb-1 p-2 rounded-lg`}
           >
             <Method value={endpoint.method} className="mt-0.5" />
             <div className="">
               <Path method={endpoint.method} path={endpoint.path} />
-              <div className="text-[#81aec4]"># {endpoint.query}</div>
+              <div className="text-[#81aec4]"># {endpoint.title}</div>
             </div>
           </a>
         ))}
@@ -73,17 +73,17 @@ function EndpointsNav({ endpoints }: { endpoints: EndpointBlock[] }) {
   )
 }
 
-function Resource({ query, code, properties, hidden }: Content["resource"]) {
+function Resource({ title, code, properties, hidden }: Content["resource"]) {
   return (
     <section className="">
       <hr className="my-16" />
       <div className="flex gap-8 flex-wrap">
         <div className="min-w-96 flex-1 prose-hr:my-2">
-          <h2 className="mt-0">{query}</h2>
+          <h2 className="mt-0">{title}</h2>
           <div className="font-bold text-lg">Properties</div>
           <hr />
           {properties.map((property) => (
-            <Property key={property.query} {...property} />
+            <Property key={property.title} {...property} />
           ))}
 
           {hidden && (
@@ -92,7 +92,7 @@ function Resource({ query, code, properties, hidden }: Content["resource"]) {
                 {hidden.length} hidden fields
               </summary>
               {hidden.map((property) => (
-                <Property key={property.query} {...property} />
+                <Property key={property.title} {...property} />
               ))}
             </details>
           )}
@@ -110,7 +110,7 @@ function Resource({ query, code, properties, hidden }: Content["resource"]) {
 type PropertyBlock = Content["resource"]["properties"][number]
 
 function Property({
-  query,
+  title,
   type,
   readonly,
   deprecated,
@@ -123,7 +123,7 @@ function Property({
     <div>
       <div className="flex gap-2 font-mono items-center">
         <span className="text-[#25a2c6] bg-[#0a1d26] px-1 rounded">
-          {query}
+          {title}
         </span>
         <TypeTag value={type} />
         <Pill
@@ -152,7 +152,7 @@ function Property({
       {subproperties && (
         <details className="border border-[#133a48] bg-[#0A1D26] rounded-lg overflow-hidden">
           <summary className="p-2  text-[#81AEC4] cursor-pointer">
-            <span className="font-mono">{query}</span> properties
+            <span className="font-mono">{title}</span> properties
           </summary>
           <div className="px-4 border-t border-[#133a48]">
             {subproperties.children}
@@ -175,7 +175,7 @@ function TypeTag({ value }: { value: string }) {
 }
 
 function Endpoint({
-  query,
+  title,
   method,
   path,
   request,
@@ -190,11 +190,11 @@ function Endpoint({
       <div className="flex gap-8 flex-wrap">
         <div className="min-w-96 flex-1 prose-hr:my-2">
           <h2
-            id={query.replace(/\s/g, "-")}
+            id={title.replace(/\s/g, "-")}
             className="flex items-center gap-3 mt-0 scroll-mt-12"
           >
             <Method value={method} />
-            {query}
+            {title}
           </h2>
           <hr className="m-0" />
 
@@ -202,15 +202,15 @@ function Endpoint({
           <div className="font-bold mt-12 text-lg">Parameters</div>
           <hr />
           {parameters.map((property) => (
-            <Property key={property.query} {...property} />
+            <Property key={property.title} {...property} />
           ))}
           <div className="font-bold mt-12 text-lg">Examples</div>
           <hr />
           <Accordion type="single" collapsible className="w-full">
             {examples.map((example) => (
-              <AccordionItem key={example.query} value={example.query}>
+              <AccordionItem key={example.title} value={example.title}>
                 <AccordionTrigger className="text-base text-[#81aec4] hover:text-[#bedbeb] data-[state=open]:text-[#bedbeb]">
-                  {example.query}
+                  {example.title}
                 </AccordionTrigger>
                 <AccordionContent>Hey</AccordionContent>
               </AccordionItem>

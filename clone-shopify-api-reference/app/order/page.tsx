@@ -7,7 +7,7 @@ import { Layout } from "./api-layout"
 const content = parseContent(getBlocks())
 
 export const metadata = {
-  title: content.intro.query,
+  title: content.intro.title,
 }
 
 export default function Page() {

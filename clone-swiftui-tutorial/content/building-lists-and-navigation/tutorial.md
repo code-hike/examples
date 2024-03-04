@@ -1,14 +1,14 @@
 # !hero Building lists and navigation
 
-This tutorial guides you through building _Landmarks_ — an app for discovering and sharing the places you love. You’ll start by building the view that shows a landmark’s details.
+With the basic landmark detail view set up, you need to provide a way for users to see the full list of landmarks, and to view the details about each location.
 
-To lay out the views, Landmarks uses _stacks_ to combine and layer the image and text view components. To add a map to the view, you’ll include a standard MapKit component. As you refine the view’s design, Xcode provides real-time feedback so you can see how those changes translate into code.
+You’ll create views that can show information about any landmark, and dynamically generate a scrolling list that a user can tap to see a detail view for a landmark. To fine-tune the UI, you’ll use Xcode to render previews at different device sizes.
 
 Download the project files to begin building this project, and follow the steps below.
 
-> !time 40mins
-> !files https://v1.codehike.org
-> !xcode https://v1.codehike.org
+!time 35mins
+!files https://v1.codehike.org
+!xcode https://v1.codehike.org
 
 # !!sections Create a new project and explore the canvas
 
@@ -501,19 +501,19 @@ When creating a custom SwiftUI view, where do you declare the view’s layout?
 
 In the view's initializer.
 
-> !hint Use the body property to declare the view’s layout.
+!hint Use the body property to declare the view’s layout.
 
 ### !!answers correct
 
 In the `body` property.
 
-> !hint Custom views implement the body property, which is a requirement of the View protocol.
+!hint Custom views implement the body property, which is a requirement of the View protocol.
 
 ### !!answers
 
 In the `layoutSubviews()` method.
 
-> !hint SwiftUI views are not UIView subclasses. Use the body property to declare the view’s layout.
+!hint SwiftUI views are not UIView subclasses. Use the body property to declare the view’s layout.
 
 ## !!questions
 
@@ -523,16 +523,16 @@ What is the purpose of a spacer in SwiftUI?
 
 To add space between views.
 
-> !hint Spacers expand to make their containing view use all of the space of its parent view.
+!hint Spacers expand to make their containing view use all of the space of its parent view.
 
 ### !!answers correct
 
 To make a view use all of the space of its parent view.
 
-> !hint Spacers expand to make their containing view use all of the space of its parent view.
+!hint Spacers expand to make their containing view use all of the space of its parent view.
 
 ### !!answers
 
 To center a view within its parent view.
 
-> !hint Spacers expand to make their containing view use all of the space of its parent view.
+!hint Spacers expand to make their containing view use all of the space of its parent view.

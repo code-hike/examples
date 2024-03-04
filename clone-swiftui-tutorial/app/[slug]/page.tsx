@@ -6,6 +6,7 @@ import { Code } from "@/components/code"
 import { Preview } from "@/components/preview"
 import { Quiz } from "@/components/quiz"
 import { ArrowDownCircle, Hammer } from "lucide-react"
+import { parseContent, Content } from "./schema"
 
 export function generateStaticParams() {
   return [
@@ -14,17 +15,19 @@ export function generateStaticParams() {
   ]
 }
 
+type Section = Content["sections"][0]
+
 export default async function TutorialPage({
   params,
 }: {
   params: { slug: string }
 }) {
-  const { getHike } = await import(`@/content/${params.slug}/tutorial.md`)
-  const { hero, sections, quiz } = getHike()
+  const { getBlocks } = await import(`@/content/${params.slug}/tutorial.md`)
+  const { hero, sections, quiz } = parseContent(getBlocks())
 
   const sectionNames = [
     "Introduction",
-    ...sections.map((section: any) => section.query),
+    ...sections.map(({ title }) => title),
     "Check your understanding",
   ]
 
@@ -33,7 +36,7 @@ export default async function TutorialPage({
       <Nav tutorial={params.slug} sections={sectionNames} />
       <main className="overflow-x-clip">
         <Hero hero={hero} />
-        {sections.map((section: any, i: number) => (
+        {sections.map((section, i) => (
           <Section
             key={i}
             section={section}
@@ -48,12 +51,12 @@ export default async function TutorialPage({
   )
 }
 
-function Hero({ hero }: { hero: any }) {
+function Hero({ hero }: { hero: Content["hero"] }) {
   return (
     <header className="py-20 bg-black" id={slugify("Introduction")}>
       <div className="max-w-3xl xl:max-w-4xl mx-auto prose prose-invert">
         <h3>SwiftUI essentials</h3>
-        <h1>{hero.query}</h1>
+        <h1>{hero.title}</h1>
         {hero.children}
         <div className="flex mt-10">
           <div className="w-40 pr-8 flex flex-col items-center">
@@ -78,9 +81,17 @@ function Hero({ hero }: { hero: any }) {
   )
 }
 
-async function Section({ slug, section, number }: any) {
-  const { intro, steps } = section
-  const content = steps.map((step: any) => ({
+async function Section({
+  slug,
+  section,
+  number,
+}: {
+  slug: string
+  section: Section
+  number: number
+}) {
+  const { intro, blocks } = section
+  const content = blocks.map((step: any) => ({
     sticker: (
       <Sticker
         slug={slug}
@@ -96,12 +107,12 @@ async function Section({ slug, section, number }: any) {
   return (
     <section
       className="max-w-3xl xl:max-w-4xl mx-auto pt-20"
-      id={slugify(section.query)}
+      id={slugify(section.title)}
     >
       <header className=" mb-20 flex flex-row">
         <div className="w-1/2 prose pr-7">
           <h3>Section {number}</h3>
-          <h2>{section.query}</h2>
+          <h2>{section.title}</h2>
           {intro.children}
         </div>
         <div className="w-1/2 pl-7 flex items-center">
@@ -126,8 +137,8 @@ async function Section({ slug, section, number }: any) {
   )
 }
 
-function ScrollableContent({ section }: { section: any }) {
-  const { steps } = section
+function ScrollableContent({ section }: { section: Section }) {
+  const { blocks } = section
 
   return (
     <div className="flex-none mt-32 mb-[94vh] mr-[4.167%] w-[37.5%]">
@@ -136,16 +147,16 @@ function ScrollableContent({ section }: { section: any }) {
           return <div className="px-7 mb-8 prose text-sm">{child}</div>
         }
         const { index, name } = child.props
-        if (name !== "steps") return null
+        if (name !== "blocks") return null
 
-        const { query, children } = steps[index]
+        const { title, children } = blocks[index]
         return (
           <ScrollyStep
             key={index}
             stepIndex={index}
             className="border-l-8 border-transparent data-[ch-selected]:border-blue-400 px-5 py-4 mb-24 rounded-lg bg-zinc-50"
           >
-            <h4 className="mb-2 text-sm font-semibold">{query}</h4>
+            <h4 className="mb-2 text-sm font-semibold">{title}</h4>
             <div className="prose prose-hr:my-4 text-sm">{children}</div>
           </ScrollyStep>
         )
