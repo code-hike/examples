@@ -14,4 +14,4 @@
 
 [Original](https://shopify.dev/docs/api/admin-rest/2024-01/resources/order)
 
-[Stackblitz](https://stackblitz.com/~/github.com/code-hike/examples/edit/tree/main/clone-shopify-api-reference/app/order/content.md?initialPath=order&startScript=start-shopify)
+[Stackblitz](https://stackblitz.com/~/github.com/code-hike/examples/edit/tree/main/clone-shopify-api-reference/content/order.md?initialPath=order&startScript=start-shopify)
