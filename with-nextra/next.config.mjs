@@ -14,7 +14,7 @@ const chConfig = {
 const mdxOptions = {
   remarkPlugins: [[remarkCodeHike, chConfig]],
   recmaPlugins: [[recmaCodeHike, chConfig]],
-  jsx: true,
+  // jsx: true,
 }
 
 const withNextra = nextra({
