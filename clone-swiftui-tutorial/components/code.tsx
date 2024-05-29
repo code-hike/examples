@@ -1,9 +1,11 @@
-import { CodeContent, CodeBlock } from "codehike"
+import { AnnotationHandler, Pre, RawCode, highlight } from "codehike/code"
 import { themeIcons } from "seti-icons"
 
-export function Code({ codeblock }: { codeblock: CodeBlock }) {
+export async function Code({ codeblock }: { codeblock: RawCode }) {
   const { svg, color } = getLightIcon(codeblock.meta || "")
   const __html = svg.replace(/svg/, `svg fill='${color}'`)
+
+  const highlighted = await highlight(codeblock, "github-light")
 
   return (
     <>
@@ -20,34 +22,37 @@ export function Code({ codeblock }: { codeblock: CodeBlock }) {
         />
         {codeblock.meta}
       </div>
-      <CodeContent
+      <Pre
         key={codeblock.meta}
-        codeblock={codeblock}
-        config={{ theme: "github-light", annotationPrefix: "!" }}
+        code={highlighted}
         className="min-h-[40rem] py-3 pl-1 text-sm"
-        components={{ Line, Mark }}
+        handlers={[mark, lineNumber]}
       />
     </>
   )
 }
 
-function Line({ children, query }: any) {
-  return (
-    <div data-line="true" className="px-2">
-      <span className="pl-2 pr-4 inline-block w-[2ch] box-content !opacity-50 text-right select-none">
-        {query}
-      </span>
+const mark: AnnotationHandler = {
+  name: "Mark",
+  Block: ({ children }) => (
+    <div className="bg-indigo-50 shadow-[-4px_0_0] shadow-blue-400">
       {children}
     </div>
-  )
+  ),
 }
 
-function Mark({ query, inline, children }: any) {
-  return (
-    <div className={"bg-indigo-50 shadow-[-4px_0_0] shadow-blue-400"}>
-      {children}
-    </div>
-  )
+const lineNumber: AnnotationHandler = {
+  name: "LineNumber",
+  Line: ({ annotation, icon, InnerLine, lineNumber, children, ...props }) => {
+    return (
+      <InnerLine merge={props} data-line="true" className="px-2">
+        <span className="pl-2 pr-4 inline-block w-[2ch] box-content !opacity-50 text-right select-none">
+          {lineNumber}
+        </span>
+        {children}
+      </InnerLine>
+    )
+  },
 }
 
 const getDarkIcon = themeIcons({

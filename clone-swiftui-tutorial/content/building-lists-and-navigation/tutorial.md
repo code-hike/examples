@@ -10,6 +10,8 @@ Download the project files to begin building this project, and follow the steps 
 !files https://v1.codehike.org
 !xcode https://v1.codehike.org
 
+![!image](020H00.png)
+
 # !!sections Create a new project and explore the canvas
 
 ## !intro
@@ -20,25 +22,25 @@ Create a new Xcode project that uses SwiftUI. Explore the canvas, previews, and 
 
 To preview and interact with views from the canvas in Xcode, and to use all the latest features described throughout the tutorials, ensure your Mac is running macOS Sonoma or later.
 
-## !! Step 1
+## !!Step Step 1
 
 Open Xcode and either click “Create New Project” in Xcode’s startup window, or choose File > New > Project.
 
 ![!screenshot A screenshot of the Xcode welcome screen. There are three options to choose from when you open Xcode: Create New Project, Clone Git Repository, and Open Existing Project. The first option is highlighted.](010101.png)
 
-## !! Step 2
+## !!Step Step 2
 
 In the template selector, select iOS as the platform, select the App template, and then click Next.
 
 ![!screenshot A screenshot of the template selector sheet in Xcode. In the top row, iOS is selected as the platform. In the Application section, App is selected as the template. The Next button in the lower-right corner is highlighted.](010102.png)
 
-## !! Step 3
+## !!Step Step 3
 
 Enter “Landmarks” as the product name, select “SwiftUI” for the interface and “Swift” for the language, and click Next. Choose a location to save the Landmarks project on your Mac.
 
 ![!screenshot A screenshot of the project sheet which shows the name Landmarks filled in for the Product Name. The interface is set to SwiftUI, and the language is set to Swift.](010103.png)
 
-## !! Step 4
+## !!Step Step 4
 
 In the Project navigator, select `LandmarksApp`.
 
@@ -59,7 +61,7 @@ struct LandmarksApp: App {
 }
 ```
 
-## !! Step 5
+## !!Step Step 5
 
 In the Project navigator, select `ContentView`.
 
@@ -90,7 +92,7 @@ struct ContentView: View {
 }
 ```
 
-## !! Step 6
+## !!Step Step 6
 
 The canvas displays a preview automatically.
 
@@ -100,7 +102,7 @@ If the canvas isn’t visible, select Editor > Canvas to show it.
 
 ![!screenshot A screenshot of the Xcode canvas showing an iPhone preview screen that has the text Hello world below a globe icon.](010106.png)
 
-## !! Step 7
+## !!Step Step 7
 
 Inside the body property, remove everything but the Text declaration and change “Hello, world!” to a greeting for yourself.
 
@@ -139,7 +141,7 @@ As you build the Landmarks app, you can use any combination of editors: the sour
 
 Next, you’ll customize the text view using the inspector.
 
-## !! Step 1
+## !!Step Step 1
 
 Change the canvas mode to Selectable.
 
@@ -149,7 +151,7 @@ The canvas displays previews in Live mode by default so that you can interact wi
 
 ![!screenshot A screenshot of the editor and canvas, with the iPhone preview showing to the right.](010201.png)
 
-## !! Step 2
+## !!Step Step 2
 
 In the preview, Command-Control-click the greeting to bring up the structured editing popover, and choose “Show SwiftUI Inspector”.
 
@@ -159,13 +161,13 @@ The popover shows different attributes that you can customize, depending on the 
 
 ![!screenshot A screenshot of the editor and canvas, with the iPhone preview showing to the right.](010202.png)
 
-## !! Step 3
+## !!Step Step 3
 
 Use the inspector to change the text to “Turtle Rock”, the name of the first landmark you’ll show in your app.
 
 ![!screenshot A screenshot.](010203.png)
 
-## !! Step 4
+## !!Step Step 4
 
 Change the Font modifier to “Title”.
 
@@ -179,7 +181,7 @@ This applies the system font to the text so that it responds correctly to the us
 
 To customize a SwiftUI view, you call methods called _modifiers_. Modifiers wrap a view to change its display or other properties. Each modifier returns a new view, so it’s common to chain multiple modifiers, stacked vertically.
 
-## !! Step 5
+## !!Step Step 5
 
 Edit the code by hand to add the `foregroundColor(.green)` modifier; this changes the text’s color to green.
 
@@ -206,13 +208,13 @@ struct ContentView: View {
 
 Your code is always the source of truth for the view. When you use the inspector to change or remove a modifier, Xcode updates your code immediately to match.
 
-## !! Step 6
+## !!Step Step 6
 
 This time, open the inspector by Control-clicking on the `Text` declaration in the code editor, and then choose “Show SwiftUI Inspector” from the popover. Click the Color pop-up menu and choose Inherited to change the text color to black again.
 
 ![!screenshot A screenshot.](010206.png)
 
-## !! Step 7
+## !!Step Step 7
 
 Notice that Xcode updates your code automatically to reflect the change, removing the `foregroundColor(.green)` modifier.
 
@@ -235,7 +237,7 @@ struct ContentView: View {
 }
 ```
 
-## !! Step 8
+## !!Step Step 8
 
 Set the preview back to Live mode.
 
@@ -261,7 +263,7 @@ In this section, you’ll use a vertical stack to place the title above a horizo
 
 You can use Xcode to embed a view in a container view, open an inspector, or help with other useful changes.
 
-## !! Step 1
+## !!Step Step 1
 
 Control-click the text view’s initializer to show a context menu, and then choose “Embed in VStack”.
 
@@ -271,13 +273,13 @@ Control-click the text view’s initializer to show a context menu, and then cho
 
 Next, you’ll add a text view to the stack by dragging a `Text` view from the library.
 
-## !! Step 2
+## !!Step Step 2
 
 Open the library by clicking the plus button (+) at the top-right of the Xcode window, and then drag a `Text` view to the place in your code immediately below the “Turtle Rock” text view.
 
 ![!screenshot A screenshot.](010302.png)
 
-## !! Step 3
+## !!Step Step 3
 
 Replace the `Text` view’s placeholder text with “Joshua Tree National Park”.
 
@@ -306,7 +308,7 @@ struct ContentView: View {
 
 Customize the location to match the desired layout.
 
-## !! Step 4
+## !!Step Step 4
 
 Set the location’s font to `subheadline`.
 
@@ -332,7 +334,7 @@ struct ContentView: View {
 }
 ```
 
-## !! Step 5
+## !!Step Step 5
 
 Edit the `VStack` initializer to align the views by their leading edges.
 
@@ -366,7 +368,7 @@ struct ContentView: View {
 
 Next, you’ll add another text view to the right of the location, this for the park’s state.
 
-## !! Step 6
+## !!Step Step 6
 
 Embed the “Joshua Tree National Park” text view in an HStack.
 
@@ -394,7 +396,7 @@ struct ContentView: View {
 }
 ```
 
-## !! Step 7
+## !!Step Step 7
 
 Add a new text view after the location, change the placeholder text to the park’s state, and then set its font to `subheadline`.
 
@@ -424,7 +426,7 @@ struct ContentView: View {
 }
 ```
 
-## !! Step 8
+## !!Step Step 8
 
 To direct the layout to use the full width of the device, separate the park and the state by adding a `Spacer` to the horizontal stack holding the two text views.
 
@@ -459,7 +461,7 @@ struct ContentView: View {
 }
 ```
 
-## !! Step 9
+## !!Step Step 9
 
 Finally, use the `padding()` modifier to give the landmark’s name and details a little more space around their outer edges.
 

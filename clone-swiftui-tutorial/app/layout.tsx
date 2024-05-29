@@ -5,10 +5,9 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title:
-    "Creating and combining views — CloneUI Tutorials | Code Hike Examples",
+  title: "CloneUI Tutorials | Code Hike Examples",
   description:
-    "This tutorial guides you through building Landmarks — an app for discovering and sharing the places you love.",
+    "A clone of the SwiftUI Tutorials website, built with Code Hike v1.",
 }
 
 export default function RootLayout({
