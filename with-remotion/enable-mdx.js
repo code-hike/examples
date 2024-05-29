@@ -1,7 +1,12 @@
-// import {remarkCodeHike, recmaCodeHike} from 'codehike/mdx';
+const chConfig = {
+	components: {code: 'Code'},
+	syntaxHighlighting: {
+		theme: 'github-dark',
+	},
+};
 
-export const enableMdx = (currentConfiguration) => {
-	// const {remarkCodeHike, recmaCodeHike} = await import('codehike/mdx');
+export const enableMdx = async (currentConfiguration) => {
+	const {remarkCodeHike, recmaCodeHike} = await import('codehike/mdx');
 	return {
 		...currentConfiguration,
 		module: {
@@ -16,8 +21,8 @@ export const enableMdx = (currentConfiguration) => {
 						{
 							loader: '@mdx-js/loader',
 							options: {
-								// remarkPlugins: [remarkCodeHike],
-								// recmaPlugins: [recmaCodeHike],
+								remarkPlugins: [[remarkCodeHike, chConfig]],
+								recmaPlugins: [[recmaCodeHike, chConfig]],
 								// jsx: true, // fails
 							},
 						},

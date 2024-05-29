@@ -1,3 +1,22 @@
-## Hello MDX
+## !! before
 
-Lorem ipsum
+```js !
+const houses = ["Stark", "Lannister", "Baratheon", "Targaryen"];
+
+const winner = houses[Math.floor(Math.random() * houses.length)];
+
+console.log(`Iron Throne: ${winner}`);
+```
+
+## !! after
+
+```js ! george.js
+const houses = ["Stark", "Lannister", "Baratheon", "Targaryen"];
+
+const clash = () => {
+  const winner = houses[Math.floor(Math.random() * houses.length)];
+  return `${winner} wins the battle!`;
+};
+
+console.log(clash());
+```
