@@ -10,12 +10,21 @@ export default async function App() {
         <h1>SwiftUI Tutorials Clone</h1>
         <p>
           This is a clone of the{" "}
-          <a href="https://developer.apple.com/tutorials/swiftui">
+          <a
+            href="https://developer.apple.com/tutorials/swiftui"
+            className="hover:underline"
+          >
             SwiftUI Tutorials
           </a>{" "}
-          website. Built with <a href="https://v1.codehike.org">Code Hike v1</a>
+          website. Built with{" "}
+          <a href="https://v1.codehike.org" className="hover:underline">
+            Code Hike v1
+          </a>
           . Find the source code on{" "}
-          <a href="https://github.com/code-hike/examples/tree/main/clone-swiftui-tutorial">
+          <a
+            href="https://github.com/code-hike/examples/tree/main/clone-swiftui-tutorial"
+            className="hover:underline"
+          >
             GitHub
           </a>
           .
