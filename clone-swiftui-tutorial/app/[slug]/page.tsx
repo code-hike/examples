@@ -76,7 +76,7 @@ export default async function TutorialPage({
   return (
     <>
       <Nav tutorial={params.slug} sections={sectionNames} />
-      <main className="overflow-x-clip">
+      <main className="overflow-x-clip bg-white pb-12">
         <Hero hero={hero} slug={params.slug} />
         {sections.map((section, i) => (
           <Section
@@ -87,7 +87,6 @@ export default async function TutorialPage({
           />
         ))}
         <Quiz quiz={quiz} />
-        <footer className="py-20 bg-zinc-100" />
       </main>
     </>
   )
@@ -97,7 +96,6 @@ async function Hero({ hero, slug }: { hero: HeroData; slug: string }) {
   const img = await loadImage(slug, hero.image)
   return (
     <header className="py-20 bg-black relative" id={slugify("Introduction")}>
-      {/* use bg image */}
       <div
         className="absolute inset-0 bg-top bg-no-repeat bg-cover opacity-30"
         style={{ backgroundImage: `url(${img?.src})` }}

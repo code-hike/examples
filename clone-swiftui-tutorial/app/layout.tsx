@@ -16,8 +16,29 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className="bg-zinc-100">
+      <body className={inter.className}>
+        {children}
+        <footer className="py-8  flex justify-center gap-4 text-zinc-700 text-sm">
+          <a href="https://v1.codehike.org" className="hover:underline">
+            Code Hike docs
+          </a>
+          <span>•</span>
+          <a
+            href="https://github.com/code-hike/examples/tree/main/clone-swiftui-tutorial"
+            className="hover:underline"
+          >
+            Example source code
+          </a>
+          <span>•</span>
+          <a
+            href="https://developer.apple.com/tutorials/swiftui"
+            className="hover:underline"
+          >
+            Original SwiftUI website
+          </a>
+        </footer>
+      </body>
     </html>
   )
 }

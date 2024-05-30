@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 /* fix radix select scrollbar shift https://github.com/radix-ui/primitives/issues/1925#issuecomment-1801729428 */
-html {
+/* html {
   scrollbar-gutter: stable;
 }
 
 body[style] {
   margin: 0 auto !important;
-}
+} */
