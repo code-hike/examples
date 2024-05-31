@@ -5,7 +5,13 @@ import { Preview } from "@/components/preview"
 import { Quiz } from "@/components/quiz"
 import { ArrowDownCircle, Hammer } from "lucide-react"
 import { parseRoot } from "codehike/blocks"
-import { Selectable, Selection, SelectionProvider } from "codehike/utils"
+import {
+  Selectable,
+  Selection,
+  SelectionProvider,
+  StaticFallback,
+  StaticToggle,
+} from "codehike/utils"
 import { RawCode } from "codehike/code"
 import { z } from "zod"
 import { Block, CodeBlock, ImageBlock } from "codehike/blocks"
@@ -48,6 +54,8 @@ export const Schema = Block.extend({
   }),
 })
 
+type TutorialContent = z.infer<typeof Schema>
+
 export function generateStaticParams() {
   return [
     { slug: "creating-and-combining-views" },
@@ -63,32 +71,45 @@ export default async function TutorialPage({
   const { default: Content } = await import(
     `@/content/${params.slug}/tutorial.md`
   )
-  const { hero, sections, quiz } = parseRoot(Content, Schema, {
+  const tutorial = parseRoot(Content, Schema, {
     components: { Step },
   })
 
   const sectionNames = [
     "Introduction",
-    ...sections.map(({ title }) => title || ""),
+    ...tutorial.sections.map(({ title }) => title || ""),
     "Check your understanding",
   ]
 
   return (
     <>
       <Nav tutorial={params.slug} sections={sectionNames} />
-      <main className="overflow-x-clip bg-white pb-12">
-        <Hero hero={hero} slug={params.slug} />
-        {sections.map((section, i) => (
-          <Section
-            key={i}
-            section={section}
-            slug={params.slug}
-            number={i + 1}
-          />
-        ))}
-        <Quiz quiz={quiz} />
-      </main>
+      <StaticFallback
+        query="not screen, (max-width: 768px)"
+        fallback={<div>Static</div>}
+      >
+        <Tutorial tutorial={tutorial} params={params} />
+      </StaticFallback>
     </>
+  )
+}
+
+function Tutorial({
+  tutorial,
+  params,
+}: {
+  tutorial: TutorialContent
+  params: { slug: string }
+}) {
+  const { hero, sections, quiz } = tutorial
+  return (
+    <main className="overflow-x-clip bg-white pb-12">
+      <Hero hero={hero} slug={params.slug} />
+      {sections.map((section, i) => (
+        <Section key={i} section={section} slug={params.slug} number={i + 1} />
+      ))}
+      <Quiz quiz={quiz} />
+    </main>
   )
 }
 
