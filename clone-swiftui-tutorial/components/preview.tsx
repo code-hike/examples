@@ -12,7 +12,7 @@ export function Preview({ preview }: any) {
     <div
       data-state={collapsed ? "closed" : "open"}
       className={cn(
-        "absolute m-4 top-0 right-0 rounded-2xl bg-zinc-100 overflow-hidden",
+        "hidden md:block absolute m-4 top-0 right-0 rounded-2xl bg-zinc-100 overflow-hidden",
         "w-28 data-[state=open]:w-72 transition-[width]",
         disabled ? "" : "shadow-[0_0_3px_0] shadow-black/40",
       )}

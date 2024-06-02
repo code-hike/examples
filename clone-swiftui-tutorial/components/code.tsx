@@ -9,7 +9,7 @@ export async function Code({ codeblock }: { codeblock: RawCode }) {
 
   return (
     <>
-      <div className="pl-4 pt-3 text-zinc-600">
+      <div className="pl-4 pt-3 text-zinc-600 bg-zinc-50">
         <span
           dangerouslySetInnerHTML={{ __html }}
           style={{
@@ -25,7 +25,7 @@ export async function Code({ codeblock }: { codeblock: RawCode }) {
       <Pre
         key={codeblock.meta}
         code={highlighted}
-        className="min-h-[40rem] py-3 pl-1 text-sm"
+        className="md:min-h-[40rem] py-3 pl-1 text-sm bg-zinc-50"
         handlers={[mark, lineNumber]}
       />
     </>

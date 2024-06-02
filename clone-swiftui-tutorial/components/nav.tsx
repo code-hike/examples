@@ -41,53 +41,8 @@ export function Nav({
           size={28}
         />
         <SectionSelect sections={sections} />
-        <div className="mx-5 h-5 border-l border-zinc-200 hidden md:block" />
-        <StaticToggleButton />
       </div>
     </nav>
-  )
-}
-
-function StaticToggleButton() {
-  return (
-    <StaticToggle
-      className="text-zinc-600 hidden md:block"
-      viewDynamicText={
-        (
-          <IconButton
-            key="dynamic"
-            icon={<LayoutList className="rotate-180" />}
-            description="View dynamic version"
-          />
-        ) as any
-      }
-      viewStaticText={
-        (
-          <IconButton
-            key="static"
-            icon={<ScrollText />}
-            description="View static version"
-          />
-        ) as any
-      }
-    />
-  )
-}
-
-function IconButton({
-  icon,
-  description,
-}: {
-  icon: React.ReactNode
-  description: string
-}) {
-  return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>{icon}</TooltipTrigger>
-        <TooltipContent>{description}</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
   )
 }
 
