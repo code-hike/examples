@@ -7,26 +7,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { ChevronRight, LayoutList, ScrollText } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { slugify } from "@/lib/utils"
-import { StaticToggle } from "codehike/utils"
-import {
-  TooltipProvider,
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-} from "@/components/ui/tooltip"
 
-export function Nav({
-  tutorial,
-  sections,
-}: {
-  tutorial: string
-  sections: string[]
-}) {
+export function Nav({ slug, sections }: { slug: string; sections: string[] }) {
   return (
     <nav className="w-full bg-white border-b border-zinc-200 sticky top-0 z-10">
       <div className="flex gap-2 max-w-4xl mx-auto items-center h-12 justify-center md:justify-normal">
@@ -34,7 +21,7 @@ export function Nav({
           CloneUI <span className="text-teal-600">Tutorials</span>
         </Link>
         <div className="mx-5 h-5 border-l border-zinc-200 hidden md:block" />
-        <TutorialSelect tutorial={tutorial} />
+        <TutorialSelect slug={slug} />
         <ChevronRight
           className="text-zinc-200 -mx-2 hidden md:block"
           strokeWidth={1}
@@ -46,10 +33,10 @@ export function Nav({
   )
 }
 
-function TutorialSelect({ tutorial }: { tutorial: string }) {
+function TutorialSelect({ slug }: { slug: string }) {
   const router = useRouter()
   return (
-    <Select value={tutorial} onValueChange={(value) => router.push(value)}>
+    <Select value={slug} onValueChange={(value) => router.push(value)}>
       <SelectTrigger className="min-w-56 max-w-72">
         <SelectValue />
       </SelectTrigger>

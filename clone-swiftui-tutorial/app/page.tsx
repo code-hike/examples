@@ -1,7 +1,6 @@
-import { parseRoot } from "codehike/blocks"
 import Link from "next/link"
 
-import { Schema } from "./[slug]/page"
+import { getTutorial, loadImage } from "@/lib/content"
 
 export default async function App() {
   return (
@@ -43,10 +42,8 @@ export default async function App() {
 }
 
 async function Tutorial({ slug }: { slug: string }) {
-  const { default: Content } = await import(`@/content/${slug}/tutorial.md`)
-  const { hero } = parseRoot(Content, Schema, {
-    components: { Step: () => null },
-  })
+  const { hero } = await getTutorial(slug, { components: { Step: () => null } })
+
   const img = await loadImage(slug, hero.image)
   return (
     <Link
@@ -64,17 +61,4 @@ async function Tutorial({ slug }: { slug: string }) {
       </div>
     </Link>
   )
-}
-
-async function loadImage(slug: string, img?: { url: string; alt: string }) {
-  if (!img) return null
-  const {
-    default: { src, height, width },
-  } = await import(`@/content/${slug}/assets/${img.url}`)
-  return {
-    src,
-    height,
-    width,
-    alt: img.alt,
-  }
 }

@@ -1,26 +1,14 @@
 import { AnnotationHandler, Pre, RawCode, highlight } from "codehike/code"
-import { themeIcons } from "seti-icons"
+import { FileIcon } from "./file-icon"
 import theme from "./theme"
 
 export async function Code({ codeblock }: { codeblock: RawCode }) {
-  const { svg, color } = getLightIcon(codeblock.meta || "")
-  const __html = svg.replace(/svg/, `svg fill='${color}'`)
-
   const highlighted = await highlight(codeblock, theme)
 
   return (
     <>
       <div className="pl-4 pt-3 text-zinc-600 bg-zinc-50">
-        <span
-          dangerouslySetInnerHTML={{ __html }}
-          style={{
-            display: "inline-block",
-            height: "1.8em",
-            width: "1.8em",
-            margin: "-0.6em 0",
-            marginRight: "0.5em",
-          }}
-        />
+        <FileIcon filename={codeblock.meta} />
         {codeblock.meta}
       </div>
       <Pre
@@ -35,7 +23,6 @@ export async function Code({ codeblock }: { codeblock: RawCode }) {
 
 export async function ProseCode({ codeblock }: { codeblock: RawCode }) {
   const highlighted = await highlight(codeblock, theme)
-
   return <Pre code={highlighted} className="text-sm bg-transparent" />
 }
 
@@ -61,17 +48,3 @@ const lineNumber: AnnotationHandler = {
     )
   },
 }
-
-const getLightIcon = themeIcons({
-  blue: "#498ba7",
-  grey: "#455155",
-  "grey-light": "#627379",
-  green: "#7fae42",
-  orange: "#f05138",
-  pink: "#dd4b78",
-  purple: "#9068b0",
-  red: "#b8383d",
-  white: "#bfc2c1",
-  yellow: "#b7b73b",
-  ignore: "#3b4b52",
-})

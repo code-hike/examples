@@ -5,8 +5,9 @@ import React from "react"
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group"
 import { Label } from "./ui/label"
 import { Button } from "./ui/button"
+import { QuizData } from "@/lib/content"
 
-export function Quiz({ quiz }: { quiz: any }) {
+export function Quiz({ quiz }: { quiz: QuizData }) {
   const [questionIndex, setQuestionIndex] = React.useState(0)
   const [answerIndex, setAnswerIndex] = React.useState<number | undefined>(
     undefined,
