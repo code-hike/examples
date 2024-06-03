@@ -8,7 +8,11 @@ const nextConfig = {
 }
 
 /** @type {import('codehike/mdx').CodeHikeConfig} */
-const chConfig = {}
+const chConfig = {
+  components: {
+    code: "ProseCode",
+  },
+}
 
 const withMDX = createMDX({
   extension: /\.(md|mdx)$/,

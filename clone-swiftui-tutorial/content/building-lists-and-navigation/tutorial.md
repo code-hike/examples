@@ -495,46 +495,72 @@ struct ContentView: View {
 
 # !quiz Check Your Understanding
 
-## !!questions
+## !!questions Which of these is a correct way to return three views from a custom view’s body property?
 
-When creating a custom SwiftUI view, where do you declare the view’s layout?
+### !!answers correct
+
+```swift
+VStack {
+   Text("Turtle Rock")
+      .font(.title)
+   Divider()
+   Text("Joshua Tree National Park")
+}
+```
+
+!hint You can use a stack to return multiple views from a body property.
+
+### !!answers
+
+```swift
+[
+    Text("Turtle Rock").font(.title),
+    Divider(),
+    Text("Joshua Tree National Park")
+]
+```
+
+!hint An array of views isn’t a view itself. Use a stack to group together different views instead of returning an array.
+
+### !!answers
+
+```swift
+Text("Turtle Rock")
+    + Divider()
+    + Text("Joshua Tree National Park")
+```
+
+!hint The concatenation operator (+) doesn’t work for views. Use a stack to group together different views instead.
+
+## !!questions Which layout renders from the following view code?
+
+```swift
+var body: some View {
+    HStack {
+        CircleImage()
+        VStack(alignment: .leading) {
+            Text("Turtle Rock")
+                .font(.title)
+            Text("Joshua Tree National Park")
+        }
+    }
+}
+```
 
 ### !!answers
 
 In the view's initializer.
 
-!hint Use the body property to declare the view’s layout.
+!hint The image is grouped in a horizontal stack that contains the two text views in a vertical stack.
 
-### !!answers correct
+### !!answers
 
 In the `body` property.
 
-!hint Custom views implement the body property, which is a requirement of the View protocol.
-
-### !!answers
-
-In the `layoutSubviews()` method.
-
-!hint SwiftUI views are not UIView subclasses. Use the body property to declare the view’s layout.
-
-## !!questions
-
-What is the purpose of a spacer in SwiftUI?
-
-### !!answers
-
-To add space between views.
-
-!hint Spacers expand to make their containing view use all of the space of its parent view.
+!hint In a stack, views appear from leading to trailing, top to bottom, or back to front. In this case, the image should come before the text.
 
 ### !!answers correct
 
-To make a view use all of the space of its parent view.
+In the `layoutSubviews()` method.
 
-!hint Spacers expand to make their containing view use all of the space of its parent view.
-
-### !!answers
-
-To center a view within its parent view.
-
-!hint Spacers expand to make their containing view use all of the space of its parent view.
+!hint The nested horizontal and vertical stacks arrange the image to the left of the two text views.
