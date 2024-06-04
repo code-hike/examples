@@ -1,5 +1,4 @@
 import Link from "next/link"
-
 import { getTutorial, loadImage } from "@/lib/content"
 
 export default async function App() {
@@ -43,13 +42,12 @@ export default async function App() {
 
 async function Tutorial({ slug }: { slug: string }) {
   const { hero } = await getTutorial(slug, { components: { Step: () => null } })
-
   const img = await loadImage(slug, hero.image)
   return (
     <Link
       href={slug}
-      className="bg-zinc-800 relative flex-1 px-8 py-4 hover:bg-zinc-700"
       title={hero.title}
+      className="bg-zinc-800 relative flex-1 px-8 py-4 hover:bg-zinc-700"
     >
       <div
         className="absolute inset-0 bg-top bg-no-repeat bg-cover opacity-30"

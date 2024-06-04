@@ -23,7 +23,7 @@ export default async function TutorialPage({
 
   const sectionNames = [
     "Introduction",
-    ...sections.map(({ title }) => title || ""),
+    ...sections.map(({ title }) => title!),
     "Check your understanding",
   ]
 
@@ -35,8 +35,8 @@ export default async function TutorialPage({
         {sections.map((section, i) => (
           <Section
             key={i}
-            section={section}
             slug={params.slug}
+            section={section}
             number={i + 1}
           />
         ))}
