@@ -1,12 +1,12 @@
-import { Block, CodeBlock, parseProps } from "codehike/blocks"
+import { Block, HighlightedCodeBlock, parseProps } from "codehike/blocks"
 import { z } from "zod"
-import { Pre, RawCode, highlight } from "codehike/code"
+import { HighlightedCode, Pre, RawCode, highlight } from "codehike/code"
 import { Selection, Selectable, SelectionProvider } from "codehike/utils"
 import Link from "next/link"
 
 const Schema = Block.extend({
   intro: Block,
-  steps: z.array(Block.extend({ code: CodeBlock })),
+  steps: z.array(Block.extend({ code: HighlightedCodeBlock })),
   outro: Block,
 })
 
@@ -47,7 +47,6 @@ export function ScrollycodingLayout(props: unknown) {
   )
 }
 
-async function Code({ codeblock }: { codeblock: RawCode }) {
-  const highlighted = await highlight(codeblock, "github-dark")
-  return <Pre code={highlighted} className="min-h-[40rem] bg-transparent" />
+function Code({ codeblock }: { codeblock: HighlightedCode }) {
+  return <Pre code={codeblock} className="min-h-[40rem] bg-transparent" />
 }
