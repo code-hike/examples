@@ -96,6 +96,7 @@ function CodeTransition({ oldCode, newCode, durationInFrames = 30 }) {
 
   React.useLayoutEffect(() => {
     if (!oldCode) {
+      continueRender(handle)
       return
     }
     if (!firstSnapshot) {

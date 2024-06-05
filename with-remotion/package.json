@@ -4,9 +4,8 @@
   "description": "My Remotion video",
   "scripts": {
     "start": "remotion studio",
-    "build": "remotion render HelloWorld out/video.mp4",
-    "upgrade": "remotion upgrade",
-    "test": "eslint src --ext ts,tsx,js,jsx"
+    "build": "remotion render CodeHikeExample out/video.mp4",
+    "upgrade": "remotion upgrade"
   },
   "repository": {},
   "license": "UNLICENSED",
