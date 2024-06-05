@@ -13,23 +13,34 @@ type Flip = {
   last: SnapshotElement
 }
 
+export type Transition = {
+  element: HTMLElement
+  style: {
+    dx?: [number, number]
+    dy?: [number, number]
+    color?: [string, string]
+    opacity?: [number, number]
+  }
+  options: {
+    delay: number
+    duration: number
+    easing: string
+    fill: "backwards" | "both"
+  }
+}
+
 export function getFirstSnapshot(parent: HTMLElement): SnapshotElement[] {
   const elements = getFlipableElements(parent)
   return elements.map(toSnapshotElement)
 }
 
-export function animateChange(
-  parent: HTMLElement,
-  firstSnapshot: SnapshotElement[]
-) {
-  // TODO stop prev animations
-
-  const flips = getFlips(parent, firstSnapshot)
-
+export function animateFlips(flips: Flip[]) {
   const { added, moved } = groupFlips(flips)
   const removeDuration = 0
   const moveDuration = fullStaggerDuration(moved.length, config.moveDuration)
   const addDuration = fullStaggerDuration(added.length, config.addDuration)
+
+  const transitions = [] as Transition[]
 
   moved.forEach((group, groupIndex) => {
     group.forEach((flip) => {
@@ -43,7 +54,7 @@ export function animateChange(
           config.moveDuration
         )
 
-      animateMove(element, first!, last, delay)
+      transitions.push(animateMove(element, first!, last, delay))
     })
   })
 
@@ -55,9 +66,21 @@ export function animateChange(
         moveDuration +
         staggerDelay(groupIndex, added.length, addDuration, config.addDuration)
 
-      animateAdd(element, last, delay)
+      transitions.push(animateAdd(element, last, delay))
     })
   })
+
+  return transitions
+}
+
+export function animateChange(
+  parent: HTMLElement,
+  firstSnapshot: SnapshotElement[]
+) {
+  // TODO stop prev animations
+
+  const flips = getFlips(parent, firstSnapshot)
+  return animateFlips(flips)
 }
 
 function animateMove(
@@ -65,34 +88,66 @@ function animateMove(
   first: SnapshotElement,
   last: SnapshotElement,
   delay: number
-) {
+): Transition {
   const dx = first.x - last.x
   const dy = first.y - last.y
-  element.animate(
-    {
+  // element.animate(
+  //   {
+  //     // opacity: [first.opacity, last.opacity],
+  //     transform: [`translate(${dx}px, ${dy}px)`, "translate(0, 0)"],
+  //     color: [first.color, last.color],
+  //   },
+  //   {
+  //     duration: config.moveDuration,
+  //     easing: "ease-in-out",
+  //     fill: "backwards",
+  //     delay,
+  //   }
+  // )
+
+  return {
+    element: element as HTMLElement,
+    style: {
       // opacity: [first.opacity, last.opacity],
-      transform: [`translate(${dx}px, ${dy}px)`, "translate(0, 0)"],
+      dx: [dx, 0],
+      dy: [dy, 0],
       color: [first.color, last.color],
     },
-    {
+    options: {
       duration: config.moveDuration,
       easing: "ease-in-out",
       fill: "backwards",
       delay,
-    }
-  )
+    },
+  }
 }
 
-function animateAdd(element: Element, last: SnapshotElement, delay: number) {
-  element.animate(
-    { opacity: [0, 1] },
-    {
+function animateAdd(
+  element: Element,
+  last: SnapshotElement,
+  delay: number
+): Transition {
+  // element.animate(
+  //   { opacity: [0, 1] },
+  //   {
+  //     duration: config.addDuration,
+  //     fill: "both",
+  //     easing: "ease-out",
+  //     delay,
+  //   }
+  // )
+  return {
+    element: element as HTMLElement,
+    style: {
+      opacity: [0, 1],
+    },
+    options: {
       duration: config.addDuration,
       fill: "both",
       easing: "ease-out",
       delay,
-    }
-  )
+    },
+  }
 }
 
 // ---
@@ -143,9 +198,12 @@ function groupFlips(flips: Flip[]): {
 // ---
 const config = {
   removeDuration: 100,
+  // these are single durations (the duration of one transition)
   moveDuration: 250,
   addDuration: 200,
 }
+
+export const maxDuration = 2 * config.moveDuration + config.addDuration
 
 function fullStaggerDuration(count: number, singleDuration: number) {
   if (count === 0) return 0
@@ -165,7 +223,10 @@ function staggerDelay(
 
 // ---
 
-function getFlips(parent: HTMLElement, firstSnapshot: SnapshotElement[]) {
+export function getFlips(
+  parent: HTMLElement,
+  firstSnapshot: SnapshotElement[]
+) {
   const elements = getFlipableElements(parent)
   // TODO stop prev animations
 

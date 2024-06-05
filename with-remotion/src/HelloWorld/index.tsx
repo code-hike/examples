@@ -1,27 +1,31 @@
-import { spring } from "remotion"
 import {
-  AbsoluteFill,
+  continueRender,
+  delayRender,
   interpolate,
+  interpolateColors,
+  AbsoluteFill,
   Sequence,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion"
-import { Logo } from "./Logo"
-import { Subtitle } from "./Subtitle"
-import { Title } from "./Title"
 import Content from "./foo.mdx"
 import { z } from "zod"
-import { Pre, RawCode, HighlightedCode, highlight } from "codehike/code"
-import { Block, CodeBlock, parseRoot } from "codehike/blocks"
+import {
+  Pre,
+  RawCode,
+  HighlightedCode,
+  highlight,
+  AnnotationHandler,
+} from "codehike/code"
+import { Block, HighlightedCodeBlock, parseRoot } from "codehike/blocks"
 import React from "react"
-
-// TODO move to codehike
-const HighlightedCodeBlock = CodeBlock.extend({
-  code: z.string(),
-  tokens: z.custom<HighlightedCode["tokens"]>(),
-  annotations: z.custom<HighlightedCode["annotations"]>(),
-  themeName: z.string(),
-})
+import {
+  animateChange,
+  getFirstSnapshot,
+  maxDuration,
+  SnapshotElement,
+  Transition,
+} from "./animate-tokens"
 
 const Schema = Block.extend({
   blocks: z.array(Block.extend({ code: HighlightedCodeBlock })),
@@ -33,21 +37,130 @@ export const HelloWorld = ({ titleText, titleColor }) => {
   const frame = useCurrentFrame()
   const { durationInFrames, fps } = useVideoConfig()
 
-  const stepIndex = (frame / durationInFrames) * blocks.length
+  // const stepIndex = (frame / durationInFrames) * blocks.length
 
-  const prevStep = blocks[Math.floor(stepIndex - 1)]
-  const currentStep = blocks[Math.floor(stepIndex)]
+  // const prevStep = blocks[Math.floor(stepIndex - 1)]
+  // const currentStep = blocks[Math.floor(stepIndex)]
 
-  // A <AbsoluteFill> is just a absolutely positioned <div>!
   return (
     <AbsoluteFill style={{ backgroundColor: "#111", color: "white" }}>
       <div style={{ padding: 12 }}>
-        <CodeTransition after={currentStep.code} before={prevStep?.code} />
+        <CodeTransition
+          oldCode={blocks[0].code}
+          newCode={blocks[1].code}
+          durationInFrames={durationInFrames}
+        />
       </div>
     </AbsoluteFill>
   )
 }
 
-function CodeTransition({ before, after }) {
-  return <Pre code={after} />
+function CodeTransition({ oldCode, newCode, durationInFrames = 30 }) {
+  const frame = useCurrentFrame()
+  const ref = React.useRef<HTMLDivElement>(null)
+  const [firstSnapshot, setSnapshot] = React.useState<SnapshotElement[]>()
+  const [handle] = React.useState(() => delayRender())
+
+  React.useLayoutEffect(() => {
+    if (!firstSnapshot) {
+      console.log("first snapshot")
+      setSnapshot(getFirstSnapshot(ref.current!))
+    } else {
+      const transitions = animateChange(ref.current!, firstSnapshot)
+      console.log("continue render", transitions)
+
+      transitions.forEach(({ element, style, options }) => {
+        const frameDelay = (durationInFrames * options.delay) / maxDuration
+        const frameDuration =
+          (durationInFrames * options.duration) / maxDuration
+
+        let { dx, dy, color, opacity } = style
+        if (opacity) {
+          element.style.opacity = interpolateWithDelay(
+            frame,
+            frameDelay,
+            frameDuration,
+            opacity
+          ) as any
+        }
+        if (color) {
+          element.style.color = interpolateColorsWithDelay(
+            frame,
+            frameDelay,
+            frameDuration,
+            color
+          )
+        }
+        if (dx || dy) {
+          const x = dx
+            ? interpolateWithDelay(frame, frameDelay, frameDuration, dx)
+            : 0
+          const y = dy
+            ? interpolateWithDelay(frame, frameDelay, frameDuration, dy)
+            : 0
+          element.style.transform = `translate(${x}px, ${y}px)`
+        }
+      })
+      continueRender(handle)
+    }
+  })
+
+  const oldPre = React.useMemo(
+    () => (
+      <Pre code={oldCode} handlers={[h]} style={{ position: "relative" }} />
+    ),
+    [oldCode]
+  )
+  const newPre = React.useMemo(
+    () => (
+      <Pre code={newCode} handlers={[h]} style={{ position: "relative" }} />
+    ),
+    [newCode]
+  )
+
+  return !firstSnapshot ? (
+    <div ref={ref}>{oldPre}</div>
+  ) : (
+    <div ref={ref}>{newPre}</div>
+  )
+}
+
+const h: AnnotationHandler = {
+  name: "transition",
+  Token: ({ value, style }) => {
+    // React.useEffect(() => {
+    //   console.log("span", value)
+    // }, [])
+    return <span style={{ ...style, display: "inline-block" }}>{value}</span>
+  },
+}
+
+function interpolateWithDelay(
+  frame: number,
+  delay: number,
+  duration: number,
+  [from, to]: [number, number]
+) {
+  if (frame < delay) {
+    return from
+  }
+  if (frame > delay + duration) {
+    return to
+  }
+  return interpolate(frame - delay, [0, duration], [from, to])
+}
+
+function interpolateColorsWithDelay(
+  frame: number,
+  delay: number,
+  duration: number,
+  [from, to]: [string, string]
+) {
+  if (frame < delay) {
+    return from
+  }
+  if (frame > delay + duration) {
+    return to
+  }
+  return interpolateColors(frame - delay, [0, duration], [from, to])
 }
