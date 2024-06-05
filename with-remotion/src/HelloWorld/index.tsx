@@ -8,60 +8,96 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion"
-import Content from "./foo.mdx"
-import { z } from "zod"
-import {
-  Pre,
-  RawCode,
-  HighlightedCode,
-  highlight,
-  AnnotationHandler,
-} from "codehike/code"
-import { Block, HighlightedCodeBlock, parseRoot } from "codehike/blocks"
+import { Pre, AnnotationHandler } from "codehike/code"
 import React from "react"
 import {
   animateChange,
   getFirstSnapshot,
   maxDuration,
   SnapshotElement,
-  Transition,
 } from "./animate-tokens"
 
-const Schema = Block.extend({
-  blocks: z.array(Block.extend({ code: HighlightedCodeBlock })),
-})
-
-export const HelloWorld = ({ titleText, titleColor }) => {
-  const { blocks } = parseRoot(Content, Schema)
-
-  const frame = useCurrentFrame()
-  const { durationInFrames, fps } = useVideoConfig()
-
-  // const stepIndex = (frame / durationInFrames) * blocks.length
-
-  // const prevStep = blocks[Math.floor(stepIndex - 1)]
-  // const currentStep = blocks[Math.floor(stepIndex)]
+export const HelloWorld = ({ blocks }) => {
+  const { durationInFrames } = useVideoConfig()
+  const stepDuration = durationInFrames / blocks.length
+  const transitionDuration = stepDuration * 0.4
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#111", color: "white" }}>
-      <div style={{ padding: 12 }}>
-        <CodeTransition
-          oldCode={blocks[0].code}
-          newCode={blocks[1].code}
-          durationInFrames={durationInFrames}
-        />
-      </div>
+      <ProgressBar steps={blocks} />
+      {blocks.map((block, index) => (
+        <Sequence from={stepDuration * index} durationInFrames={stepDuration}>
+          <div style={{ padding: "42px 24px" }}>
+            <CodeTransition
+              oldCode={blocks[index - 1]?.code}
+              newCode={block.code}
+              durationInFrames={transitionDuration}
+            />
+          </div>
+        </Sequence>
+      ))}
     </AbsoluteFill>
+  )
+}
+
+function ProgressBar({ steps }) {
+  const frame = useCurrentFrame()
+  const { durationInFrames } = useVideoConfig()
+  const stepDuration = durationInFrames / steps.length
+  const currentStep = Math.floor(frame / stepDuration)
+  const currentStepProgress = (frame % stepDuration) / stepDuration
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: 24,
+        left: 24,
+        right: 24,
+        height: 2,
+        display: "flex",
+        gap: 6,
+      }}
+    >
+      {steps.map((_, index) => (
+        <div
+          key={index}
+          style={{
+            backgroundColor: "#333",
+            borderRadius: 6,
+            overflow: "hidden",
+            height: "100%",
+            flex: 1,
+          }}
+        >
+          <div
+            style={{
+              height: "100%",
+              width:
+                index > currentStep
+                  ? 0
+                  : index === currentStep
+                  ? currentStepProgress * 100 + "%"
+                  : "100%",
+              backgroundColor: "white",
+            }}
+          />
+        </div>
+      ))}
+    </div>
   )
 }
 
 function CodeTransition({ oldCode, newCode, durationInFrames = 30 }) {
   const frame = useCurrentFrame()
-  const ref = React.useRef<HTMLDivElement>(null)
+  const ref = React.useRef<HTMLPreElement>(null)
   const [firstSnapshot, setSnapshot] = React.useState<SnapshotElement[]>()
   const [handle] = React.useState(() => delayRender())
 
   React.useLayoutEffect(() => {
+    if (!oldCode) {
+      return
+    }
     if (!firstSnapshot) {
       console.log("first snapshot")
       setSnapshot(getFirstSnapshot(ref.current!))
@@ -105,32 +141,19 @@ function CodeTransition({ oldCode, newCode, durationInFrames = 30 }) {
     }
   })
 
-  const oldPre = React.useMemo(
-    () => (
-      <Pre code={oldCode} handlers={[h]} style={{ position: "relative" }} />
-    ),
-    [oldCode]
-  )
-  const newPre = React.useMemo(
-    () => (
-      <Pre code={newCode} handlers={[h]} style={{ position: "relative" }} />
-    ),
-    [newCode]
-  )
-
-  return !firstSnapshot ? (
-    <div ref={ref}>{oldPre}</div>
-  ) : (
-    <div ref={ref}>{newPre}</div>
+  return (
+    <Pre
+      ref={ref}
+      code={oldCode && !firstSnapshot ? oldCode : newCode}
+      handlers={[h]}
+      style={{ position: "relative", fontSize: 20 }}
+    />
   )
 }
 
 const h: AnnotationHandler = {
   name: "transition",
   Token: ({ value, style }) => {
-    // React.useEffect(() => {
-    //   console.log("span", value)
-    // }, [])
     return <span style={{ ...style, display: "inline-block" }}>{value}</span>
   },
 }

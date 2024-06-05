@@ -1,37 +1,26 @@
-import {Composition} from 'remotion';
-import {HelloWorld} from './HelloWorld';
-import {Logo} from './HelloWorld/Logo';
+import { Composition } from "remotion"
+import { HelloWorld } from "./HelloWorld"
+import { Block, HighlightedCodeBlock, parseRoot } from "codehike/blocks"
+import { z } from "zod"
 
-// Each <Composition> is an entry in the sidebar!
+const Schema = Block.extend({
+  blocks: z.array(Block.extend({ code: HighlightedCodeBlock })),
+})
+
+import Content from "./content.md"
+const { blocks } = parseRoot(Content, Schema)
+const defaultStepDuration = 75
 
 export const RemotionRoot = () => {
-	return (
-		<>
-			<Composition
-				// You can take the "id" to render a video:
-				// npx remotion render src/index.jsx <id> out/video.mp4
-				id="HelloWorld"
-				component={HelloWorld}
-				durationInFrames={150}
-				fps={30}
-				width={600}
-				height={700}
-				// You can override these props for each render:
-				// https://www.remotion.dev/docs/parametrized-rendering
-				defaultProps={{
-					titleText: 'Welcome to Remotion',
-					titleColor: 'black',
-				}}
-			/>
-			{/* Mount any React component to make it show up in the sidebar and work on it individually! */}
-			<Composition
-				id="OnlyLogo"
-				component={Logo}
-				durationInFrames={150}
-				fps={30}
-				width={1920}
-				height={1080}
-			/>
-		</>
-	);
-};
+  return (
+    <Composition
+      id="CodeHikeExample"
+      component={HelloWorld}
+      defaultProps={{ blocks }}
+      fps={30}
+      durationInFrames={defaultStepDuration * blocks.length}
+      width={600}
+      height={700}
+    />
+  )
+}
