@@ -38,7 +38,6 @@ export function animateFlips(flips: Flip[]) {
   const { added, moved } = groupFlips(flips)
   const removeDuration = 0
   const moveDuration = fullStaggerDuration(moved.length, config.moveDuration)
-  const addDuration = fullStaggerDuration(added.length, config.addDuration)
 
   const transitions = [] as Transition[]
 
@@ -58,16 +57,16 @@ export function animateFlips(flips: Flip[]) {
     })
   })
 
-  added.forEach((group, groupIndex) => {
-    group.forEach((flip) => {
-      const { first, last, element } = flip
-      const delay =
-        removeDuration +
-        moveDuration +
-        staggerDelay(groupIndex, added.length, addDuration, config.addDuration)
+  const addedFlips = added.flat()
+  const addDuration = fullStaggerDuration(addedFlips.length, config.addDuration)
+  addedFlips.forEach((flip, index) => {
+    const { first, last, element } = flip
+    const delay =
+      removeDuration +
+      moveDuration +
+      staggerDelay(index, addedFlips.length, addDuration, config.addDuration)
 
-      transitions.push(animateAdd(element, last, delay))
-    })
+    transitions.push(animateAdd(element, last, delay))
   })
 
   return transitions

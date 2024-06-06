@@ -1,169 +1,63 @@
 ## !! A Game of Thrones
 
 <!-- prettier-ignore -->
-```js !
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-]
-
-const winner =
-  houses[
-    Math.floor(
-      Math.random() * houses.length,
-    )
-  ]
-
-console.log(`Iron Throne: ${winner}`)
+```jsx !
+const element = <h1 title="foo">Hello</h1>
+const container = document.getElementById("root")
+ReactDOM.render(element, container)
 ```
 
 ## !! A Clash of Kings
 
 <!-- prettier-ignore -->
-```js ! 
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-]
-
-const clash = () => {
-  // !mark[9:14]
-  const winner =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  return `${winner} wins the battle!`
-}
-
-console.log(clash())
+```jsx ! 
+const element = React.createElement(
+  "h1",
+  { title: "foo" },
+  "Hello"
+)
+​
+const container = document.getElementById("root")
+ReactDOM.render(element, container)
 ```
 
 ## !! A Storm of Swords
 
 <!-- prettier-ignore -->
-```js ! 
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-]
-
-const reveal = () => {
-  const traitor =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  return `${traitor} betrays the alliance!`
+```jsx ! 
+const element = {
+  type: "h1",
+  props: {
+    title: "foo",
+    children: "Hello",
+  },
 }
+​
+const container = document.getElementById("root")
+ReactDOM.render(element, container)
 
-console.log(reveal())
 ```
 
 ## !! A Feast for Crows
 
 <!-- prettier-ignore -->
-```js ! 
-const houses = [
-  "Martell",
-  "Lannister",
-  "Baratheon",
-  "Tyrell",
-]
-
-const intrigue = () => {
-  const ally1 =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  const ally2 =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  return `${ally1} and ${ally2} form an alliance!`
+```jsx ! 
+const element = {
+  type: "h1",
+  props: {
+    title: "foo",
+    children: "Hello",
+  },
 }
-
-console.log(intrigue())
-```
-
-## !! A Dance with Dragons
-
-<!-- prettier-ignore -->
-```js ! 
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-]
-
-const dragons = () => {
-  const dragon =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  return `${dragon} has a dragon!`
-}
-
-console.log(dragons())
-```
-
-## !! The Winds of Winter
-
-<!-- prettier-ignore -->
-```js ! 
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-  "Martell",
-  "Tyrell",
-  "Greyjoy",
-]
-
-const winterIsComing = () => {
-  const isComing = Math.random() > 0.99
-  if (isComing) {
-    return "Winter is coming!"
-  } else {
-    return "Winter is not coming."
-  }
-}
-
-console.log(winterIsComing())
-```
-
-## !! A Dream of Spring
-
-<!-- prettier-ignore -->
-```js ! 
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-  "Martell",
-  "Tyrell",
-  "Greyjoy",
-]
-
-const keepDreaming = () => {
-  return "Not gonna happen..."
-}
-
-console.log(keepDreaming())
+​
+const container = document.getElementById("root")
+​
+const node = document.createElement(element.type)
+node["title"] = element.props.title
+​
+const text = document.createTextNode("")
+text["nodeValue"] = element.props.children
+​
+node.appendChild(text)
+container.appendChild(node)
 ```
