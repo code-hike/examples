@@ -1,8 +1,6 @@
 import {
   continueRender,
   delayRender,
-  interpolate,
-  interpolateColors,
   AbsoluteFill,
   Sequence,
   useCurrentFrame,
@@ -16,8 +14,10 @@ import {
   maxDuration,
   SnapshotElement,
 } from "./animate-tokens"
+import { interpolateColorsWithDelay, interpolateWithDelay } from "./utils"
+import { ProgressBar } from "./progress-bar"
 
-export const HelloWorld = ({ blocks }) => {
+export const Video = ({ blocks }) => {
   const { durationInFrames } = useVideoConfig()
   const stepDuration = durationInFrames / blocks.length
   const transitionDuration = stepDuration * 0.4
@@ -26,7 +26,11 @@ export const HelloWorld = ({ blocks }) => {
     <AbsoluteFill style={{ backgroundColor: "#111", color: "white" }}>
       <ProgressBar steps={blocks} />
       {blocks.map((block, index) => (
-        <Sequence from={stepDuration * index} durationInFrames={stepDuration}>
+        <Sequence
+          from={stepDuration * index}
+          durationInFrames={stepDuration}
+          name={block.title}
+        >
           <div style={{ padding: "42px 24px" }}>
             <CodeTransition
               oldCode={blocks[index - 1]?.code}
@@ -37,54 +41,6 @@ export const HelloWorld = ({ blocks }) => {
         </Sequence>
       ))}
     </AbsoluteFill>
-  )
-}
-
-function ProgressBar({ steps }) {
-  const frame = useCurrentFrame()
-  const { durationInFrames } = useVideoConfig()
-  const stepDuration = durationInFrames / steps.length
-  const currentStep = Math.floor(frame / stepDuration)
-  const currentStepProgress = (frame % stepDuration) / stepDuration
-
-  return (
-    <div
-      style={{
-        position: "absolute",
-        top: 24,
-        left: 24,
-        right: 24,
-        height: 2,
-        display: "flex",
-        gap: 6,
-      }}
-    >
-      {steps.map((_, index) => (
-        <div
-          key={index}
-          style={{
-            backgroundColor: "#333",
-            borderRadius: 6,
-            overflow: "hidden",
-            height: "100%",
-            flex: 1,
-          }}
-        >
-          <div
-            style={{
-              height: "100%",
-              width:
-                index > currentStep
-                  ? 0
-                  : index === currentStep
-                  ? currentStepProgress * 100 + "%"
-                  : "100%",
-              backgroundColor: "white",
-            }}
-          />
-        </div>
-      ))}
-    </div>
   )
 }
 
@@ -146,10 +102,27 @@ function CodeTransition({ oldCode, newCode, durationInFrames = 30 }) {
     <Pre
       ref={ref}
       code={oldCode && !firstSnapshot ? oldCode : newCode}
-      handlers={[h]}
+      handlers={[h, mark]}
       style={{ position: "relative", fontSize: 20 }}
     />
   )
+}
+
+const mark: AnnotationHandler = {
+  name: "mark",
+  Inline: ({ children }) => {
+    const frame = useCurrentFrame()
+    const backgroundColor = interpolateColorsWithDelay(frame, 20, 20, [
+      "rgba(0, 0, 0, 0)",
+      "rgba(220, 0, 120, 0.5)",
+    ])
+
+    return (
+      <span style={{ backgroundColor, borderRadius: 4, padding: "0 4px" }}>
+        {children}
+      </span>
+    )
+  },
 }
 
 const h: AnnotationHandler = {
@@ -157,34 +130,4 @@ const h: AnnotationHandler = {
   Token: ({ value, style }) => {
     return <span style={{ ...style, display: "inline-block" }}>{value}</span>
   },
-}
-
-function interpolateWithDelay(
-  frame: number,
-  delay: number,
-  duration: number,
-  [from, to]: [number, number]
-) {
-  if (frame < delay) {
-    return from
-  }
-  if (frame > delay + duration) {
-    return to
-  }
-  return interpolate(frame - delay, [0, duration], [from, to])
-}
-
-function interpolateColorsWithDelay(
-  frame: number,
-  delay: number,
-  duration: number,
-  [from, to]: [string, string]
-) {
-  if (frame < delay) {
-    return from
-  }
-  if (frame > delay + duration) {
-    return to
-  }
-  return interpolateColors(frame - delay, [0, duration], [from, to])
 }

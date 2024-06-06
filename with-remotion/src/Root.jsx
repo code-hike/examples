@@ -1,5 +1,5 @@
 import { Composition } from "remotion"
-import { HelloWorld } from "./HelloWorld"
+import { Video } from "./video"
 import { Block, HighlightedCodeBlock, parseRoot } from "codehike/blocks"
 import { z } from "zod"
 
@@ -15,7 +15,7 @@ export const RemotionRoot = () => {
   return (
     <Composition
       id="CodeHikeExample"
-      component={HelloWorld}
+      component={Video}
       defaultProps={{ blocks }}
       fps={30}
       durationInFrames={defaultStepDuration * blocks.length}

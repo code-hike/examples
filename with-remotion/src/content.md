@@ -31,6 +31,7 @@ const houses = [
 ]
 
 const clash = () => {
+  // !mark[9:14]
   const winner =
     houses[
       Math.floor(
