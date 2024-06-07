@@ -2,10 +2,10 @@
 
 import React from "react"
 import {
-  SnapshotElement,
-  animateChange,
-  getFirstSnapshot,
-} from "./animate-tokens.js"
+  TokenTransitionsSnapshot,
+  calculateTransitions,
+  getStartingSnapshot,
+} from "./code/animate-tokens.js"
 
 export class CodeTransitions extends React.Component<{
   InnerPre: any
@@ -19,15 +19,41 @@ export class CodeTransitions extends React.Component<{
   }
 
   getSnapshotBeforeUpdate() {
-    return getFirstSnapshot(this.ref.current!)
+    return getStartingSnapshot(this.ref.current!)
   }
 
   componentDidUpdate(
     prevProps: any,
     prevState: any,
-    firstSnapshot: SnapshotElement[]
+    startingSnapshot: TokenTransitionsSnapshot
   ) {
-    animateChange(this.ref.current!, firstSnapshot)
+    const transitions = calculateTransitions(
+      this.ref.current!,
+      startingSnapshot,
+      {
+        selector: "span",
+      }
+    )
+    transitions.forEach(({ element, keyframes, options }) => {
+      const { opacity, color, translateX, translateY } = keyframes
+      element.animate(
+        {
+          color,
+          opacity,
+          translate: translateX &&
+            translateY && [
+              `translate(${translateX[0]}px, ${translateY[0]}px)`,
+              `translate(${translateX[1]}px, ${translateY[1]}px)`,
+            ],
+        },
+        {
+          duration: options.duration,
+          easing: options.easing,
+          fill: "both",
+          delay: options.delay,
+        }
+      )
+    })
   }
 
   render() {

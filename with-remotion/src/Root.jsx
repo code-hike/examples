@@ -16,7 +16,7 @@ export const RemotionRoot = () => {
     <Composition
       id="CodeHikeExample"
       component={Video}
-      defaultProps={{ blocks }}
+      defaultProps={{ steps: blocks }}
       fps={30}
       durationInFrames={defaultStepDuration * blocks.length}
       width={600}
