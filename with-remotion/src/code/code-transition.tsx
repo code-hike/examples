@@ -1,12 +1,12 @@
 import { continueRender, delayRender, useCurrentFrame } from "remotion"
 import { Pre, AnnotationHandler, HighlightedCode } from "codehike/code"
-import React from "react"
+import React, { useLayoutEffect, useState } from "react"
 import {
   calculateTransitions,
   getStartingSnapshot,
-  maxDuration,
+  TokenTransition,
   TokenTransitionsSnapshot,
-} from "./animate-tokens"
+} from "./token-transitions"
 import {
   interpolateColorsWithDelay as tweenColor,
   interpolateWithDelay as tween,
@@ -23,34 +23,33 @@ export function CodeTransition({
 }) {
   const frame = useCurrentFrame()
   const ref = React.useRef<HTMLPreElement>(null)
-  const [firstSnapshot, setSnapshot] =
-    React.useState<TokenTransitionsSnapshot>()
+  const [snapshot, setSnapshot] = useState<TokenTransitionsSnapshot>()
   const [handle] = React.useState(() => delayRender())
-
   const prevCode = oldCode || { ...newCode, tokens: [], annotations: [] }
 
-  React.useLayoutEffect(() => {
-    if (!firstSnapshot) {
+  useLayoutEffect(() => {
+    if (!snapshot) {
       setSnapshot(getStartingSnapshot(ref.current!))
-    } else {
-      const transitions = calculateTransitions(ref.current!, firstSnapshot)
-      transitions.forEach(({ element, keyframes: style, options }) => {
-        const frameDelay = (durationInFrames * options.delay) / maxDuration
-        const frameDuration =
-          (durationInFrames * options.duration) / maxDuration
-
-        interpolateStyle(style, element, frame, frameDelay, frameDuration)
-      })
-
-      continueRender(handle)
+      return
     }
+    const transitions = calculateTransitions(ref.current!, snapshot)
+    transitions.forEach(({ element, keyframes, options }) => {
+      tweenStyle(
+        element,
+        keyframes,
+        frame,
+        durationInFrames * options.delay,
+        durationInFrames * options.duration
+      )
+    })
+    continueRender(handle)
   })
 
   return (
     <Pre
       ref={ref}
-      code={!firstSnapshot ? prevCode : newCode}
-      handlers={[h, mark]}
+      code={!snapshot ? prevCode : newCode}
+      handlers={[inlineBlockTokens, mark]}
       style={{ position: "relative", fontSize: 20, lineHeight: 1.5 }}
     />
   )
@@ -83,26 +82,21 @@ const mark: AnnotationHandler = {
   },
 }
 
-const h: AnnotationHandler = {
-  name: "transition",
+const inlineBlockTokens: AnnotationHandler = {
+  name: "code-transition",
   Token: ({ value, style }) => {
     return <span style={{ ...style, display: "inline-block" }}>{value}</span>
   },
 }
 
-function interpolateStyle(
-  style: {
-    translateX?: [number, number] | undefined
-    translateY?: [number, number] | undefined
-    color?: [string, string] | undefined
-    opacity?: [number, number] | undefined
-  },
+function tweenStyle(
   element: HTMLElement,
+  keyframes: TokenTransition["keyframes"],
   frame: number,
   frameDelay: number,
   frameDuration: number
 ) {
-  let { translateX, translateY, color, opacity } = style
+  let { translateX, translateY, color, opacity } = keyframes
   if (opacity) {
     element.style.opacity = tween(
       frame,

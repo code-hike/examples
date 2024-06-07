@@ -5,12 +5,14 @@ import {
   TokenTransitionsSnapshot,
   calculateTransitions,
   getStartingSnapshot,
-} from "./code/animate-tokens.js"
+} from "./code/token-transitions.js"
+import { Pre } from "codehike/code"
 
-export class CodeTransitions extends React.Component<{
-  InnerPre: any
-  style?: React.CSSProperties
-}> {
+type PreProps = React.ComponentProps<typeof Pre>
+
+const MAX_TRANSITION_DURATION = 900 // milliseconds
+
+export class CodeTransitions extends React.Component<PreProps> {
   ref: React.RefObject<HTMLPreElement>
 
   constructor(props: any) {
@@ -25,15 +27,9 @@ export class CodeTransitions extends React.Component<{
   componentDidUpdate(
     prevProps: any,
     prevState: any,
-    startingSnapshot: TokenTransitionsSnapshot
+    snapshot: TokenTransitionsSnapshot
   ) {
-    const transitions = calculateTransitions(
-      this.ref.current!,
-      startingSnapshot,
-      {
-        selector: "span",
-      }
-    )
+    const transitions = calculateTransitions(this.ref.current!, snapshot)
     transitions.forEach(({ element, keyframes, options }) => {
       const { opacity, color, translateX, translateY } = keyframes
       element.animate(
@@ -47,10 +43,10 @@ export class CodeTransitions extends React.Component<{
             ],
         },
         {
-          duration: options.duration,
+          duration: options.duration * MAX_TRANSITION_DURATION,
+          delay: options.delay * MAX_TRANSITION_DURATION,
           easing: options.easing,
           fill: "both",
-          delay: options.delay,
         }
       )
     })
@@ -61,6 +57,6 @@ export class CodeTransitions extends React.Component<{
       position: "relative" as const,
       ...this.props.style,
     }
-    return <pre ref={this.ref} {...this.props} style={style} />
+    return <Pre ref={this.ref} {...this.props} style={style} />
   }
 }

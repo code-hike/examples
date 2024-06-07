@@ -1,6 +1,6 @@
 import { diffArrays } from "diff"
 
-export type SnapshotElement = {
+type SnapshotElement = {
   x: number
   y: number
   color: string
@@ -9,7 +9,7 @@ export type SnapshotElement = {
 
 export type TokenTransitionsSnapshot = SnapshotElement[]
 
-export type Transition = {
+export type TokenTransition = {
   element: HTMLElement
   keyframes: {
     translateX?: [number, number]
@@ -26,13 +26,11 @@ export type Transition = {
 }
 
 const config = {
-  removeDuration: 100,
-  // these are single durations (the duration of one transition)
-  moveDuration: 250,
-  addDuration: 200,
+  moveDuration: 0.28,
+  addDuration: 0.22,
 }
-
-export const maxDuration = 2 * config.moveDuration + config.addDuration
+// max possible duration of the full transition is 1:
+// 0.28 * 2 + 0.22 * 2 = 1 (because of `fullStaggerDuration`)
 
 type Options = {
   selector?: string
@@ -57,7 +55,7 @@ export function calculateTransitions(
 }
 
 type Flip = {
-  element: Element
+  element: HTMLElement
   first: SnapshotElement | null
   last: SnapshotElement
 }
@@ -67,7 +65,7 @@ function flipsToTransitions(flips: Flip[]) {
   const removeDuration = 0
   const moveDuration = fullStaggerDuration(moved.length, config.moveDuration)
 
-  const transitions = [] as Transition[]
+  const transitions = [] as TokenTransition[]
 
   moved.forEach((group, groupIndex) => {
     group.forEach((flip) => {
@@ -101,16 +99,16 @@ function flipsToTransitions(flips: Flip[]) {
 }
 
 function toMoveTransition(
-  element: Element,
+  element: HTMLElement,
   first: SnapshotElement,
   last: SnapshotElement,
   delay: number
-): Transition {
+): TokenTransition {
   const dx = first.x - last.x
   const dy = first.y - last.y
 
   return {
-    element: element as HTMLElement,
+    element,
     keyframes: {
       // opacity: [first.opacity, last.opacity],
       translateX: [dx, 0],
@@ -127,15 +125,13 @@ function toMoveTransition(
 }
 
 function toAddTransition(
-  element: Element,
+  element: HTMLElement,
   last: SnapshotElement,
   delay: number
-): Transition {
+): TokenTransition {
   return {
-    element: element as HTMLElement,
-    keyframes: {
-      opacity: [0, 1],
-    },
+    element,
+    keyframes: { opacity: [0, 1] },
     options: {
       duration: config.addDuration,
       fill: "both",
@@ -195,7 +191,7 @@ function groupFlips(flips: Flip[]): {
 function fullStaggerDuration(count: number, singleDuration: number) {
   if (count === 0) return 0
   return 2 * singleDuration * (1 - 1 / (1 + count))
-  // return 1.5 * singleDuration - 1 / (1 + count)
+  // max possible duration is 2 * singleDuration
 }
 function staggerDelay(
   i: number,
