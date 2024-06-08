@@ -1,0 +1,27 @@
+{
+  "name": "with-remotion",
+  "version": "1.0.0",
+  "description": "My Remotion video",
+  "scripts": {
+    "start": "remotion studio",
+    "build": "remotion render CodeHikeExample out/video.mp4",
+    "upgrade": "remotion upgrade"
+  },
+  "repository": {},
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@mdx-js/loader": "",
+    "@mdx-js/react": "",
+    "@remotion/cli": "4.0.167",
+    "@remotion/zod-types": "4.0.167",
+    "codehike": "^1.0.0-alpha.19",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "remotion": "4.0.167",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8"
+  },
+  "packageManager": "npm@9.6.7"
+}
