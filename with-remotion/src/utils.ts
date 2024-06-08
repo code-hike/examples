@@ -1,6 +1,6 @@
 import { interpolate, interpolateColors } from "remotion"
 
-export function interpolateWithDelay(
+export function tween(
   frame: number,
   delayInFrames: number,
   durationInFrames: number,
@@ -15,7 +15,7 @@ export function interpolateWithDelay(
   return interpolate(frame - delayInFrames, [0, durationInFrames], [from, to])
 }
 
-export function interpolateColorsWithDelay(
+export function tweenColor(
   frame: number,
   delay: number,
   duration: number,

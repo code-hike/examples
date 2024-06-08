@@ -1,7 +1,7 @@
 import { AbsoluteFill, Sequence, useVideoConfig } from "remotion"
 import React from "react"
 import { ProgressBar } from "./progress-bar"
-import { CodeTransition } from "./code/code-transition"
+import { CodeTransition } from "./code-transition"
 import { HighlightedCode } from "codehike/code"
 
 export const Video = (props: {
@@ -16,7 +16,7 @@ export const Video = (props: {
   const transitionDuration = stepDuration * 0.4
 
   return (
-    <AbsoluteFill style={{ backgroundColor: "#111", color: "white" }}>
+    <AbsoluteFill style={{ backgroundColor: "#0D1117" }}>
       <ProgressBar steps={steps} />
       {steps.map((step, index) => (
         <Sequence

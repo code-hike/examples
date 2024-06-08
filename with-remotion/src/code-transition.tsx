@@ -6,11 +6,9 @@ import {
   getStartingSnapshot,
   TokenTransition,
   TokenTransitionsSnapshot,
-} from "./token-transitions"
-import {
-  interpolateColorsWithDelay as tweenColor,
-  interpolateWithDelay as tween,
-} from "./utils"
+} from "codehike/utils/token-transitions"
+import { tweenColor, tween } from "./utils"
+import { mark } from "./annotations/mark"
 
 export function CodeTransition({
   oldCode,
@@ -55,40 +53,12 @@ export function CodeTransition({
   )
 }
 
-const mark: AnnotationHandler = {
-  name: "mark",
-  Inline: ({ children, annotation }) => {
-    const [color = "blue", delay = 20, duration = 10] =
-      annotation.query.split(" ")
-    const frame = useCurrentFrame()
-    const backgroundColor = tweenColor(frame, +delay, +duration, [
-      "rgba(0, 0, 0, 0)",
-      color,
-    ])
-
-    return (
-      <div
-        style={{
-          display: "inline-block",
-          backgroundColor,
-          borderRadius: 4,
-          padding: "0 .125rem",
-          margin: "0 -.125rem",
-        }}
-      >
-        {children}
-      </div>
-    )
-  },
-}
-
 const inlineBlockTokens: AnnotationHandler = {
-  name: "code-transition",
-  Token: ({ value, style }) => {
-    return <span style={{ ...style, display: "inline-block" }}>{value}</span>
-  },
+  name: "inline-block",
+  Token: ({ InnerToken, ...props }) => (
+    <InnerToken merge={props} style={{ display: "inline-block" }} />
+  ),
 }
-
 function tweenStyle(
   element: HTMLElement,
   keyframes: TokenTransition["keyframes"],
