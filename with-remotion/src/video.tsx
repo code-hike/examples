@@ -4,12 +4,7 @@ import { ProgressBar } from "./progress-bar"
 import { CodeTransition } from "./code-transition"
 import { HighlightedCode } from "codehike/code"
 
-export const Video = (props: {
-  steps: {
-    title: string
-    code: HighlightedCode
-  }[]
-}) => {
+export const Video = (props: { steps: HighlightedCode[] }) => {
   const { steps } = props
   const { durationInFrames } = useVideoConfig()
   const stepDuration = durationInFrames / steps.length
@@ -22,12 +17,12 @@ export const Video = (props: {
         <Sequence
           from={stepDuration * index}
           durationInFrames={stepDuration}
-          name={step.title}
+          name={step.meta}
         >
           <div style={{ padding: "42px 24px" }}>
             <CodeTransition
-              oldCode={steps[index - 1]?.code}
-              newCode={step.code}
+              oldCode={steps[index - 1]}
+              newCode={step}
               durationInFrames={transitionDuration}
             />
           </div>

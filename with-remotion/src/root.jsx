@@ -4,11 +4,11 @@ import { Block, HighlightedCodeBlock, parseRoot } from "codehike/blocks"
 import { z } from "zod"
 
 const Schema = Block.extend({
-  blocks: z.array(Block.extend({ code: HighlightedCodeBlock })),
+  code: z.array(HighlightedCodeBlock),
 })
 
 import Content from "./content.md"
-const { blocks } = parseRoot(Content, Schema)
+const { code } = parseRoot(Content, Schema)
 const defaultStepDuration = 75
 
 export const RemotionRoot = () => {
@@ -16,9 +16,9 @@ export const RemotionRoot = () => {
     <Composition
       id="CodeHikeExample"
       component={Video}
-      defaultProps={{ steps: blocks }}
+      defaultProps={{ steps: code }}
       fps={30}
-      durationInFrames={defaultStepDuration * blocks.length}
+      durationInFrames={defaultStepDuration * code.length}
       width={600}
       height={700}
     />

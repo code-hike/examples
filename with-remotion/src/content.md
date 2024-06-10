@@ -1,28 +1,25 @@
-## !! Lorem
-
-```jsx !
+```jsx !! Lorem
 const element = <h1 title="foo">Hello</h1>
 const container = document.getElementById("root")
 ReactDOM.render(element, container)
 ```
 
-## !! Ipsum
-
-```jsx !
+```jsx !! Ipsum
+// !mark[/element/] #7dd3fc44 10 15
 const element = React.createElement(
   "h1",
   { title: "foo" },
   "Hello"
 )
 ​
-// !mark[/container/] #7dd3fc44 10 20
+// !mark[/container/] #8b5cf644 15 15
 const container = document.getElementById("root")
+// !mark[/element/] #7dd3fc44 25 15
+// !mark[/container/] #8b5cf644 25 15
 ReactDOM.render(element, container)
 ```
 
-## !! Dolor
-
-```jsx !
+```jsx !! Dolor
 const element = {
   type: "h1",
   props: {
@@ -35,9 +32,7 @@ const container = document.getElementById("root")
 ReactDOM.render(element, container)
 ```
 
-## !! Sit
-
-```jsx !
+```jsx !! Sit
 const element = {
   type: "h1",
   props: {
