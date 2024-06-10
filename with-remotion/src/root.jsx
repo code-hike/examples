@@ -19,8 +19,8 @@ export const RemotionRoot = () => {
       defaultProps={{ steps: code }}
       fps={30}
       durationInFrames={defaultStepDuration * code.length}
-      width={600}
-      height={700}
+      width={530}
+      height={530}
     />
   )
 }

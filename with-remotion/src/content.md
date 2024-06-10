@@ -29,6 +29,7 @@ function lorem(ipsum, dolor = 1) {
     dolor = sit - amet(dolor)
     return dolor
   }
+  // !callout[/elit/] Lorem ipsum dolor sit amet
   let { elit, sed } = incididunt(ipsum)
   return elit + sed
 }

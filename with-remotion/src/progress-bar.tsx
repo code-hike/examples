@@ -15,7 +15,7 @@ export function ProgressBar({ steps }: { steps: unknown[] }) {
         top: 24,
         left: 24,
         right: 24,
-        height: 2,
+        height: 3,
         display: "flex",
         gap: 6,
       }}

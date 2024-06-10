@@ -9,6 +9,7 @@ import {
 } from "codehike/utils/token-transitions"
 import { tweenColor, tween } from "./utils"
 import { mark } from "./annotations/mark"
+import { callout } from "./annotations/callout"
 
 export function CodeTransition({
   oldCode,
@@ -47,7 +48,7 @@ export function CodeTransition({
     <Pre
       ref={ref}
       code={!snapshot ? prevCode : newCode}
-      handlers={[inlineBlockTokens, mark]}
+      handlers={[inlineBlockTokens, mark, callout]}
       style={{ position: "relative", fontSize: 20, lineHeight: 1.5 }}
     />
   )
