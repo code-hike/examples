@@ -9,7 +9,7 @@ const Schema = Block.extend({
 
 import Content from "./content.md"
 const { code } = parseRoot(Content, Schema)
-const defaultStepDuration = 75
+const defaultStepDuration = 90
 
 export const RemotionRoot = () => {
   return (

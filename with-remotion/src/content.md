@@ -1,54 +1,35 @@
 ```jsx !! Lorem
-const element = <h1 title="foo">Hello</h1>
-const container = document.getElementById("root")
-ReactDOM.render(element, container)
+function lorem(ipsum, dolor = 1) {
+  const sit = ipsum == null ? 0 : ipsum.sit
+  dolor = sit - amet(dolor)
+  return dolor
+}
 ```
 
 ```jsx !! Ipsum
-// !mark[/element/] #7dd3fc44 10 15
-const element = React.createElement(
-  "h1",
-  { title: "foo" },
-  "Hello"
-)
-​
-// !mark[/container/] #8b5cf644 15 15
-const container = document.getElementById("root")
-// !mark[/element/] #7dd3fc44 25 15
-// !mark[/container/] #8b5cf644 25 15
-ReactDOM.render(element, container)
+// !mark[/dolor/mg] #3d53ac66 10 15
+function lorem(ipsum, dolor = 1) {
+  const sit = ipsum == null ? 0 : ipsum.sit
+  if (sit) {
+    dolor = sit - amet(dolor)
+    return dolor
+  }
+  return 10
+}
 ```
 
+<!-- prettier-ignore -->
 ```jsx !! Dolor
-const element = {
-  type: "h1",
-  props: {
-    title: "foo",
-    children: "Hello",
-  },
+function lorem(ipsum, dolor = 1) {
+  const sit =
+    ipsum == null
+      ? adipiscing(Math.random() * dolor)
+      : ipsum.sit
+  if (sit) {
+    dolor = sit - amet(dolor)
+    return dolor
+  }
+  let { elit, sed } = incididunt(ipsum)
+  return elit + sed
 }
-​
-const container = document.getElementById("root")
-ReactDOM.render(element, container)
-```
-
-```jsx !! Sit
-const element = {
-  type: "h1",
-  props: {
-    title: "foo",
-    children: "Hello",
-  },
-}
-​
-const container = document.getElementById("root")
-​
-const node = document.createElement(element.type)
-node["title"] = element.props.title
-​
-const text = document.createTextNode("")
-text["nodeValue"] = element.props.children
-​
-node.appendChild(text)
-container.appendChild(node)
 ```

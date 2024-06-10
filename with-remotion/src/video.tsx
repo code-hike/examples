@@ -8,7 +8,7 @@ export const Video = (props: { steps: HighlightedCode[] }) => {
   const { steps } = props
   const { durationInFrames } = useVideoConfig()
   const stepDuration = durationInFrames / steps.length
-  const transitionDuration = stepDuration * 0.4
+  const transitionDuration = 30
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#0D1117" }}>
