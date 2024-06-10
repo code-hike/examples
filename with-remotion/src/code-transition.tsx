@@ -11,6 +11,9 @@ import { tweenColor, tween } from "./utils"
 import { mark } from "./annotations/mark"
 import { callout } from "./annotations/callout"
 
+import { loadFont } from "@remotion/google-fonts/RobotoMono"
+const { fontFamily } = loadFont()
+
 export function CodeTransition({
   oldCode,
   newCode,
@@ -49,7 +52,12 @@ export function CodeTransition({
       ref={ref}
       code={!snapshot ? prevCode : newCode}
       handlers={[inlineBlockTokens, mark, callout]}
-      style={{ position: "relative", fontSize: 20, lineHeight: 1.5 }}
+      style={{
+        position: "relative",
+        fontSize: 20,
+        lineHeight: 1.5,
+        fontFamily,
+      }}
     />
   )
 }

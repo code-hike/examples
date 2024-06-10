@@ -13,6 +13,7 @@
     "@mdx-js/loader": "",
     "@mdx-js/react": "",
     "@remotion/cli": "4.0.167",
+    "@remotion/google-fonts": "4.0.167",
     "@remotion/zod-types": "4.0.167",
     "codehike": "^1.0.0-alpha.19",
     "react": "^18.0.0",
