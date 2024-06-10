@@ -35,7 +35,8 @@ export const callout: AnnotationHandler = {
             position: "relative",
             marginTop: "0.25rem",
             whiteSpace: "pre-wrap",
-            color: "white",
+            color: "#c9d1d9",
+            fontFamily: "sans-serif",
           }}
         >
           <div
