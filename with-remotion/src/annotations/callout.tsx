@@ -1,4 +1,4 @@
-import { InlineAnnotation, AnnotationHandler } from "codehike/code"
+import { InlineAnnotation, AnnotationHandler, InnerLine } from "codehike/code"
 import React from "react"
 import { tween } from "../utils"
 import { useCurrentFrame } from "remotion"
@@ -15,13 +15,14 @@ export const callout: AnnotationHandler = {
       data: { ...data, column: (fromColumn + toColumn) / 2 },
     }
   },
-  AnnotatedLine: ({ InnerLine, annotation, indentation, ...props }) => {
+  AnnotatedLine: ({ annotation, ...props }) => {
     const { column } = annotation.data
+    const { indentation } = props
     const frame = useCurrentFrame()
     const opacity = tween(frame, 25, 20, [0, 1])
     return (
       <>
-        <InnerLine {...props} />
+        <InnerLine merge={props} />
         <div
           style={{
             opacity,

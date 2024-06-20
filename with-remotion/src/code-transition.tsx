@@ -1,5 +1,10 @@
 import { continueRender, delayRender, useCurrentFrame } from "remotion"
-import { Pre, AnnotationHandler, HighlightedCode } from "codehike/code"
+import {
+  Pre,
+  AnnotationHandler,
+  HighlightedCode,
+  InnerToken,
+} from "codehike/code"
 import React, { useLayoutEffect, useState } from "react"
 import {
   calculateTransitions,
@@ -64,7 +69,7 @@ export function CodeTransition({
 
 const inlineBlockTokens: AnnotationHandler = {
   name: "inline-block",
-  Token: ({ InnerToken, ...props }) => (
+  Token: (props) => (
     <InnerToken merge={props} style={{ display: "inline-block" }} />
   ),
 }
