@@ -1,31 +1,23 @@
 import React from "react"
-import { useCurrentFrame } from "remotion"
-import { tweenColor } from "../utils"
+import { interpolate, interpolateColors, useCurrentFrame } from "remotion"
 import { AnnotationHandler } from "codehike/code"
 
 export const mark: AnnotationHandler = {
   name: "mark",
-  Inline: ({ children, annotation }) => {
-    const [color = "blue", delay = 20, duration = 10] =
-      annotation.query.split(" ")
+  Block: ({ children, annotation }) => {
+    const delay = +(annotation.query || 0)
     const frame = useCurrentFrame()
-    const backgroundColor = tweenColor(frame, +delay, +duration, [
-      "rgba(0, 0, 0, 0)",
-      color,
-    ])
 
-    return (
-      <div
-        style={{
-          display: "inline-block",
-          backgroundColor,
-          borderRadius: 4,
-          padding: "0 .125rem",
-          margin: "0 -.125rem",
-        }}
-      >
-        {children}
-      </div>
+    const progress = interpolate(frame, [delay, delay + 10], [0, 1], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    })
+    const backgroundColor = interpolateColors(
+      progress,
+      [0, 1],
+      ["rgba(0, 0, 0, 0)", "blue"]
     )
+
+    return <div style={{ backgroundColor, width: "100%" }}>{children}</div>
   },
 }
