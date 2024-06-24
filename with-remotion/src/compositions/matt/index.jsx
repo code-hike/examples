@@ -30,18 +30,14 @@ async function calculateMetadata() {
 
     await Promise.all(
       queries.map(async ({ text, line, character, length }) => {
-        // const highlightedContent = await highlight(
-        //   { value: text, lang: "ts" },
-        //   theme
-        // )
+        const codeblock = await highlight({ value: text, lang: "ts" }, theme)
         highlighted.annotations.push({
           name: "callout",
           query: text,
           lineNumber: line + 1,
           data: {
             character,
-            // FIX: Remotion doesn't support react elements here?
-            // children: <Pre code={highlightedContent} style={{ margin: 0 }} />,
+            codeblock,
           },
           fromColumn: character,
           toColumn: character + length,

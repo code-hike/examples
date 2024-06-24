@@ -26,9 +26,9 @@ type Target = Ipsum
 
 ```ts !! c
 const hi = "Hello"
-const msg = `${hi}, world`
+const message = `${hi}, world`
 //    ^?
 
 // @errors: 2588
-msg = 123
+message = 123
 ```

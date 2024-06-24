@@ -22,14 +22,23 @@ const errorInline: AnnotationHandler = {
       },
     ]
   },
-  AnnotatedToken: ({ annotation, ...props }) => {
+  Inline: ({ children }) => (
+    <span
+      style={
+        {
+          "--decoration": "underline wavy red",
+        } as any
+      }
+    >
+      {children}
+    </span>
+  ),
+  Token: (props) => {
     return (
       <InnerToken
         merge={props}
         style={{
-          textDecoration: "underline",
-          textDecorationColor: "red",
-          textDecorationStyle: "wavy",
+          textDecoration: "var(--decoration)",
         }}
       />
     )

@@ -1,4 +1,9 @@
-import { InlineAnnotation, AnnotationHandler, InnerLine } from "codehike/code"
+import {
+  InlineAnnotation,
+  AnnotationHandler,
+  InnerLine,
+  Pre,
+} from "codehike/code"
 import React from "react"
 import { interpolate, useCurrentFrame } from "remotion"
 
@@ -15,7 +20,7 @@ export const callout: AnnotationHandler = {
     }
   },
   AnnotatedLine: ({ annotation, ...props }) => {
-    const { column } = annotation.data
+    const { column, codeblock } = annotation.data
     const { indentation } = props
     const frame = useCurrentFrame()
 
@@ -52,7 +57,11 @@ export const callout: AnnotationHandler = {
               backgroundColor: "rgb(32 42 57)",
             }}
           />
-          {annotation.data.children || annotation.query}
+          {codeblock ? (
+            <Pre code={codeblock} style={{ margin: 0 }} />
+          ) : (
+            annotation.data.children || annotation.query
+          )}
         </div>
       </>
     )
