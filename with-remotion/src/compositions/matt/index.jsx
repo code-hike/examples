@@ -74,8 +74,8 @@ export default function RemotionRoot() {
       defaultProps={{ steps: code }}
       calculateMetadata={calculateMetadata}
       fps={60}
-      width={520}
-      height={640}
+      width={560}
+      height={560}
     />
   )
 }
@@ -95,7 +95,7 @@ function Video({ steps }) {
           <Code
             oldCode={steps[index - 1]}
             newCode={step}
-            durationInFrames={60}
+            durationInFrames={90}
           />
         </Sequence>
       ))}

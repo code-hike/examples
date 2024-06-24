@@ -1,34 +1,29 @@
 ```ts !! a
-type Lorem = {
-  id: string
-  name: string
-  email: string
+const user = {
+  name: "Lorem",
+  age: 26,
 }
 
-type Target = Lorem
-//    ^?
+console.log(user)
+//           ^?
+```
+
+```ts !! b
+const user = {
+  name: "Lorem",
+  age: 26,
+}
+// @errors: 2339
+console.log(user.location)
 ```
 
 ```ts !! c
-type Lorem = {
-  id: string
-  name: string
-  email: string
+const user = {
+  name: "Lorem",
+  age: 26,
+  location: "Ipsum",
 }
 
-type Ipsum = {
-  [K in keyof Lorem]: () => Lorem[K]
-}
-
-type Target = Ipsum
-//    ^?
-```
-
-```ts !! c
-const hi = "Hello"
-const message = `${hi}, world`
-//    ^?
-
-// @errors: 2588
-message = 123
+console.log(user.location)
+//           ^?
 ```
