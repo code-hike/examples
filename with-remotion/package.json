@@ -4,7 +4,7 @@
   "description": "My Remotion video",
   "scripts": {
     "start": "remotion studio",
-    "build": "remotion render CodeHikeExample out/video.mp4",
+    "build": "remotion render",
     "upgrade": "remotion upgrade"
   },
   "repository": {},
@@ -19,10 +19,12 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "remotion": "4.0.167",
+    "twoslash-cdn": "^0.2.9",
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "typescript": "^5.5.2"
   },
   "packageManager": "npm@9.6.7"
 }
