@@ -1,6 +1,9 @@
 ## Code Hike + Remotion
 
+Blog post: https://v1.codehike.org/blog/remotion
+
 Code Hike docs: https://v1.codehike.org/docs/
+Remotion docs: https://www.remotion.dev/docs/
 
 ### Clone this example
 
@@ -11,54 +14,17 @@ $ npm install
 $ npm run start
 ```
 
-### Output
+### Examples
 
-This is the output video:
+All these examples are generated from markdown files:
 
 https://github.com/code-hike/examples/assets/1911623/4c4df3c7-72a2-4532-9d90-ed2daed740ef
 
-From this markdown content:
+### Credits and Inspiration
 
-````md content.md
-```jsx !! lorem
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : ipsum.sit
-  dolor = sit - amet(1 + dolor * 2)
-  return dolor + 1
-  // lorem ipsum
-}
-```
-
-```jsx !! ipsum
-// !mark[/dolor/mg] #3d53ac66 10 15
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : ipsum.sit
-  if (sit) {
-    dolor = sit - amet(1 + dolor * 2)
-    return dolor + 1
-  }
-  return 10
-  // lorem ipsum
-}
-```
-
-<!-- prettier-ignore -->
-```jsx !! dolor
-function lorem(ipsum, dolor = 1) {
-  const sit =
-    ipsum == null
-      ? adipiscing(Math.random() * dolor)
-      : ipsum.sit
-  if (sit) {
-    dolor = sit - amet(1 + dolor * 2)
-    return dolor + 1
-  }
-  // !callout[/elit/] Lorem ipsum dolor sit amet
-  let { elit, sed } = incididunt(ipsum)
-  return elit + sed
-}
-```
-````
+- [Jonny Burger](https://x.com/JNYBGR)
+- [Delba Oliveira](https://x.com/delba_oliveira)
+- [Matt Pocock](https://x.com/mattpocockuk)
 
 ## License
 

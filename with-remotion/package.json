@@ -1,7 +1,7 @@
 {
-  "name": "with-remotion",
+  "name": "remotion-code-hike",
   "version": "1.0.0",
-  "description": "My Remotion video",
+  "description": "Remotion + Code Hike",
   "scripts": {
     "start": "remotion studio",
     "build": "remotion render",
@@ -12,13 +12,13 @@
   "dependencies": {
     "@mdx-js/loader": "",
     "@mdx-js/react": "",
-    "@remotion/cli": "4.0.167",
-    "@remotion/google-fonts": "4.0.167",
-    "@remotion/zod-types": "4.0.167",
+    "@remotion/cli": "4.0.177",
+    "@remotion/google-fonts": "4.0.177",
+    "@remotion/zod-types": "4.0.177",
     "codehike": "^1.0.0-beta.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "remotion": "4.0.167",
+    "remotion": "4.0.177",
     "twoslash-cdn": "^0.2.9",
     "zod": "^3.21.4"
   },
