@@ -1,8 +1,8 @@
 ## Code Hike + Remotion
 
-Blog post: https://v1.codehike.org/blog/remotion
+Blog post: [From Markdown to Video](https://v1.codehike.org/blog/remotion)
 
-Code Hike docs: https://v1.codehike.org/docs/
+Code Hike docs: https://v1.codehike.org/docs/  
 Remotion docs: https://www.remotion.dev/docs/
 
 ### Clone this example
@@ -18,7 +18,7 @@ $ npm run start
 
 All these examples are generated from markdown files:
 
-https://github.com/code-hike/examples/assets/1911623/4c4df3c7-72a2-4532-9d90-ed2daed740ef
+https://github.com/code-hike/examples/assets/1911623/47f291fe-51b3-4f9c-aa93-9db554294a6b
 
 ### Credits and Inspiration
 
