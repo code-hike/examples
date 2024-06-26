@@ -4,15 +4,8 @@ import { pageTree } from "@/app/source"
 // shared configuration
 export const baseOptions: BaseLayoutProps = {
   nav: {
-    title: "My App",
+    title: "Fumadocs + Code Hike",
   },
-  links: [
-    {
-      text: "Documentation",
-      url: "/docs",
-      active: "nested-url",
-    },
-  ],
 }
 
 // docs layout configuration
