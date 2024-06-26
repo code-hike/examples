@@ -15,3 +15,7 @@
 ## Code Hike + Remotion
 
 - https://github.com/code-hike/examples/tree/main/with-remotion
+
+## Code Hike + Fumadocs
+
+- https://github.com/code-hike/examples/tree/main/with-fumadocs
