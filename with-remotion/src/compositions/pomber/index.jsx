@@ -25,7 +25,8 @@ function Video({ steps }) {
         background: "#010409",
       }}
     >
-      <ProgressBar steps={steps} />
+      {/* <ProgressBar steps={steps} /> */}
+      <Captions steps={steps} />
       {steps.map((step, index) => {
         stepEnd += step.duration
         return (
@@ -51,7 +52,7 @@ function Video({ steps }) {
               <Code
                 oldCode={steps[index - 1]?.content}
                 newCode={step.content}
-                style={{ width: 480, height: 300 }}
+                style={{ width: 420, height: 300 }}
               />
               <Output
                 newCode={step.output}
@@ -62,5 +63,27 @@ function Video({ steps }) {
         )
       })}
     </AbsoluteFill>
+  )
+}
+
+function Captions({ steps }) {
+  return (
+    <div
+      style={{
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: 110,
+        display: "flex",
+        gap: 6,
+        padding: "20px 18px",
+        color: "#fafafabb",
+        textAlign: "center",
+        justifyContent: "center",
+        fontSize: 42,
+        fontFamily: "Arial, sans-serif",
+      }}
+    ></div>
   )
 }

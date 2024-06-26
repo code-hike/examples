@@ -136,7 +136,7 @@ function lorem(ipsum, dolor = 1) {
 
 ## !!steps mark block
 
-!duration 180
+!duration 220
 
 ```jsx !code focus
 import { Pre } from "codehike/code"
@@ -148,7 +148,9 @@ export function Code({ codeblock }) {
 const markHandler = {
   name: "mark",
   Block: ({ children }) => (
-    <div style={{ background: "red" }}>{children}</div>
+    <div style={{ background: "#58a6ff44" }}>
+      {children}
+    </div>
   ),
 }
 ```
@@ -188,7 +190,9 @@ export function Code({ codeblock }) {
 const markHandler = {
   name: "mark",
   Block: ({ children }) => (
-    <div style={{ background: "red" }}>{children}</div>
+    <div style={{ background: "#58a6ff44" }}>
+      {children}
+    </div>
   ),
 }
 ```
@@ -228,7 +232,9 @@ export function Code({ codeblock }) {
 const markHandler = {
   name: "mark",
   Block: ({ children }) => (
-    <div style={{ background: "red" }}>{children}</div>
+    <div style={{ background: "#58a6ff44" }}>
+      {children}
+    </div>
   ),
 }
 ```

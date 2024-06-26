@@ -29,8 +29,7 @@ export function ProgressBar({
         height: 110,
         display: "flex",
         gap: 6,
-        background: "#fff2",
-        padding: "20px 120px",
+        padding: "20px 18px",
       }}
     >
       {steps.map(({ title, duration }, index) => {
@@ -45,6 +44,7 @@ export function ProgressBar({
               flexDirection: "column",
               alignItems: "center",
               gap: 12,
+              justifyContent: "end",
             }}
           >
             <div

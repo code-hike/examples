@@ -69,7 +69,7 @@ export function Code({
 
 function useFocus(oldCode, newCode) {
   const frame = useCurrentFrame()
-  const focusColor = "#58a6ffaa"
+  const focusColor = "#58a6ffcc"
   let borderColor = "transparent"
   let opacity = 0.6
   if (oldCode?.focus && newCode.focus) {
@@ -141,7 +141,6 @@ export function Output({ newCode, oldCode }) {
           style={{
             backgroundColor: "#0D1117",
             height: 180,
-            width: 412,
             borderRadius: 4,
             margin: 12,
             padding: "12px 0",
@@ -155,7 +154,6 @@ export function Output({ newCode, oldCode }) {
             padding: "12px 0",
             backgroundColor: "#0D1117",
             height: 180,
-            width: 412,
             borderRadius: 4,
             margin: 12,
             opacity: 0,
