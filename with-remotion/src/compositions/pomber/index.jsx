@@ -46,7 +46,7 @@ function Video({ steps }) {
             <Code
               oldCode={steps[index - 1]?.code}
               newCode={step.code}
-              style={{ width: 760, height: "100%" }}
+              style={{ width: 900, height: "100%" }}
             />
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <Code

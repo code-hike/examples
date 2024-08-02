@@ -4,7 +4,13 @@ import { z } from "zod"
 import Content from "./content.md"
 import { highlight } from "codehike/code"
 
+import { loadFont } from "@remotion/google-fonts/RobotoMono"
+const font = loadFont()
+
+export const fontFamily = font.fontFamily
+
 export async function calculateMetadata() {
+  await font.waitUntilDone()
   const { steps } = parseRoot(
     Content,
     Block.extend({

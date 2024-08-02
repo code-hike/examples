@@ -8,10 +8,10 @@
 
 ````md !content focus
 ```js
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : 1
+function lorem(ipsum) {
+  let dolor = sit ? 0 : 1
   dolor = sit - amet(dolor)
-  return sit ? foo(ipsum) : []
+  return ipsum(dolor)
 }
 ```
 ````
@@ -30,10 +30,10 @@ export function Code({ codeblock }) {
 
 ````md !content
 ```js
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : 1
+function lorem(ipsum) {
+  let dolor = sit ? 0 : 1
   dolor = sit - amet(dolor)
-  return sit ? foo(ipsum) : []
+  return ipsum(dolor)
 }
 ```
 ````
@@ -52,19 +52,19 @@ export function Code({ codeblock }) {
 
 ````md !content
 ```js
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : 1
+function lorem(ipsum) {
+  let dolor = sit ? 0 : 1
   dolor = sit - amet(dolor)
-  return sit ? foo(ipsum) : []
+  return ipsum(dolor)
 }
 ```
 ````
 
 ```js !output focus
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : 1
+function lorem(ipsum) {
+  let dolor = sit ? 0 : 1
   dolor = sit - amet(dolor)
-  return sit ? foo(ipsum) : []
+  return ipsum(dolor)
 }
 ```
 
@@ -82,20 +82,20 @@ export function Code({ codeblock }) {
 
 ````md !content focus
 ```js
-function lorem(ipsum, dolor = 1) {
+function lorem(ipsum) {
   // !mark
-  const sit = ipsum == null ? 0 : 1
+  let dolor = sit ? 0 : 1
   dolor = sit - amet(dolor)
-  return sit ? foo(ipsum) : []
+  return ipsum(dolor)
 }
 ```
 ````
 
 ```js !output
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : 1
+function lorem(ipsum) {
+  let dolor = sit ? 0 : 1
   dolor = sit - amet(dolor)
-  return sit ? foo(ipsum) : []
+  return ipsum(dolor)
 }
 ```
 
@@ -117,20 +117,20 @@ const markHandler = {
 
 ````md !content
 ```js
-function lorem(ipsum, dolor = 1) {
+function lorem(ipsum) {
   // !mark
-  const sit = ipsum == null ? 0 : 1
+  let dolor = sit ? 0 : 1
   dolor = sit - amet(dolor)
-  return sit ? foo(ipsum) : []
+  return ipsum(dolor)
 }
 ```
 ````
 
 ```js !output
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : 1
+function lorem(ipsum) {
+  let dolor = sit ? 0 : 1
   dolor = sit - amet(dolor)
-  return sit ? foo(ipsum) : []
+  return ipsum(dolor)
 }
 ```
 
@@ -157,20 +157,20 @@ const markHandler = {
 
 ````md !content
 ```js
-function lorem(ipsum, dolor = 1) {
+function lorem(ipsum) {
   // !mark
-  const sit = ipsum == null ? 0 : 1
+  let dolor = sit ? 0 : 1
   dolor = sit - amet(dolor)
-  return sit ? foo(ipsum) : []
+  return ipsum(dolor)
 }
 ```
 ````
 
 ```js !output
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : 1
+function lorem(ipsum) {
+  let dolor = sit ? 0 : 1
   dolor = sit - amet(dolor)
-  return sit ? foo(ipsum) : []
+  return ipsum(dolor)
 }
 ```
 
@@ -199,20 +199,20 @@ const markHandler = {
 
 ````md !content
 ```js
-function lorem(ipsum, dolor = 1) {
+function lorem(ipsum) {
   // !mark
-  const sit = ipsum == null ? 0 : 1
+  let dolor = sit ? 0 : 1
   dolor = sit - amet(dolor)
-  return sit ? foo(ipsum) : []
+  return ipsum(dolor)
 }
 ```
 ````
 
 ```js !output
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : 1
+function lorem(ipsum) {
+  let dolor = sit ? 0 : 1
   dolor = sit - amet(dolor)
-  return sit ? foo(ipsum) : []
+  return ipsum(dolor)
 }
 ```
 
@@ -241,20 +241,20 @@ const markHandler = {
 
 ````md !content
 ```js
-function lorem(ipsum, dolor = 1) {
+function lorem(ipsum) {
   // !mark
-  const sit = ipsum == null ? 0 : 1
+  let dolor = sit ? 0 : 1
   dolor = sit - amet(dolor)
-  return sit ? foo(ipsum) : []
+  return ipsum(dolor)
 }
 ```
 ````
 
 ```js !output focus
-function lorem(ipsum, dolor = 1) {
+function lorem(ipsum) {
   // !!mark fadein
-  const sit = ipsum == null ? 0 : 1
+  let dolor = sit ? 0 : 1
   dolor = sit - amet(dolor)
-  return sit ? foo(ipsum) : []
+  return ipsum(dolor)
 }
 ```

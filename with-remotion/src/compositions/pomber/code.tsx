@@ -1,7 +1,6 @@
 import { Pre, HighlightedCode, InnerLine } from "codehike/code"
 import React from "react"
 
-import { loadFont } from "@remotion/google-fonts/RobotoMono"
 import { tokenTransitions, useTokenTransitions } from "./token-transitions"
 import { mark } from "./annotations/mark"
 import {
@@ -12,7 +11,8 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion"
-const { fontFamily } = loadFont()
+
+import { fontFamily } from "./calculate-metadata"
 
 const FOCUS_FRAMES = 15
 
@@ -38,7 +38,7 @@ export function Code({
         lineHeight: 1.4,
         fontFamily,
         color: "white",
-        padding: "0 12px",
+        padding: "0 22px",
         border: "2px solid",
         borderColor,
         borderRadius: 4,
@@ -118,7 +118,7 @@ export function Output({ newCode, oldCode }) {
         flex: 1,
         backgroundImage: `url(${staticFile("dark-grid.svg")})`,
         backgroundPosition: "center",
-        backgroundSize: "46px",
+        backgroundSize: "40px",
         borderRadius: 4,
         display: "flex",
         alignItems: "center",
@@ -165,7 +165,7 @@ export function Output({ newCode, oldCode }) {
 }
 const markHandler = {
   name: "mark",
-  Line: (props) => <InnerLine merge={props} style={{ padding: "0 12px" }} />,
+  Line: (props) => <InnerLine merge={props} style={{ padding: "0 22px" }} />,
   Block: ({ children, annotation }) => {
     const fadein = annotation.query === "fadein"
     const frame = useCurrentFrame()
