@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stepsContainer {
+  flex: 1;
+  margin-top: 8rem;
+  margin-bottom: 90vh;
+  margin-left: 0.5rem;
+  min-width: 14rem;
+}
+
+.step {
+  border-left: 4px solid transparent;
+  padding: 0.5rem 1.25rem;
+  margin-bottom: 6rem;
+  border-radius: 0.25rem;
+  background-color: #8881;
+}
+
+.step[data-selected="true"] {
+  border-left-color: #60a5fa;
+}
+
+.stepTitle {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+}
+
+.sticker {
+  width: 40vw;
+  max-width: 36rem;
+  background-color: #212121;
+}
+
+.stickyCode {
+  position: sticky;
+  top: 4rem;
+  overflow: auto;
+}

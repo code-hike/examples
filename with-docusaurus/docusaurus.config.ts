@@ -42,7 +42,7 @@ const config: Config = {
       {
         docs: {
           beforeDefaultRemarkPlugins: [[remarkCodeHike, chConfig]],
-          // recmaPlugins: [[recmaCodeHike, chConfig]],
+          recmaPlugins: [[recmaCodeHike, chConfig]],
           sidebarPath: "./sidebars.ts",
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
