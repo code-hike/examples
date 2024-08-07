@@ -1,7 +1,11 @@
 import { slugify } from "@/lib/utils"
 import { Code } from "@/components/code"
 import { Preview } from "@/components/preview"
-import { Selectable, Selection, SelectionProvider } from "codehike/utils"
+import {
+  Selectable,
+  Selection,
+  SelectionProvider,
+} from "codehike/utils/selection"
 import { RawCode } from "codehike/code"
 import { SectionData, loadImage } from "@/lib/content"
 import { Asset, AssetProvider } from "./context"
