@@ -1,4 +1,3 @@
-import { CodeBlock, CodeContent } from "codehike"
 import { CopyButton } from "./copy-button"
 import {
   LocalStoredTabs,
@@ -8,32 +7,42 @@ import {
   TabsTrigger,
 } from "./ui/tabs"
 import { Method, Path } from "./ui/endpoint"
+import {
+  AnnotationHandler,
+  highlight,
+  InnerLine,
+  Pre,
+  RawCode,
+} from "codehike/code"
 
-export function ResourceCode({ codeblock }: { codeblock: CodeBlock }) {
+export async function ResourceCode({ codeblock }: { codeblock: RawCode }) {
+  const highlighted = await highlight(codeblock, "dark-plus")
   return (
     <div className="border border-[#1e647a] min-w-0 flex-1 rounded-lg lg:max-w-lg lg:ml-auto overflow-hidden bg-[#184C5E]">
       <div className="font-mono px-4 py-1 text-[#8fbfd7] bg-[#133A48] m-0.5 rounded-lg">
         {"{}   " + codeblock.meta}
       </div>
-      <CodeContent
-        codeblock={codeblock}
-        config={{ theme: "dark-plus" }}
+      <Pre
+        code={highlighted}
         className="min-h-[40rem] max-h-[600px] m-0 px-0 whitespace-pre-wrap"
-        components={{ Line }}
+        handlers={[line]}
       />
     </div>
   )
 }
 
-export function RequestCode({
+export async function RequestCode({
   codeblocks,
   path,
   method,
 }: {
-  codeblocks: CodeBlock[]
+  codeblocks: RawCode[]
   method: "GET" | "POST" | "PUT" | "DEL"
   path: string
 }) {
+  const highlighted = await Promise.all(
+    codeblocks.map((codeblock) => highlight(codeblock, "dark-plus")),
+  )
   return (
     <LocalStoredTabs
       localStorageKey="preferredLanguage"
@@ -63,13 +72,12 @@ export function RequestCode({
           ))}
         </div>
       </div>
-      {codeblocks.map((codeblock) => (
+      {highlighted.map((codeblock) => (
         <TabsContent value={codeblock.meta!}>
-          <CodeContent
-            codeblock={codeblock}
-            config={{ theme: "dark-plus" }}
+          <Pre
+            code={codeblock}
             className="max-h-[600px] m-0 px-0 whitespace-pre-wrap break-all"
-            components={{ Line }}
+            handlers={[line]}
           />
         </TabsContent>
       ))}
@@ -77,7 +85,8 @@ export function RequestCode({
   )
 }
 
-export function ResponseCode({ codeblock }: { codeblock: CodeBlock }) {
+export async function ResponseCode({ codeblock }: { codeblock: RawCode }) {
+  const highlighted = await highlight(codeblock, "dark-plus")
   return (
     <div className="border border-cyan-950 min-w-0 flex-1 rounded-lg lg:max-w-lg lg:ml-auto overflow-hidden bg-[#0A1D26]">
       <div className="font-mono px-4 py-1 text-[#8fbfd7] bg-[#061219] m-0.5 rounded-lg flex gap-3 items-center">
@@ -88,24 +97,23 @@ export function ResponseCode({ codeblock }: { codeblock: CodeBlock }) {
         </span>
       </div>
 
-      <CodeContent
-        codeblock={codeblock}
-        config={{ theme: "dark-plus" }}
+      <Pre
+        code={highlighted}
         className="max-h-[600px] m-0 px-0 whitespace-pre-wrap"
-        components={{ Line }}
+        handlers={[line]}
       />
     </div>
   )
 }
 
-// TODO better word-wrap
-function Line({ children, query }: any) {
-  return (
+const line: AnnotationHandler = {
+  name: "line",
+  Line: (props) => (
     <div data-line="true" className="table-row px-1">
       <div className="pl-1 pr-4 w-[3ch] box-content !opacity-50 text-right select-none table-cell">
-        {query}
+        {props.lineNumber}
       </div>
-      <div className="table-cell break-words">{children}</div>
+      <InnerLine merge={props} />
     </div>
-  )
+  ),
 }

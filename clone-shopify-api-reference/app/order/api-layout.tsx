@@ -58,7 +58,7 @@ function EndpointsNav({ endpoints }: { endpoints: EndpointBlock[] }) {
         {endpoints.map((endpoint) => (
           <a
             key={endpoint.title}
-            href={`#${endpoint.title.replace(/\s/g, "-")}`}
+            href={`#${endpoint.title?.replace(/\s/g, "-")}`}
             className={`flex gap-3 no-underline items-start mb-1 p-2 rounded-lg`}
           >
             <Method value={endpoint.method} className="mt-0.5" />
@@ -190,7 +190,7 @@ function Endpoint({
       <div className="flex gap-8 flex-wrap">
         <div className="min-w-96 flex-1 prose-hr:my-2">
           <h2
-            id={title.replace(/\s/g, "-")}
+            id={title?.replace(/\s/g, "-")}
             className="flex items-center gap-3 mt-0 scroll-mt-12"
           >
             <Method value={method} />
@@ -208,7 +208,7 @@ function Endpoint({
           <hr />
           <Accordion type="single" collapsible className="w-full">
             {examples.map((example) => (
-              <AccordionItem key={example.title} value={example.title}>
+              <AccordionItem key={example.title} value={example.title!}>
                 <AccordionTrigger className="text-base text-[#81aec4] hover:text-[#bedbeb] data-[state=open]:text-[#bedbeb]">
                   {example.title}
                 </AccordionTrigger>

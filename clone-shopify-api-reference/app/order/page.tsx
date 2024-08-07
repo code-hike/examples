@@ -1,10 +1,10 @@
 // @ts-ignore
-import { getBlocks } from "@/content/order.md"
+import MDX from "@/content/order.md"
 import { parseContent } from "./schema"
 import Link from "next/link"
 import { Layout } from "./api-layout"
 
-const content = parseContent(getBlocks())
+const content = parseContent(MDX)
 
 export const metadata = {
   title: content.intro.title,
