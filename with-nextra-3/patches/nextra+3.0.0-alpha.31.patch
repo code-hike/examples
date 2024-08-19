@@ -1,0 +1,20 @@
+diff --git a/node_modules/nextra/dist/server/compile.js b/node_modules/nextra/dist/server/compile.js
+index a344072..c15c684 100644
+--- a/node_modules/nextra/dist/server/compile.js
++++ b/node_modules/nextra/dist/server/compile.js
+@@ -218,6 +218,7 @@ async function compileMdx(source, {
+         [rehypeExtractTocContent, { isRemoteContent }]
+       ].filter(truthy),
+       recmaPlugins: [
++        ...recmaPlugins || [],
+         () => (ast, file) => {
+           const mdxContentIndex = ast.body.findIndex((node) => {
+             if (node.type === "ExportDefaultDeclaration") {
+@@ -259,7 +260,6 @@ async function compileMdx(source, {
+           }
+         },
+         isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx,
+-        ...recmaPlugins || []
+       ].filter(truthy)
+     });
+   }

@@ -1,0 +1,25 @@
+{
+  "name": "with-nextra",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "postinstall": "patch-package"
+  },
+  "dependencies": {
+    "codehike": "^1.0.0-beta.9",
+    "next": "^14.2.3",
+    "nextra": "3.0.0-alpha.31",
+    "nextra-theme-docs": "3.0.0-alpha.31",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.12.7",
+    "autoprefixer": "^10.4.19",
+    "patch-package": "^8.0.0",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "typescript": "5.4.5"
+  }
+}
