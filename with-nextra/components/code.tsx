@@ -7,6 +7,7 @@ export function Code({ codeblock }: { codeblock: HighlightedCode }) {
       code={codeblock}
       handlers={[callout]}
       className="border border-zinc-500/50 rounded py-2 px-4"
+      style={codeblock.style}
     />
   )
 }
