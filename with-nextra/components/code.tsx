@@ -1,12 +1,12 @@
-import { Pre } from "codehike/code"
-import { callout } from "./callout"
+import { HighlightedCode, Pre } from "codehike/code"
+import { callout } from "./annotations/callout"
 
-export function Code({ codeblock }) {
+export function Code({ codeblock }: { codeblock: HighlightedCode }) {
   return (
     <Pre
       code={codeblock}
-      className="border border-zinc-800 px-4 py-2 my-2 rounded bg-zinc-900 text-zinc-100"
       handlers={[callout]}
+      className="border border-zinc-500/50 rounded py-2 px-4"
     />
   )
 }
