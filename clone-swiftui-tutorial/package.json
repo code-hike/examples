@@ -19,7 +19,7 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "codehike": "^1.0.0-beta.8",
+    "codehike": "^1.0.0",
     "lucide-react": "^0.323.0",
     "next": "14.2.3",
     "react": "^18",

@@ -1,6 +1,6 @@
 This is an example website using Nextra (v3) and Code Hike.
 
-- [Code Hike](https://v1.codehike.org) - learn about Code Hike
+- [Code Hike](https://codehike.org) - learn about Code Hike
 - [Nextra](https://nextra.site) - learn about Nextra
 
 Clone it with:

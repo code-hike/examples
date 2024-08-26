@@ -7,8 +7,8 @@ To lay out the views, Landmarks uses _stacks_ to combine and layer the image and
 Download the project files to begin building this project, and follow the steps below.
 
 !time 40mins
-!files https://v1.codehike.org
-!xcode https://v1.codehike.org
+!files https://codehike.org
+!xcode https://codehike.org
 
 ![!image](010H00.png)
 

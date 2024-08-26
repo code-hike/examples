@@ -18,7 +18,7 @@ const STEP_DURATION = 120
 const twoslash = createTwoslashFromCDN()
 const theme = "github-dark"
 
-// based on https://v1.codehike.org/docs/code/twoslash
+// based on https://codehike.org/docs/code/twoslash
 async function calculateMetadata() {
   const twoslashPromises = code.map(async (step) => {
     const { code, queries, errors } = await twoslash.run(

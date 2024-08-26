@@ -15,7 +15,7 @@ export default async function App() {
             SwiftUI Tutorials
           </a>{" "}
           website. Built with{" "}
-          <a href="https://v1.codehike.org" className="hover:underline">
+          <a href="https://codehike.org" className="hover:underline">
             Code Hike v1
           </a>
           . Find the source code on{" "}

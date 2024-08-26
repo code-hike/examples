@@ -1,7 +1,7 @@
 This is a demo Next.js application including Fumadocs and Code Hike.
 
 - [Live demo](https://ch-with-fumadocs.vercel.app/)
-- [Code Hike](https://v1.codehike.org) - learn about Code Hike
+- [Code Hike](https://codehike.org) - learn about Code Hike
 - [Fumadocs](https://fumadocs.vercel.app) - learn about Fumadocs
 
 Clone it with:

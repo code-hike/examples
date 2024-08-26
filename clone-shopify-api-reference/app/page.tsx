@@ -20,9 +20,6 @@ export default function Page() {
         <li>
           <Link href="/order">Order</Link>
         </li>
-        <li>
-          <Link href="/product">Product</Link>
-        </li>
       </ul>
       <p>
         Find the{" "}
@@ -35,7 +32,7 @@ export default function Page() {
         </a>
         . For more information, see the{" "}
         <a
-          href="https://v1.codehike.org/docs"
+          href="https://codehike.org/docs"
           target="_blank"
           rel="noopener noreferrer"
         >

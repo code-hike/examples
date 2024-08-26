@@ -7,7 +7,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "codehike": "^1.0.0-beta.9",
+    "codehike": "^1.0.0",
     "next": "^14.2.3",
     "nextra": "3.0.0-alpha.31",
     "nextra-theme-docs": "3.0.0-alpha.31",

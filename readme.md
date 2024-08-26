@@ -1,1 +1,1 @@
-# [Code Hike Examples](https://v1.codehike.org/docs/examples)
+# [Code Hike Examples](https://codehike.org/docs/examples)

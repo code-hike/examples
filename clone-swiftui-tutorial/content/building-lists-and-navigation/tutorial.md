@@ -7,8 +7,8 @@ You’ll create views that can show information about any landmark, and dynamica
 Download the project files to begin building this project, and follow the steps below.
 
 !time 35mins
-!files https://v1.codehike.org
-!xcode https://v1.codehike.org
+!files https://codehike.org
+!xcode https://codehike.org
 
 ![!image](020H00.png)
 

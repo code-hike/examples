@@ -1,8 +1,8 @@
 ## Code Hike + Remotion
 
-Blog post: [From Markdown to Video](https://v1.codehike.org/blog/remotion)
+Blog post: [From Markdown to Video](https://codehike.org/blog/remotion)
 
-Code Hike docs: https://v1.codehike.org/docs/  
+Code Hike docs: https://codehike.org/docs/  
 Remotion docs: https://www.remotion.dev/docs/
 
 ### Clone this example

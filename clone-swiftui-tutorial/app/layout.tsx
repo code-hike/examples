@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}
         <footer className="py-8  flex justify-center gap-4 text-zinc-700 text-sm">
-          <a href="https://v1.codehike.org" className="hover:underline">
+          <a href="https://codehike.org" className="hover:underline">
             Code Hike docs
           </a>
           <span>•</span>
