@@ -6,7 +6,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "codehike": "^1.0.0",
+    "codehike": "https://pkg.pr.new/codehike@435",
     "next": "^14.2.7",
     "next-mdx-remote": "^5.0.0",
     "react": "^18.3.1",
