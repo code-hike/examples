@@ -18,7 +18,7 @@ export function Scrollycoding(props: unknown) {
   const { steps } = parseProps(props, Schema)
   return (
     <SelectionProvider className="flex gap-4">
-      <div className="flex-1 mt-32 mb-[90vh] ml-2 prose">
+      <div className="flex-1 mt-32 mb-[90vh] ml-2 prose min-w-60">
         {steps.map((step, i) => (
           <Selectable
             key={i}
@@ -31,7 +31,7 @@ export function Scrollycoding(props: unknown) {
           </Selectable>
         ))}
       </div>
-      <div className="w-[40vw] max-w-xl bg-card">
+      <div className="w-1/2 bg-card">
         <div className="top-16 sticky overflow-auto">
           <Selection
             from={steps.map((step) => (
